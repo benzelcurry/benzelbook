@@ -8,6 +8,8 @@ const jwt = require('jsonwebtoken');
 
 require('dotenv').config();
 
+const indexRouter = require('./routes/index');
+
 const mongoDB = process.env.MONGODB_URI;
 mongoose.connect(mongoDB, { useUnifiedTopology: true, useNewUrlParser: true });
 const db = mongoose.connection;
@@ -22,8 +24,6 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.json('Hello, World!');
-});
+app.use('/', indexRouter);
 
 app.listen(process.env.PORT, () => console.log(`Listening on Port ${process.env.PORT}!`));
