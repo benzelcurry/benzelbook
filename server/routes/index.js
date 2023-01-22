@@ -16,4 +16,7 @@ router.get('/', (req, res) => {
 // GET list of users
 router.get('/users', user_controller.user_list);
 
+// POST create new user
+router.post('/users', user_controller.create_user);
+
 module.exports = router;
