@@ -1,3 +1,5 @@
+// Nav/Header component
+
 import React from 'react';
 
 import '../stylesheets/Nav.css';

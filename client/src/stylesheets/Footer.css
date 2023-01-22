@@ -4,4 +4,26 @@
   color: #1877f2;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
+
+.github {
+  height: 30px;
+  filter: invert(34%) sepia(84%) saturate(1430%) hue-rotate(197deg) brightness(94%) contrast(102%);
+}
+
+.personal-link {
+  display: flex;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
+  margin: 0 10px 0 10px;
+  gap: 5px;
+}
+
+.personal-link:hover {
+  color: #8f71e2;
+}
+
+.personal-link:hover .github {
+  filter: invert(48%) sepia(46%) saturate(1000%) hue-rotate(215deg) brightness(95%) contrast(87%);}
