@@ -6,9 +6,14 @@ const router = express.Router();
 // Require controller modules
 const user_controller = require('../controllers/userController');
 
+
+///// NON-SPECIFIC ROUTES ///// 
+
 router.get('/', (req, res) => {
   res.json('Welcome to Odinbook!');
 });
+
+router.get('/login', user_controller.login_user);
 
 
 ///// USER ROUTES /////

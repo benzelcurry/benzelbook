@@ -8,6 +8,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
+
 // Return list of Users on GET
 exports.user_list = (req, res, next) => {
   User.find()
@@ -17,6 +18,7 @@ exports.user_list = (req, res, next) => {
       res.json({ user_list: list_users });
     });
 };
+
 
 // Create new user on POST
 exports.create_user = [
@@ -95,3 +97,53 @@ exports.create_user = [
     });
   },
 ];
+
+
+// Log user in on POST
+exports.login_user = (req, res, next) => {
+  async.parallel(
+    {
+      user(callback) {
+        User.findOne({ username: req.body.username }).exec(callback);
+      },
+    },
+    (err, results) => {
+      if (err) {
+        // Error in API usage
+        return next(err);
+      };
+      if (!results.user) {
+        // No user with matching username found
+        return res.json({
+          error: 'Username does not exist'
+        });
+      };
+      bcrypt.compare(req.body.password, results.user.password, (err, isValid) => {
+        if (isValid) {
+          const secret = process.env.SECRET_KEY;
+          const token = jwt.sign(
+            {
+              username: req.body.username,
+              id: results.user._id,
+            },
+            secret,
+            { expiresIn: '30d' },
+          );
+
+          // MIGHT WANT TO COME BACK AND DELETE COOKIE SINCE CAN'T SERVE FROM DIF DOMAINS
+          res.cookie('token', token, { secure: false, httpOnly: true });
+
+          return res.status(200).json({
+            message: 'Successful',
+            admin: results.user.admin,
+            token,
+          });
+        } else {
+          return res.status(401).json({
+            error: 'Incorrect password'
+          });
+        };
+      });
+    },
+  );
+};
