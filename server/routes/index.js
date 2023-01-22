@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
   res.json('Welcome to Odinbook!');
 });
 
-router.get('/login', user_controller.login_user);
+router.post('/login', user_controller.login_user);
 
 
 ///// USER ROUTES /////
