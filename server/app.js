@@ -1,3 +1,5 @@
+// Main entry point for server
+
 const express = require('express');
 const compression = require('compression');
 const helmet = require('helmet');
