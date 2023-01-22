@@ -8,7 +8,9 @@ const App = () => {
   return (
     <div>
       <Nav />
-      Hello, World!
+      <div className="app">
+        Hello, World!
+      </div>
       <Footer />
     </div>
   );

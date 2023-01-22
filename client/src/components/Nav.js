@@ -5,7 +5,7 @@ import '../stylesheets/Nav.css';
 const Nav = () => {
   return (
     <div className='header'>
-      This is my header.
+      <button className='site-title'>Benzelbook</button>
     </div>
   );
 };
