@@ -8,7 +8,7 @@ const UserSchema = new Schema({
   username: { type: String, required: true, minLength: 3, maxLength: 16 },
   account_created: { type: Date, required: true },
   // Friends field might need updating; not sure if this will work
-  friends: [{ type: Schema.Types.ObjectId, ref: 'User', required: false }],
+  friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 });
 
 UserSchema.virtual('url').get(function() {
