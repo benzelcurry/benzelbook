@@ -9,7 +9,7 @@ const SignUp = () => {
     <div>
       <Nav />
       <div className="signup-container">
-        <form action="" method="POST">
+        <form action="" method="POST" className='signup-form'>
           <div className="signup-inputs">
             <label htmlFor="first_name">First Name: </label>
             <input type="text" name='first_name' id='first_name' placeholder='First Name' />
@@ -24,7 +24,7 @@ const SignUp = () => {
             <input type="confirm_password" name='confirm_password' id='confirm_password' placeholder='Confirm Password' />
           </div>
 
-          <button>Sign Up</button>
+          <button className='signup-form-btn'>Sign Up</button>
         </form>
       </div>
       <Footer />

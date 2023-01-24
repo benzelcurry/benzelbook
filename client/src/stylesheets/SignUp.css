@@ -5,3 +5,53 @@
   align-items: center;
   padding: 100px;
 }
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signup-inputs {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 175px auto;
+  gap: 10px;
+}
+
+.signup-inputs > label {
+  font-size: 18px;
+}
+
+.signup-inputs > input {
+  height: 30px;
+  width: 200px;
+  border: solid 2px black;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.signup-inputs > input:focus {
+  border: solid 3px black;
+}
+
+.signup-form-btn {
+  margin-top: 40px;
+  width: 150px;
+  height: 40px;
+  border: solid 2px black;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px;
+  background-color: #b5d4fd;;
+  font-size: 18px;
+}
+
+.signup-form-btn:hover {
+  filter: brightness(1.1);
+}
+
+.signup-form-btn:active {
+  filter: brightness(0.9);
+}
