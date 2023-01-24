@@ -6,6 +6,7 @@ import { HashRouter, Routes, Route } from 'react-router-dom';
 
 import App from './App';
 import LogIn from './LogIn';
+import SignUp from './SignUp';
 
 const RouteSwitch = () => {
   return (
@@ -13,6 +14,7 @@ const RouteSwitch = () => {
       <Routes>
         <Route path='/' element={ <App /> } />
         <Route path='login' element={ <LogIn /> } />
+        <Route path='signup' element={ <SignUp /> } />
       </Routes>
     </HashRouter>
   );

@@ -10,6 +10,11 @@
   padding-right: 20px;
 }
 
+.nav-right {
+  display: flex;
+  gap: 20px;
+}
+
 .site-title,
 .nav-btn {
   border: none;
@@ -23,7 +28,7 @@
   height: 100%;
 }
 
-.login-btn {
+.nav-btn {
   font-size: 16px;
 }
 
