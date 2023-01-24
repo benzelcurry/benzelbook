@@ -21,6 +21,11 @@ const Nav = () => {
       })
   }, [token])
 
+  const handleClick = (e) => {
+    localStorage.clear();
+    navigate(0);
+  }
+
   return (
     <div className='header'>
       <Link to={'/'} className='nav-link'>
@@ -32,6 +37,7 @@ const Nav = () => {
         { user ?
           <div>
             <button className='nav-btn'>{user}</button>
+            <button className='nav-btn'>Log Out</button>
           </div>
           : 
           <div>
