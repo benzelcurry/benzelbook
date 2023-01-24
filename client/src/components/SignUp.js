@@ -36,6 +36,53 @@ const SignUp = () => {
     setConfPass(e.target.value);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (firstName.length === 0) {
+      return setError('Please enter a first name');
+    };
+    if (familyName.length === 0) {
+      return setError('Please enter a family name');
+    };
+    if (username.length === 0) {
+      return setError('Please enter a username');
+    };
+    if (password.length === 0) {
+      return setError('Password field must not be blank');
+    };
+    if (confPass.length === 0) {
+      return setError('Confirm password field must not be blank');
+    };
+    const body = {
+      first_name: firstName,
+      family_name: familyName,
+      username: username,
+      password: password,
+      confirm_password: confPass,
+    };
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/users`, body)
+      .then((response) => {
+        if (response.data.errors) {
+          if (response.data.errors[0] === 'object') {
+            return setError(response.data.errors[0].msg);
+          } else {
+            return setError(response.data.errors[0]);
+          }
+        }
+        axios.post(`${process.env.REACT_APP_SERVER_URL}/login`, { username: username, password: password })
+          .then((response) => {
+            console.log(response);
+            if (response.data.message === 'Successful') {
+              window.localStorage.setItem('token', response.data.token);
+              navigate('/');
+            }
+          })
+          .catch((err) => {
+            throw new Error(err);
+          });
+      });
+  };
+
   return (
     <div>
       <Nav />
@@ -53,8 +100,8 @@ const SignUp = () => {
             />
 
             <label htmlFor="username">Username: </label>
-            <input type="text" name='username' id='username' placeholder='Username' 
-              onChange={(e) => handleUser(e)}
+            <input type="text" name='username' id='username' maxLength={16}
+              placeholder='Username (16 char max)' onChange={(e) => handleUser(e)}
             />
 
             <label htmlFor="password">Password: </label>
@@ -63,13 +110,14 @@ const SignUp = () => {
             />
 
             <label htmlFor="confirm_password">Confirm Password: </label>
-            <input type="confirm_password" name='confirm_password' id='confirm_password' placeholder='Confirm Password' 
+            <input type="password" name='confirm_password' id='confirm_password' placeholder='Confirm Password' 
               onChange={(e) => handleConf(e)}
             />
           </div>
 
-          <button className='signup-form-btn'>Sign Up</button>
+          <button className='signup-form-btn' onClick={(e) => handleSubmit(e)}>Sign Up</button>
         </form>
+        { error ? error : null }
       </div>
       <Footer />
     </div>

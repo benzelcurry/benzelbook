@@ -6,7 +6,7 @@ const helmet = require('helmet');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const jwt = require('jsonwebtoken');z
+const jwt = require('jsonwebtoken');
 
 require('dotenv').config();
 
