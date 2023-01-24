@@ -14,16 +14,14 @@ const LogIn = () => {
     <div>
       <Nav />
       <div className="login-container">
-        <form action="" method="POST">
-          <div className="form-group">
+        <form action="" method="POST" className="login-form">
+          <div className="form-inputs">
             <label htmlFor="username">Username: </label>
             <input type="text" name="username" id="username" placeholder="Username" />
-          </div>
-          <div className="form-group">
             <label htmlFor="password">Password: </label>
             <input type="password" name="password" id="password" placeholder="Password" />
           </div>
-          <button>Log In</button>
+          <button className='login-form-btn'>Log In</button>
         </form>
       </div>
       <Footer />
