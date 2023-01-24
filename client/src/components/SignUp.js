@@ -71,7 +71,6 @@ const SignUp = () => {
         }
         axios.post(`${process.env.REACT_APP_SERVER_URL}/login`, { username: username, password: password })
           .then((response) => {
-            console.log(response);
             if (response.data.message === 'Successful') {
               window.localStorage.setItem('token', response.data.token);
               navigate('/');
@@ -117,7 +116,10 @@ const SignUp = () => {
 
           <button className='signup-form-btn' onClick={(e) => handleSubmit(e)}>Sign Up</button>
         </form>
-        { error ? error : null }
+        { error ? 
+          <div className="error-msg">{error}</div> 
+          : null 
+        }
       </div>
       <Footer />
     </div>

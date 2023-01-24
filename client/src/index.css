@@ -25,3 +25,8 @@ code {
   height: 100%;
   background-color: #f0f2f5;
 }
+
+.error-msg {
+  color: red;
+  margin-top: 20px;
+}

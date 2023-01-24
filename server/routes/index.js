@@ -2,6 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
+const jwt = require('jsonwebtoken');
 
 // Require controller modules
 const user_controller = require('../controllers/userController');
@@ -11,6 +12,18 @@ const user_controller = require('../controllers/userController');
 
 router.get('/', (req, res) => {
   res.json('Welcome to Odinbook!');
+});
+
+router.post('/', (req, res) => {
+  if (req.body.token) {
+    const decrypt = jwt.verify(req.body.token, process.env.SECRET_KEY);
+    res.json({
+      username: decrypt.username,
+      id: decrypt.id,
+    });
+  } else {
+    res.json('No current user.');
+  };
 });
 
 router.post('/login', user_controller.login_user);

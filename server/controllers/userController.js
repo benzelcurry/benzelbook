@@ -139,7 +139,7 @@ exports.login_user = (req, res, next) => {
             token,
           });
         } else {
-          return res.status(401).json({
+          return res.json({
             error: 'Incorrect password'
           });
         };

@@ -37,7 +37,7 @@ const Nav = () => {
         { user ?
           <div>
             <button className='nav-btn'>{user}</button>
-            <button className='nav-btn'>Log Out</button>
+            <button className='nav-btn' onClick={() => handleClick()}>Log Out</button>
           </div>
           : 
           <div>
