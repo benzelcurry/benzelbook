@@ -1,3 +1,6 @@
+// Router component
+// Using hash router because some hosting services struggle with regular router
+
 import React from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 
