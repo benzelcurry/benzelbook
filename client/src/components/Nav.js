@@ -17,7 +17,7 @@ const Nav = () => {
     axios.post(`${process.env.REACT_APP_SERVER_URL}/`, body)
       .then((response) => {
         console.log(response);
-        setUser(response.data.username);
+        setUser(response.data.name);
       })
   }, [token])
 

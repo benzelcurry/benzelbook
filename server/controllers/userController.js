@@ -124,6 +124,8 @@ exports.login_user = (req, res, next) => {
           const token = jwt.sign(
             {
               username: req.body.username,
+              first_name: results.user.first_name,
+              family_name: results.user.family_name,
               id: results.user._id,
             },
             secret,

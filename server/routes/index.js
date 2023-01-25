@@ -19,6 +19,7 @@ router.post('/', (req, res) => {
     const decrypt = jwt.verify(req.body.token, process.env.SECRET_KEY);
     res.json({
       username: decrypt.username,
+      name: `${decrypt.first_name} ${decrypt.family_name}`,
       id: decrypt.id,
     });
   } else {
