@@ -107,3 +107,8 @@
 .user-post-btn:active {
   filter: brightness(0.9);
 }
+
+.remaining {
+  align-self: start;
+  font-size: 0.8rem;
+}
