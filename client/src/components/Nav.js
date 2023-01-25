@@ -7,7 +7,8 @@ import axios from 'axios';
 import '../stylesheets/Nav.css';
 
 const Nav = () => {
-  const [user, setUser] = useState();
+  const [name, setName] = useState();
+  const [username, setUsername] = useState();
   const token = localStorage.getItem('token');
 
   const navigate = useNavigate();
@@ -16,8 +17,8 @@ const Nav = () => {
     const body = { token: localStorage.getItem('token') }
     axios.post(`${process.env.REACT_APP_SERVER_URL}/`, body)
       .then((response) => {
-        console.log(response);
-        setUser(response.data.name);
+        setName(response.data.name);
+        setUsername(response.data.username);
       })
   }, [token])
 
@@ -32,9 +33,11 @@ const Nav = () => {
         <button className='site-title'>Benzelbook</button>
       </Link>
       <div className="nav-right">
-        { user ?
+        { name ?
           <div>
-            <button className='nav-btn'>{user}</button>
+            <Link to={`/user/${username}`} className='nav-link'>
+              <button className='nav-btn'>{name}</button>
+            </Link>
             <button className='nav-btn' onClick={() => handleClick()}>Log Out</button>
           </div>
           : 
