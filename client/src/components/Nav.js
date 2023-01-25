@@ -31,8 +31,6 @@ const Nav = () => {
       <Link to={'/'} className='nav-link'>
         <button className='site-title'>Benzelbook</button>
       </Link>
-      { /* MAKE LOGIN BUTTON CONDITIONALLY DISPLAY ONLY IF USER
-        IS LOGGED OUT */ }
       <div className="nav-right">
         { user ?
           <div>
