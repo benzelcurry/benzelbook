@@ -14,6 +14,7 @@ const User = () => {
   const [user, setUser] = useState({});
   const [page, setPage] = useState({});
   const [content, setContent] = useState('');
+  const [error, setError] = useState('');
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
 
@@ -43,6 +44,25 @@ const User = () => {
     setContent(e.target.value);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (content.length === 0) {
+      return setError('Please enter a post before hitting submit.');
+    };
+    const body = { content: content, userID: user.id };
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/posts`, body)
+      .then((response) => {
+        if (response.data.message === 'Successful') {
+          navigate(0);
+        } else {
+          setError(response.data.errors[0].msg);
+        }
+      })
+      .catch((err) => {
+        throw new Error(err);
+      })
+  };
+
   return (
     <div>
       <Nav />
@@ -61,13 +81,17 @@ const User = () => {
           <div className="user-posts">
             <div className="user-new-post">
               <img src={DefaultAvatar} alt="User avatar" className='mini-avatar' />
-              <form action="" method="POST">
+              <form action="">
                 <textarea name="new-status" id="new-status" className='user-new-status'
                   placeholder="What's on your mind?" onChange={(e) => handleInput(e)}
                   maxLength={1000}>
                 </textarea>
                 <p className='remaining'>{1000 - content.length} chars remaining</p>
-                <button className='user-post-btn'>Submit Post</button>
+                <button className='user-post-btn' onClick={(e) => handleSubmit(e)}>Submit Post</button>
+                { error ?
+                  <p className='error-msg'>{error}</p>
+                  : null
+                }
               </form>
             </div>
             <div className="user-wall">

@@ -43,7 +43,9 @@ exports.create_post = [
 
     post.save((err) => {
       if (err) { return next(err) };
-      res.json('Post successfully created.');
+      res.json({
+        message: 'Successful'
+      });
     });
   },
 ];
