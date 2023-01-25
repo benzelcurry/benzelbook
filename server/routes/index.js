@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 
 // Require controller modules
 const user_controller = require('../controllers/userController');
+const post_controller = require('../controllers/postController');
 
 
 ///// NON-SPECIFIC ROUTES ///// 
@@ -37,5 +38,14 @@ router.get('/users', user_controller.user_list);
 
 // POST create new user
 router.post('/users', user_controller.create_user);
+
+
+///// (USER-MADE) POST ROUTES /////
+
+// GET list of posts
+router.get('/posts', post_controller.post_list);
+
+// Create new post on POST
+router.post('/posts', post_controller.create_post);
 
 module.exports = router;
