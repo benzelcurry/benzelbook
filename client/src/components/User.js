@@ -36,7 +36,13 @@ const User = () => {
           </div>
           <div className="user-posts">
             <div className="user-new-post">
-              User new post form will go in here.
+              <img src={DefaultAvatar} alt="User avatar" className='mini-avatar' />
+              <form action="" method="POST">
+                <textarea name="new-status" id="new-status" className='user-new-status'
+                  placeholder="What's on your mind?">
+                </textarea>
+                <button className='user-post-btn'>Submit Post</button>
+              </form>
             </div>
             <div className="user-wall">
               Posts on user's wall will go in here.

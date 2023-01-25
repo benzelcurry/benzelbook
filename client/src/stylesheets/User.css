@@ -40,7 +40,7 @@
   grid-template-columns: 1fr 1.5fr;
 }
 
-.user-intro{
+.user-intro {
   display: flex;
   border-radius: 20px;
   padding: 20px;
@@ -61,4 +61,49 @@
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;
+}
+
+.mini-avatar {
+  height: 40px;
+  width: 40px;
+}
+
+.user-new-post {
+  display: flex;
+  gap: 20px;
+}
+
+.user-new-status {
+  width: 350px;
+  height: 150px;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #f0f2f5;
+  font-family: inherit;
+}
+
+.user-new-post > form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-post-btn {
+  padding: 10px;
+  margin-top: 20px;
+  background-color: inherit;
+  border: none;
+  border-radius: 10px;
+  background-color: #b9d6fc;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.user-post-btn:hover {
+  filter: brightness(1.1);
+}
+
+.user-post-btn:active {
+  filter: brightness(0.9);
 }
