@@ -20,6 +20,16 @@ exports.user_list = (req, res, next) => {
 };
 
 
+// Return details of single User on GET
+exports.user_detail = (req, res, next) => {
+  User.findOne({ username: req.params.username })
+    .exec((err, user) => {
+      if (err) { return next(err) };
+      res.json({ user })
+    });
+};
+
+
 // Create new user on POST
 exports.create_user = [
   // Validate and sanitize fields

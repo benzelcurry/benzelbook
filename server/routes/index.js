@@ -39,6 +39,8 @@ router.get('/users', user_controller.user_list);
 // POST create new user
 router.post('/users', user_controller.create_user);
 
+// GET details for a single user
+router.get('/users/:username', user_controller.user_detail);
 
 ///// (USER-MADE) POST ROUTES /////
 
