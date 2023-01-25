@@ -30,6 +30,19 @@ const User = () => {
             <div className="user-fullname">{user.name}</div>
           </div>
         </div>
+        <div className="user-contents">
+          <div className="user-intro">
+            User intro content will go in here.
+          </div>
+          <div className="user-posts">
+            <div className="user-new-post">
+              User new post form will go in here.
+            </div>
+            <div className="user-wall">
+              Posts on user's wall will go in here.
+            </div>
+          </div>
+        </div>
       </div>
       <Footer />
     </div>

@@ -1,6 +1,8 @@
 .user-container {
-  height: 100%;
+  align-self: center;
+  flex-grow: 1;
   width: 100%;
+  max-width: 1400px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,4 +29,36 @@
 .user-fullname {
   font-size: 32px;
   font-weight: bold;
+}
+
+.user-contents {
+  box-sizing: border-box;
+  padding: 50px;
+  width: 100%;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr 1.5fr;
+}
+
+.user-intro{
+  display: flex;
+  border-radius: 20px;
+  padding: 20px;
+  flex-direction: column;
+  background-color: #fff;
+  height: 400px;
+  flex-grow: 1;
+}
+
+.user-posts {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 500px;
+}
+
+.user-posts > div {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
 }

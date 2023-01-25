@@ -22,7 +22,7 @@ code {
 #root > div {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex-grow: 1;
   background-color: #f0f2f5;
 }
 
