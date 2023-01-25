@@ -23,6 +23,7 @@ const User = () => {
     <div>
       <Nav />
       <div className="user-container">
+        <div className="cover-photo"></div>
         <div className="user-header">
           <img src={DefaultAvatar} alt="User avatar" className='profile-pic' />
           <div className="user-basics">
