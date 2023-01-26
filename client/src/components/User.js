@@ -10,8 +10,6 @@ import Post from './Post';
 import DefaultAvatar from '../images/default-avatar.svg';
 import '../stylesheets/User.css';
 
-// NOTE: POSTS SEEM TO PERSIST FROM ONE USER'S PAGE TO ANOTHER
-// IF YOU MANUALLY TYPE URL INTO ADDRESS BAR; FIX THIS PRONTO
 const User = () => {
   const { username } = useParams();
   const [user, setUser] = useState({});
@@ -36,7 +34,7 @@ const User = () => {
     axios.get(`${process.env.REACT_APP_SERVER_URL}/users/${username}`)
       .then((results) => {
         if (results.data.user) {
-          setPage(results.data.user); 
+          setPage(results.data.user);
         } else {
           // REPLACE THIS WITH A 'USER DOES NOT EXIST' PAGE
           navigate('/');
@@ -50,6 +48,10 @@ const User = () => {
       axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/`)
         .then((results) => {
           const postList = results.data.post_list;
+          // The below line clears state since React doesn't automatically
+          // refresh the page on URL params change. Probably a better way to
+          // handle this; get figured out before deployment.
+          if (posts) { setPosts([]) }
           for (const post of postList) {
             if ((post.author === page._id && !post.target) || post.target === page._id) {
               if (!posts.some(obj => obj._id === post._id)) {
@@ -59,7 +61,7 @@ const User = () => {
           };
         });
     } 
-  }, [page._id, posts]);
+  }, [page._id]);
 
   // Updates message content in state upon change
   const handleInput = (e) => {
