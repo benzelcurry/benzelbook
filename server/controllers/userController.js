@@ -30,6 +30,16 @@ exports.user_detail = (req, res, next) => {
 };
 
 
+// Look up user by ID and return details on GET
+exports.userID_detail = (req, res, next) => {
+  User.findOne({ _id: req.params.id })
+    .exec((err, user) => {
+      if (err) { return next(err) };
+      res.json({ user })
+    });
+};
+
+
 // Create new user on POST
 exports.create_user = [
   // Validate and sanitize fields

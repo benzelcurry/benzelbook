@@ -112,3 +112,9 @@
   align-self: start;
   font-size: 0.8rem;
 }
+
+.user-wall {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

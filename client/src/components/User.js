@@ -6,6 +6,7 @@ import axios from 'axios';
 
 import Nav from './Nav';
 import Footer from './Footer';
+import Post from './Post';
 import DefaultAvatar from '../images/default-avatar.svg';
 import '../stylesheets/User.css';
 
@@ -116,7 +117,7 @@ const User = () => {
             </div>
             <div className="user-wall">
               {posts.map((post) =>
-                <div key={post._id}>{post.content}</div>
+                <Post key={post._id} content={post.content} author={post.author} />
               )}
             </div>
           </div>
