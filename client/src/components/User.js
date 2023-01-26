@@ -13,6 +13,7 @@ const User = () => {
   const { username } = useParams();
   const [user, setUser] = useState({});
   const [page, setPage] = useState({});
+  const [posts, setPosts] = useState([]);
   const [content, setContent] = useState('');
   const [error, setError] = useState('');
   const token = localStorage.getItem('token');
@@ -40,10 +41,30 @@ const User = () => {
       });
   }, [navigate, username]);
 
+  // Pulls list of posts and displays relevant ones on user's page
+  useEffect(() => {
+    if (page._id) {
+      axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/`)
+        .then((results) => {
+          const postList = results.data.post_list;
+          for (const post of postList) {
+            if (post.author === page._id || post.target === page._id) {
+              if (!posts.some(obj => obj._id === post._id)) {
+                setPosts(current => [...current, post]);
+              };
+            };
+          };
+        });
+    } 
+  }, [page._id, posts]);
+
+  // Updates message content in state upon change
   const handleInput = (e) => {
+    console.log(posts);
     setContent(e.target.value);
   };
 
+  // Sends post info to server
   const handleSubmit = (e) => {
     e.preventDefault();
     if (content.length === 0) {
