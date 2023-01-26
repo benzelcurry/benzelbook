@@ -16,7 +16,7 @@ const RouteSwitch = () => {
         <Route path='/' element={ <App /> } />
         <Route path='login' element={ <LogIn /> } />
         <Route path='signup' element={ <SignUp /> } />
-        <Route path='/user/:username' element={ <User /> } />
+        <Route path='user/:username' element={ <User /> } />
       </Routes>
     </HashRouter>
   );

@@ -60,7 +60,6 @@ const User = () => {
 
   // Updates message content in state upon change
   const handleInput = (e) => {
-    console.log(posts);
     setContent(e.target.value);
   };
 
@@ -116,7 +115,9 @@ const User = () => {
               </form>
             </div>
             <div className="user-wall">
-              Posts on user's wall will go in here.
+              {posts.map((post) =>
+                <div key={post._id}>{post.content}</div>
+              )}
             </div>
           </div>
         </div>
