@@ -32,6 +32,7 @@ exports.create_post = [
       content: req.body.content,
       date: new Date(),
       author: req.body.userID,
+      target: req.body.targetID,
       likes: 0,
     });
 
