@@ -5,9 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 code {
@@ -15,16 +13,11 @@ code {
     monospace;
 }
 
-#root {
-  height: 100%;
-}
-
 #root > div {
+  background-color: #f0f2f5;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100%;
-  flex-grow: 1;
-  background-color: #f0f2f5;
 }
 
 .error-msg {
