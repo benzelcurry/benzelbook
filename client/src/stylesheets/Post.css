@@ -2,4 +2,37 @@
   padding: 20px;
   background-color: #f0f2f5;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.post-author {
+  margin: 0;
+  font-weight: bold;
+}
+
+.post-date {
+  margin: 0;
+  font-size: 0.9em;
+}
+
+.post-actions {
+  align-self: end;
+  display: flex;
+  gap: 10px;
+}
+
+.post-action {
+  height: 25px;
+  cursor: pointer;
+}
+
+.post-action:hover {
+  filter: invert(43%) sepia(71%) saturate(5009%) hue-rotate(203deg) brightness(98%) contrast(94%);
 }

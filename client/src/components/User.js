@@ -10,6 +10,8 @@ import Post from './Post';
 import DefaultAvatar from '../images/default-avatar.svg';
 import '../stylesheets/User.css';
 
+// NOTE: POSTS SEEM TO PERSIST FROM ONE USER'S PAGE TO ANOTHER
+// IF YOU MANUALLY TYPE URL INTO ADDRESS BAR; FIX THIS PRONTO
 const User = () => {
   const { username } = useParams();
   const [user, setUser] = useState({});
@@ -49,7 +51,7 @@ const User = () => {
         .then((results) => {
           const postList = results.data.post_list;
           for (const post of postList) {
-            if (post.author === page._id || post.target === page._id) {
+            if ((post.author === page._id && !post.target) || post.target === page._id) {
               if (!posts.some(obj => obj._id === post._id)) {
                 setPosts(current => [...current, post]);
               };
@@ -117,7 +119,7 @@ const User = () => {
             </div>
             <div className="user-wall">
               {posts.map((post) =>
-                <Post key={post._id} content={post.content} author={post.author} />
+                <Post key={post._id} post={post} author={post.author} />
               )}
             </div>
           </div>
