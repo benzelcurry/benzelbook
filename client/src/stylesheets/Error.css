@@ -1,0 +1,12 @@
+.error-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-code {
+  font-size: 44px;
+  font-weight: bold;
+}
