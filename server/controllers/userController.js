@@ -62,7 +62,9 @@ exports.create_user = [
     .isLength({ max: 16 })
     .withMessage('Username must be 16 characters or less')
     .isAlphanumeric()
-    .withMessage('Usernames may only contain alphanumeric characters'),
+    .withMessage('Usernames may only contain alphanumeric characters')
+    .custom((value) => value !== '404')
+    .withMessage('Please choose a different username'),
   body('password')
     .trim()
     .isLength({ min: 6 })
