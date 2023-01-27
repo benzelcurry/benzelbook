@@ -12,6 +12,7 @@ import '../stylesheets/User.css';
 
 const User = () => {
   const { username } = useParams();
+  const [current, setCurrent] = useState(username);
   const [user, setUser] = useState({});
   const [page, setPage] = useState({});
   const [posts, setPosts] = useState([]);
@@ -19,6 +20,14 @@ const User = () => {
   const [error, setError] = useState('');
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
+
+  // Reloads page if URL parameters change
+  useEffect(() => {
+    if (current !== username) {
+      setCurrent(username);
+      window.location.reload();
+    }
+  }, [current, username])
 
   // Pulls active user on client end
   useEffect(() => {
@@ -48,10 +57,6 @@ const User = () => {
       axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/`)
         .then((results) => {
           const postList = results.data.post_list;
-          // The below line clears state since React doesn't automatically
-          // refresh the page on URL params change. Probably a better way to
-          // handle this; get figured out before deployment.
-          if (posts) { setPosts([]) }
           for (const post of postList) {
             if ((post.author === page._id && !post.target) || post.target === page._id) {
               if (!posts.some(obj => obj._id === post._id)) {
@@ -61,7 +66,7 @@ const User = () => {
           };
         });
     } 
-  }, [page._id]);
+  }, [page._id, posts]);
 
   // Updates message content in state upon change
   const handleInput = (e) => {
