@@ -63,7 +63,7 @@ const SignUp = () => {
     axios.post(`${process.env.REACT_APP_SERVER_URL}/users`, body)
       .then((response) => {
         if (response.data.errors) {
-          if (response.data.errors[0] === 'object') {
+          if (typeof(response.data.errors[0]) === 'object') {
             return setError(response.data.errors[0].msg);
           } else {
             return setError(response.data.errors[0]);

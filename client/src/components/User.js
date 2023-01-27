@@ -45,8 +45,7 @@ const User = () => {
         if (results.data.user) {
           setPage(results.data.user);
         } else {
-          // REPLACE THIS WITH A 'USER DOES NOT EXIST' PAGE
-          navigate('/');
+          navigate('/404');
         };
       });
   }, [navigate, username]);

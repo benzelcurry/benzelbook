@@ -8,7 +8,7 @@ import App from './App';
 import LogIn from './LogIn';
 import SignUp from './SignUp';
 import User from './User';
-import NoUser from './NoUser';
+import Error from './Error';
 
 const RouteSwitch = () => {
   return (
@@ -17,8 +17,8 @@ const RouteSwitch = () => {
         <Route path='/' element={ <App /> } />
         <Route path='login' element={ <LogIn /> } />
         <Route path='signup' element={ <SignUp /> } />
-        <Route path='user/404' element={ <NoUser /> } />
         <Route path='user/:username' element={ <User /> } />
+        <Route path='*' element={ <Error /> } />
       </Routes>
     </HashRouter>
   );
