@@ -9,6 +9,7 @@ import LogIn from './LogIn';
 import SignUp from './SignUp';
 import User from './User';
 import Error from './Error';
+import FriendRequests from './FriendRequests';
 
 const RouteSwitch = () => {
   return (
@@ -17,6 +18,7 @@ const RouteSwitch = () => {
         <Route path='/' element={ <App /> } />
         <Route path='login' element={ <LogIn /> } />
         <Route path='signup' element={ <SignUp /> } />
+        <Route path='friend-requests' element={ <FriendRequests /> } />
         <Route path='user/:username' element={ <User /> } />
         <Route path='*' element={ <Error /> } />
       </Routes>

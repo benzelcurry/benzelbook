@@ -36,7 +36,9 @@ const Nav = () => {
       <div className="nav-right">
         { name ?
           <div>
-            <img src={FriendRequest} alt="Friend requests icon" className='fr-nav' />
+            <Link to={'/friend-requests'} className='nav-link'>
+              <img src={FriendRequest} alt="Friend requests icon" className='fr-nav' />
+            </Link>
             <Link to={`/user/${username}`} className='nav-link'>
               <button className='nav-btn'>{name}</button>
             </Link>
