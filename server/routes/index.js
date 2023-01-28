@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 // Require controller modules
 const user_controller = require('../controllers/userController');
 const post_controller = require('../controllers/postController');
+const like_controller = require('../controllers/likeController');
 
 
 ///// NON-SPECIFIC ROUTES ///// 
@@ -52,5 +53,8 @@ router.get('/posts', post_controller.post_list);
 
 // Create new post on POST
 router.post('/posts', post_controller.create_post);
+
+// Create new like on a post on POST
+router.post('/posts/like', like_controller.add_like);
 
 module.exports = router;
