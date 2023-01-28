@@ -10,6 +10,25 @@
   padding-right: 20px;
 }
 
+.nav-left {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-search {
+  height: 20px;
+  border: none;
+  padding: 10px;
+  background-color: #f0f2f5;
+  border-radius: 20px;
+}
+
+.nav-search:focus {
+  outline: none;
+}
+
 .nav-right {
   height: 100%;
   display: flex;

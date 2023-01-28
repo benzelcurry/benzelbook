@@ -30,9 +30,15 @@ const Nav = () => {
 
   return (
     <div className='header'>
-      <Link to={'/'} className='nav-link'>
-        <button className='site-title'>Benzelbook</button>
-      </Link>
+      <div className="nav-left">
+        <Link to={'/'} className='nav-link'>
+          <button className='site-title'>Benzelbook</button>
+        </Link>
+        {/* MAKE THIS SEARCH FIELD FUNCTIONAL */}
+        <form action="">
+            <input type="text" placeholder='Search Benzelbook' className='nav-search' />
+        </form>
+      </div>
       <div className="nav-right">
         { name ?
           <div>
