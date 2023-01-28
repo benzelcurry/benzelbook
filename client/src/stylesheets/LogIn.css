@@ -55,3 +55,10 @@
 .login-form-btn:active {
   filter: brightness(0.9);
 }
+
+.no-account-msg {
+  text-decoration: none;
+  color: blue;
+  font-size: 0.9em;
+  font-style: italic;
+}

@@ -1,7 +1,7 @@
 // Log-In Component
 
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import Nav from './Nav';
@@ -64,6 +64,9 @@ const LogIn = () => {
           </div>
           <button className='login-form-btn' onClick={(e) => handleSubmit(e)}>Log In</button>
         </form>
+        <Link to={'/signup'} className='no-account-msg'>
+          <p>Don't have an account? Sign up now!</p>
+        </Link>
         { error ? 
           <div className="error-msg">{error}</div> 
           : null 
