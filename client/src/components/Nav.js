@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+import FriendRequest from '../images/friend-request.svg';
 import '../stylesheets/Nav.css';
 
 const Nav = () => {
@@ -35,6 +36,7 @@ const Nav = () => {
       <div className="nav-right">
         { name ?
           <div>
+            <img src={FriendRequest} alt="Friend requests icon" className='fr-nav' />
             <Link to={`/user/${username}`} className='nav-link'>
               <button className='nav-btn'>{name}</button>
             </Link>

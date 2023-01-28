@@ -36,3 +36,13 @@ a.nav-link {
   text-decoration: none;
   color: inherit;
 }
+
+.fr-nav {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+
+.fr-nav:hover {
+  filter: invert(19%) sepia(2%) saturate(1793%) hue-rotate(314deg) brightness(93%) contrast(77%);
+}
