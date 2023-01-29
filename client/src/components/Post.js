@@ -69,8 +69,7 @@ const Post = ({ post, author }) => {
       <p className="post-body">{post.content}</p>
       <div className='post-actions'>
         <i><img src={Comment} alt="Comment" className='post-action' /></i>
-        {/* ADD ABILITY TO LIKE COMMENTS BY CLICKING ICON; WILL 
-          NEED TO CREATE A FUNCTION FOR HANDLING THIS */}
+        {/* MAKE SO ICON HIGHLIGHTS BLUE WHEN LIKED BY USER? */}
         <i className='likes-container'>
           { likes ? likes : null }
           <img src={Like} alt="Like" className='post-action' onClick={() => handleLike()}/>
