@@ -38,11 +38,13 @@ const Post = ({ post, author }) => {
   }, [author]);
 
   const handleLike = () => {
-    const body = { userID: user.id, postID: post._id };
-    axios.post(`${process.env.REACT_APP_SERVER_URL}/posts/likes`, body)
+    const body = { userID: user.id };
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/posts/${post._id}`, body)
       .then((response) => {
         if (response.data.message === 'Successful') {
           setLikes(likes + 1);
+        } else {
+          setLikes(likes - 1);
         }
       })
       .catch((err) => {
