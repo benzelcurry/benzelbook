@@ -10,6 +10,7 @@ import '../stylesheets/Nav.css';
 const Nav = () => {
   const [name, setName] = useState();
   const [username, setUsername] = useState();
+  const [query, setQuery] = useState();
   const token = localStorage.getItem('token');
 
   const navigate = useNavigate();
@@ -23,6 +24,15 @@ const Nav = () => {
       })
   }, [token])
 
+  const handleQuery = (e) => {
+    setQuery(e.target.value);
+  }
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    navigate('/search');
+  }
+
   const handleClick = (e) => {
     localStorage.clear();
     navigate(0);
@@ -34,9 +44,10 @@ const Nav = () => {
         <Link to={'/'} className='nav-link'>
           <button className='site-title'>Benzelbook</button>
         </Link>
-        {/* MAKE THIS SEARCH FIELD FUNCTIONAL */}
-        <form action="">
-            <input type="text" placeholder='Search Benzelbook' className='nav-search' />
+        <form action="" onSubmit={(e) => handleSearch(e)}>
+            <input type="text" placeholder='Search Benzelbook' className='nav-search' 
+              onChange={(e) => handleQuery(e)}
+            />
         </form>
       </div>
       <div className="nav-right">
