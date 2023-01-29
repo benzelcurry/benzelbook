@@ -1,6 +1,6 @@
 // Controller for Like (upvote) methods
 
-const Like = require('../models/post');
+const Like = require('../models/like');
 
 const async = require('async');
 const { body, validationResult } = require('express-validator');

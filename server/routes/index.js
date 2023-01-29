@@ -46,6 +46,7 @@ router.get('/users/id/:id', user_controller.userID_detail);
 // GET details for a single user
 router.get('/users/:username', user_controller.user_detail);
 
+
 ///// (USER-MADE) POST ROUTES /////
 
 // GET list of posts
@@ -55,6 +56,6 @@ router.get('/posts', post_controller.post_list);
 router.post('/posts', post_controller.create_post);
 
 // Create new like on a post on POST
-router.post('/posts/like', like_controller.add_like);
+router.post('/posts/likes', like_controller.add_like);
 
 module.exports = router;
