@@ -58,4 +58,7 @@ router.post('/posts', post_controller.create_post);
 // Create new like on a post on POST
 router.post('/posts/likes', like_controller.add_like);
 
+// Return amount of likes on a post on GET
+router.get('/posts/:id/likes', like_controller.get_likes);
+
 module.exports = router;
