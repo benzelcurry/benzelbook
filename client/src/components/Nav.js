@@ -30,7 +30,7 @@ const Nav = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    navigate('/search');
+    navigate('/search', { state: { query: query } });
   }
 
   const handleClick = (e) => {
