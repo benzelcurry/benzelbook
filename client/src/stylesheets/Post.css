@@ -36,3 +36,10 @@
 .post-action:hover {
   filter: invert(43%) sepia(71%) saturate(5009%) hue-rotate(203deg) brightness(98%) contrast(94%);
 }
+
+.likes-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-style: normal;
+}

@@ -12,7 +12,15 @@ import '../stylesheets/Post.css';
 const Post = ({ post, author }) => {
   const [postAuthor, setPostAuthor] = useState({});
   const [user, setUser] = useState({});
+  const [likes, setLikes] = useState(0);
   const token = localStorage.getItem('token');
+
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/${post._id}/likes`)
+      .then((response) => {
+        setLikes(response.data.total_likes);
+      });
+  }, [post._id]);
 
   useEffect(() => {
     const body = { token: localStorage.getItem('token') }
@@ -34,7 +42,7 @@ const Post = ({ post, author }) => {
     axios.post(`${process.env.REACT_APP_SERVER_URL}/posts/likes`, body)
       .then((response) => {
         if (response.data.message === 'Successful') {
-          console.log(response.data.message);
+          setLikes(likes + 1);
         }
       })
       .catch((err) => {
@@ -61,7 +69,10 @@ const Post = ({ post, author }) => {
         <i><img src={Comment} alt="Comment" className='post-action' /></i>
         {/* ADD ABILITY TO LIKE COMMENTS BY CLICKING ICON; WILL 
           NEED TO CREATE A FUNCTION FOR HANDLING THIS */}
-        <i><img src={Like} alt="Like" className='post-action' onClick={() => handleLike()}/></i>
+        <i className='likes-container'>
+          { likes ? likes : null }
+          <img src={Like} alt="Like" className='post-action' onClick={() => handleLike()}/>
+        </i>
       </div>
     </div>
   );
