@@ -100,7 +100,13 @@ const User = () => {
         <div className="user-header">
           <img src={DefaultAvatar} alt="User avatar" className='profile-pic' />
           <div className="user-basics">
-            <div className="user-fullname">{page.first_name} {page.family_name}</div>
+            <h1 className="user-fullname">{page.first_name} {page.family_name}</h1>
+            {
+              // GET THIS TO HIDE IF USERS ARE ALREADY FRIENDS
+              (user.id !== page._id) ?
+              <button className='add-friend'>Add Friend</button>
+              : null
+            }
           </div>
         </div>
         <div className="user-contents">

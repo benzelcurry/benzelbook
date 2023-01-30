@@ -13,6 +13,8 @@ const Search = ({ query }) => {
   const location = useLocation();
   const [users, setUsers] = useState([]);
 
+  // Pulls list of users from server and then refines according
+  // to search query
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_SERVER_URL}/users`)
       .then((response) => {

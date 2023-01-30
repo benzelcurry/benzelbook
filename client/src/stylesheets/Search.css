@@ -11,3 +11,7 @@
   text-decoration: none;
   color: inherit;
 }
+
+.preview-name {
+  font-weight: bold;
+}
