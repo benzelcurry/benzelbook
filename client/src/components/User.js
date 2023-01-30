@@ -68,6 +68,16 @@ const User = () => {
     } 
   }, [page._id, posts]);
 
+  // Checks to see if there's a pending friend request
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/requests`)
+      .then((response) => {
+        const requests = response.data.request_list;
+        const existingRequest = requests.find(req => (req.from === user.id) && req.to === page._id);
+        if (existingRequest) { setPending(true) };
+      })
+  }, [page._id, user.id]);
+
   // Updates message content in state upon change
   const handleInput = (e) => {
     setContent(e.target.value);
@@ -123,7 +133,9 @@ const User = () => {
             {
               // GET THIS TO HIDE IF USERS ARE ALREADY FRIENDS
               (user.id !== page._id) ?
-              <button className='add-friend' onClick={(e) => handleRequest(e)}>Add Friend</button>
+              <button className='add-friend' onClick={(e) => handleRequest(e)}>
+                { pending ? 'Cancel Request' : 'Add Friend' }
+              </button>
               : null
             }
           </div>
