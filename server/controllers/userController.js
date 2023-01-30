@@ -19,6 +19,7 @@ exports.user_list = (req, res, next) => {
         username: user.username,
         first_name: user.first_name,
         family_name: user.family_name,
+        account_created: user.account_created,
         id: user._id,
       }));
 

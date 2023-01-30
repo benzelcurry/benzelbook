@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 const user_controller = require('../controllers/userController');
 const post_controller = require('../controllers/postController');
 const like_controller = require('../controllers/likeController');
+const request_controller = require('../controllers/requestController');
 
 
 ///// NON-SPECIFIC ROUTES ///// 
@@ -60,5 +61,11 @@ router.get('/posts/:id/likes', like_controller.get_likes);
 
 // Create new like or removes an old one on a post on POST
 router.post('/posts/:id', like_controller.add_like);
+
+
+///// FRIEND REQUEST ROUTES /////
+
+// Create new Friend Request on POST
+router.post('/requests', request_controller.create_request);
 
 module.exports = router;
