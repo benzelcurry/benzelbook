@@ -16,6 +16,7 @@ const User = () => {
   const [user, setUser] = useState({});
   const [page, setPage] = useState({});
   const [posts, setPosts] = useState([]);
+  const [pending, setPending] = useState(false);
   const [content, setContent] = useState('');
   const [error, setError] = useState('');
   const token = localStorage.getItem('token');
@@ -92,6 +93,24 @@ const User = () => {
       })
   };
 
+  // Sends a friend request from active user to profile page's account
+  const handleRequest = (e) => {
+    e.preventDefault();
+    const body = { userID: user.id, pageID: page._id };
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/requests`, body)
+      .then((response) => {
+        if (response.data.message === 'Success') {
+          return setPending(true);
+          // DELETE THE BELOW ELSE STATEMENT ONCE FUNCTION IS PROVEN WORKING
+        } else {
+          console.log(response);
+        }
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+  };
+
   return (
     <div>
       <Nav />
@@ -104,7 +123,7 @@ const User = () => {
             {
               // GET THIS TO HIDE IF USERS ARE ALREADY FRIENDS
               (user.id !== page._id) ?
-              <button className='add-friend'>Add Friend</button>
+              <button className='add-friend' onClick={(e) => handleRequest(e)}>Add Friend</button>
               : null
             }
           </div>
