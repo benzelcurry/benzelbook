@@ -15,7 +15,14 @@ exports.user_list = (req, res, next) => {
     .sort([['username', 'ascending']])
     .exec((err, list_users) => {
       if (err) { return next(err) };
-      res.json({ user_list: list_users });
+      const users = list_users.map((user) => ({ 
+        username: user.username,
+        first_name: user.first_name,
+        family_name: user.family_name,
+        id: user._id,
+      }));
+
+      res.json({ user_list: users });
     });
 };
 
