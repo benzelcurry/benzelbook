@@ -6,6 +6,7 @@ import axios from 'axios';
 
 import Nav from './Nav';
 import Footer from './Footer';
+import ProfilePreview from './ProfilePreview';
 import '../stylesheets/Search.css';
 
 const Search = ({ query }) => {
@@ -38,9 +39,9 @@ const Search = ({ query }) => {
         {/* MAKE SEARCH RESULTS FOR USERS MAP TO HERE;
           CREATE A COMPONENT FOR USER CARD PREVIEWS THAT LINK
           TO THE RESPECTIVE PROFILE */}
-        Search results will go here.
-
-        <p>Query: {location.state ? location.state.query : null}</p>
+        { users.map((user) => 
+          <ProfilePreview key={user._id} user={user} />
+        )}
       </div>
       <Footer />
     </div>

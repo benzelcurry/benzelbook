@@ -1,0 +1,23 @@
+.preview-container {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  width: 500px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.preview-pic {
+  height: 70px;
+}
+
+.preview-info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #f0f2f5;
+  padding: 20px;
+  border-radius: 10px;
+  gap: 5px;
+}
