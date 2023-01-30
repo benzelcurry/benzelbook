@@ -35,6 +35,9 @@ const Search = ({ query }) => {
     <div>
       <Nav />
       <div className="search-container">
+        {/* MAKE SEARCH RESULTS FOR USERS MAP TO HERE;
+          CREATE A COMPONENT FOR USER CARD PREVIEWS THAT LINK
+          TO THE RESPECTIVE PROFILE */}
         Search results will go here.
 
         <p>Query: {location.state ? location.state.query : null}</p>
