@@ -1,3 +1,5 @@
+// Component for profile previews that are displayed in search results
+
 import React from 'react';
 import { DateTime } from 'luxon';
 
@@ -12,7 +14,7 @@ const ProfilePreview = ({ user }) => {
       <div className="preview-info">
         <div className="preview-name">{user.first_name} {user.family_name}</div>
         <div className="preview-act-created">
-          {DateTime.fromISO(user.account_created).toLocaleString(DateTime.DATE_MED)}
+          Account created: {DateTime.fromISO(user.account_created).toLocaleString(DateTime.DATE_MED)}
         </div>
       </div>
     </div>

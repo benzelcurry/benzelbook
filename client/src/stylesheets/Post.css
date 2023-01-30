@@ -6,6 +6,11 @@
   flex-direction: column;
 }
 
+.post-link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .post-header {
   display: flex;
   align-items: center;

@@ -4,4 +4,10 @@
   align-items: center;
   padding: 50px;
   flex-grow: 1;
+  gap: 30px;
+}
+
+.preview-link {
+  text-decoration: none;
+  color: inherit;
 }

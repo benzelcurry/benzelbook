@@ -6,6 +6,11 @@
   padding: 20px;
   border-radius: 10px;
   background-color: #fff;
+  cursor: pointer;
+}
+
+.preview-container:hover {
+  filter: brightness(0.9);
 }
 
 .preview-pic {

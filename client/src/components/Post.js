@@ -1,6 +1,7 @@
 // Component for displaying posts in news feed/profile pages
 
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { DateTime } from 'luxon';
 
@@ -61,10 +62,12 @@ const Post = ({ post, author }) => {
         <img src={
           postAuthor.pfp ? postAuthor.pfp : DefaultAvatar
         } alt="User avatar" className='mini-avatar' />
-        <div className="post-info">
-          <p className='post-author'>{postAuthor.first_name} {postAuthor.family_name}</p>
-          <p className='post-date'>{DateTime.fromISO(post.date).toLocaleString(DateTime.DATE_MED)}</p>
-        </div>
+        <Link to={`/user/${postAuthor.username}`} className='post-link'>
+          <div className="post-info">
+            <p className='post-author'>{postAuthor.first_name} {postAuthor.family_name}</p>
+            <p className='post-date'>{DateTime.fromISO(post.date).toLocaleString(DateTime.DATE_MED)}</p>
+          </div>
+        </Link>
       </div>
       <p className="post-body">{post.content}</p>
       <div className='post-actions'>
