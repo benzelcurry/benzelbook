@@ -15,6 +15,7 @@ exports.user_list = (req, res, next) => {
     .sort([['username', 'ascending']])
     .exec((err, list_users) => {
       if (err) { return next(err) };
+      // WILL NEED TO UPDATE TO RETURN PROFILE PIC INFO
       const users = list_users.map((user) => ({ 
         username: user.username,
         first_name: user.first_name,
@@ -43,7 +44,14 @@ exports.userID_detail = (req, res, next) => {
   User.findOne({ _id: req.params.id })
     .exec((err, user) => {
       if (err) { return next(err) };
-      res.json({ user })
+      // WILL NEED TO UPDATE TO RETURN PROFILE PIC INFO
+      res.json({
+        username: user.username,
+        first_name: user.first_name,
+        family_name: user.family_name,
+        account_created: user.account_created,
+        id: user._id,
+      });
     });
 };
 

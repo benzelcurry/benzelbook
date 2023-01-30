@@ -71,4 +71,7 @@ router.get('/requests', request_controller.request_list);
 // Create new Friend Request on POST
 router.post('/requests', request_controller.create_request);
 
+// Cancel a pending Friend Request on DELETE
+router.delete('/requests/:id', request_controller.delete_request);
+
 module.exports = router;

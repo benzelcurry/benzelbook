@@ -17,6 +17,7 @@ const User = () => {
   const [page, setPage] = useState({});
   const [posts, setPosts] = useState([]);
   const [pending, setPending] = useState(false);
+  const [existing, setExisting] = useState();
   const [content, setContent] = useState('');
   const [error, setError] = useState('');
   const token = localStorage.getItem('token');
@@ -74,9 +75,12 @@ const User = () => {
       .then((response) => {
         const requests = response.data.request_list;
         const existingRequest = requests.find(req => (req.from === user.id) && req.to === page._id);
-        if (existingRequest) { setPending(true) };
+        if (existingRequest) {
+          setPending(true);
+          setExisting(existingRequest.id); 
+        };
       })
-  }, [page._id, user.id]);
+  }, [page._id, user.id, pending]);
 
   // Updates message content in state upon change
   const handleInput = (e) => {
@@ -103,22 +107,31 @@ const User = () => {
       })
   };
 
-  // Sends a friend request from active user to profile page's account
+  // Sends/cancels a friend request from active user to profile page's account
   const handleRequest = (e) => {
     e.preventDefault();
-    const body = { userID: user.id, pageID: page._id };
-    axios.post(`${process.env.REACT_APP_SERVER_URL}/requests`, body)
-      .then((response) => {
-        if (response.data.message === 'Success') {
-          return setPending(true);
-          // DELETE THE BELOW ELSE STATEMENT ONCE FUNCTION IS PROVEN WORKING
-        } else {
-          console.log(response);
-        }
-      })
-      .catch((err) => {
-        throw new Error(err);
-      });
+    if (!pending) {
+      const body = { userID: user.id, pageID: page._id };
+      axios.post(`${process.env.REACT_APP_SERVER_URL}/requests`, body)
+        .then((response) => {
+          if (response.data.message === 'Success') {
+            return setPending(true);
+          };
+        })
+        .catch((err) => {
+          throw new Error(err);
+        });
+    } else {
+      axios.delete(`${process.env.REACT_APP_SERVER_URL}/requests/${existing}`)
+        .then((response) => {
+          if (response.data.message === 'Success') {
+            return setPending(false);
+          };
+        })
+        .catch((err) => {
+          throw new Error(err);
+        });
+    };
   };
 
   return (

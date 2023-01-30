@@ -11,6 +11,7 @@ exports.request_list = (req, res, next) => {
     const requests = list_requests.map((request) => ({
       from: request.from,
       to: request.to,
+      id: request._id,
     }));
 
     res.json({ request_list: requests });
@@ -29,5 +30,14 @@ exports.create_request = (req, res, next) => {
   request.save((err) => {
     if (err) { return next(err) };
     res.json({ message: 'Success' });
+  });
+};
+
+
+// Cancel pending Friend Request on DELETE
+exports.delete_request = (req, res, next) => {
+  FriendRequest.findByIdAndRemove(req.params.id, (err) => {
+    if (err) { return res.json({ message: 'Error' }) };
+    return res.json({ message: 'Success' });
   });
 };
