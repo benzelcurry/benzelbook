@@ -25,13 +25,6 @@ const FriendRequests = () => {
     if (user.id) {
       axios.get(`${process.env.REACT_APP_SERVER_URL}/requests`)
         .then((response) => {
-          // for (const request of response.data.request_list) {
-          //   if (request.from === user.id) {
-          //     setOutgoing(current => [...current, request]);
-          //   } else if (request.to === user.id) {
-          //     setIncoming(current => [...current, request]);
-          //   }
-          // }
           setRequests(response.data.request_list);
         })
         .catch((err) => {
@@ -53,7 +46,7 @@ const FriendRequests = () => {
         };
       };
     }
-  }, [user.id, requests])
+  }, [user.id, requests, incoming, outgoing])
 
   return (
     <div>
