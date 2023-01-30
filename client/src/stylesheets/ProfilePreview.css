@@ -26,3 +26,14 @@
   border-radius: 10px;
   gap: 5px;
 }
+
+.preview-name {
+  font-size: 1em;
+  margin: 0;
+}
+
+.preview-act-created {
+  font-size: 1em;
+  margin: 0;
+  font-weight: normal;
+}

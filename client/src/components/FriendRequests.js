@@ -1,8 +1,12 @@
+// Component for displaying all incoming/outgoing friend requests
+// for the active user
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import Nav from './Nav';
 import Footer from './Footer';
+import RequestPreview from './RequestPreview';
 import '../stylesheets/FriendRequests.css';
 
 const FriendRequests = () => {
@@ -12,6 +16,7 @@ const FriendRequests = () => {
   const [outgoing, setOutgoing] = useState([]);
   const token = localStorage.getItem('token');
 
+  // Pulls active user data
   useEffect(() => {
     const body = { token: localStorage.getItem('token') }
     axios.post(`${process.env.REACT_APP_SERVER_URL}/`, body)
@@ -65,7 +70,7 @@ const FriendRequests = () => {
           {
             outgoing.length > 0 ?
             outgoing.map((req) => 
-              <p key={req._id}>{req.to}</p>
+              <RequestPreview id={req.to} />
             )
             : <p>You currently have no outgoing friend requests.</p>
           }

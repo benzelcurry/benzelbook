@@ -34,7 +34,7 @@ const Post = ({ post, author }) => {
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_SERVER_URL}/users/id/${author}`)
       .then((response) => {
-        setPostAuthor(response.data.user);
+        setPostAuthor(response.data);
       })
   }, [author]);
 

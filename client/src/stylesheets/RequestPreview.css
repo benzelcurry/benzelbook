@@ -1,3 +1,17 @@
 .request-preview {
+  background-color: #fff;
+  width: 500px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.request-preview > .request-link > div {
   display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.request-link {
+  text-decoration: none;
+  color: inherit;
 }

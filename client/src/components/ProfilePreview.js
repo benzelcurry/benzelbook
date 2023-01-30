@@ -12,10 +12,10 @@ const ProfilePreview = ({ user }) => {
       <img src={ user.picture ? user.picture : DefaultAvatar } 
       alt="User avatar" className='preview-pic' />
       <div className="preview-info">
-        <div className="preview-name">{user.first_name} {user.family_name}</div>
-        <div className="preview-act-created">
+        <h6 className="preview-name">{user.first_name} {user.family_name}</h6>
+        <h6 className="preview-act-created">
           Account created: {DateTime.fromISO(user.account_created).toLocaleString(DateTime.DATE_MED)}
-        </div>
+        </h6>
       </div>
     </div>
   );
