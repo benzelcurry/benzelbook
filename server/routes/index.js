@@ -65,6 +65,9 @@ router.post('/posts/:id', like_controller.add_like);
 
 ///// FRIEND REQUEST ROUTES /////
 
+// GET list of Friend Requests
+router.get('/requests', request_controller.request_list);
+
 // Create new Friend Request on POST
 router.post('/requests', request_controller.create_request);
 
