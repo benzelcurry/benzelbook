@@ -57,8 +57,14 @@ const RequestPreview = ({ req, outgoing, incoming }) => {
         </button>
         : 
         <div className='response'>
-          <button className='response-btn'>Accept</button>
-          <button className='response-btn'>Reject</button>
+          { !canceled ?
+            <button className='response-btn'>Accept</button>
+            : null
+          }
+          <button className='response-btn'
+            onClick={(e) => handleCancel(e)}>
+            { !canceled ? 'Reject' : 'Rejected!' }
+          </button>
         </div>
       }
     </div>
