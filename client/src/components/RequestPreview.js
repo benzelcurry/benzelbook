@@ -7,15 +7,26 @@ import axios from 'axios';
 import DefaultAvatar from '../images/default-avatar.svg';
 import '../stylesheets/RequestPreview.css';
 
-const RequestPreview = ({ id, outgoing }) => {
+const RequestPreview = ({ req, outgoing }) => {
   const [profile, setProfile] = useState({});
+  const [canceled, setCanceled] = useState(false);
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_SERVER_URL}/users/id/${id}`)
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/users/id/${req.to}`)
       .then((response) => {
         setProfile(response.data);
       });
-  }, [id])
+  }, [req.to])
+
+  const handleCancel = (e) => {
+    e.preventDefault();
+    axios.delete(`${process.env.REACT_APP_SERVER_URL}/requests/${req.id}`)
+      .then((response) => {
+        if (response.data.message === 'Success') {
+          setCanceled(true);
+        };
+      });
+  };
 
   return (
     <div className="request-preview">
@@ -32,7 +43,10 @@ const RequestPreview = ({ id, outgoing }) => {
       </Link>
       {
         outgoing ?
-        <button className='response-btn'>Cancel Request</button>
+        <button className='response-btn' 
+          onClick={ !canceled ? (e) => handleCancel(e) : null }>
+          { !canceled ? 'Cancel Request' : 'Canceled' }
+        </button>
         : 
         <div className='response'>
           <button className='response-btn'>Accept</button>
