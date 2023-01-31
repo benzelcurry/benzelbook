@@ -7,7 +7,7 @@ import axios from 'axios';
 import DefaultAvatar from '../images/default-avatar.svg';
 import '../stylesheets/RequestPreview.css';
 
-const RequestPreview = ({ id }) => {
+const RequestPreview = ({ id, outgoing }) => {
   const [profile, setProfile] = useState({});
 
   useEffect(() => {
@@ -30,6 +30,15 @@ const RequestPreview = ({ id }) => {
           </h6>
         </div>
       </Link>
+      {
+        outgoing ?
+        <button className='response-btn'>Cancel Request</button>
+        : 
+        <div className='response'>
+          <button className='response-btn'>Accept</button>
+          <button className='response-btn'>Reject</button>
+        </div>
+      }
     </div>
   );
 };

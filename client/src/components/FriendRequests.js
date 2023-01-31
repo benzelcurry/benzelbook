@@ -70,7 +70,7 @@ const FriendRequests = () => {
           {
             outgoing.length > 0 ?
             outgoing.map((req) => 
-              <RequestPreview id={req.to} />
+              <RequestPreview id={req.to} outgoing={true} />
             )
             : <p>You currently have no outgoing friend requests.</p>
           }

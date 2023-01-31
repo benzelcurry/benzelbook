@@ -3,6 +3,8 @@
   width: 500px;
   padding: 20px;
   border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .request-preview > .request-link > div {
@@ -14,4 +16,23 @@
 .request-link {
   text-decoration: none;
   color: inherit;
+}
+
+.response-btn {
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  align-self: center;
+  padding: 10px;
+  cursor: pointer;
+  background-color: #9ec5f7;
+  font-weight: bold;
+}
+
+.response-btn:hover {
+  filter: brightness(1.1);
+}
+
+.response-btn:active {
+  filter: brightness(1.2);
 }

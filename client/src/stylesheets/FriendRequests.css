@@ -5,3 +5,8 @@
   align-items: center;
   padding: 50px;
 }
+
+.incoming-requests,
+.outgoing-requests {
+  width: 540px;
+}
