@@ -36,6 +36,23 @@ const RequestPreview = ({ req, outgoing, incoming }) => {
       });
   };
 
+  // Handles accepting friend requests
+  const handleAccept = (e) => {
+    e.preventDefault();
+    // WILL NEED TO DELETE THE FRIEND REQUEST OBJECT IN DB UPON ACCEPTANCE
+    const body = { friend: req.to };
+    axios.put(`${process.env.REACT_APP_SERVER_URL}/users/${req.from}/friends`, body)
+      .then((response) => {
+        console.log(response);
+      });
+
+    const body2 = { friend: req.from };
+    axios.put(`${process.env.REACT_APP_SERVER_URL}/users/${req.to}/friends`, body2)
+      .then((response) => {
+        console.log(response);
+      });
+  }
+
   return (
     <div className="request-preview">
       <Link to={`/user/${profile.username}`}
@@ -58,7 +75,11 @@ const RequestPreview = ({ req, outgoing, incoming }) => {
         : 
         <div className='response'>
           { !canceled ?
-            <button className='response-btn'>Accept</button>
+            // MAKE THIS BUTTON DISAPPEAR/CHANGE UPON ACCEPTANCE
+            <button className='response-btn'
+              onClick={(e) => handleAccept(e)}>
+              Accept
+            </button>
             : null
           }
           <button className='response-btn'

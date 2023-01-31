@@ -15,6 +15,7 @@ const Nav = () => {
 
   const navigate = useNavigate();
 
+  // Sends token to server for persistent log in verification
   useEffect(() => {
     const body = { token: localStorage.getItem('token') }
     axios.post(`${process.env.REACT_APP_SERVER_URL}/`, body)
@@ -24,15 +25,18 @@ const Nav = () => {
       })
   }, [token])
 
+  // Handles the search query
   const handleQuery = (e) => {
     setQuery(e.target.value);
   }
 
+  // Redirects to search results page when search query is entered
   const handleSearch = (e) => {
     e.preventDefault();
     navigate('/search', { state: { query: query } });
   }
 
+  // Logs user out
   const handleClick = (e) => {
     localStorage.clear();
     navigate(0);

@@ -187,3 +187,20 @@ exports.login_user = (req, res, next) => {
     },
   );
 };
+
+
+// Add friend to User on PUT
+exports.update_friends = (req, res, next) => {
+  User.findById(req.params.id)
+    .exec((err, user) => {
+      if(err) { return next(err) }
+
+      const old = user.friends;
+      const updated = [...old, req.body.friend];
+      
+      User.findByIdAndUpdate(req.params.id, { friends: updated }, (err) => {
+        if (err) return next(err);
+        return res.json({ message: 'Success' });
+      });
+    });
+};
