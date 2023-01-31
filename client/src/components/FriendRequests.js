@@ -61,7 +61,9 @@ const FriendRequests = () => {
           <h2>Incoming Requests</h2>
           {
             incoming.length > 0 ? 
-            <div>Will map incoming requests here</div>
+            incoming.map((req) => 
+              <RequestPreview req={req} incoming={true} />
+            )
             : <p>You currently have no incoming friend requests.</p>
           }
         </div>

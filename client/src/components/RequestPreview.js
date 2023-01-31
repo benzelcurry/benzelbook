@@ -7,17 +7,25 @@ import axios from 'axios';
 import DefaultAvatar from '../images/default-avatar.svg';
 import '../stylesheets/RequestPreview.css';
 
-const RequestPreview = ({ req, outgoing }) => {
+const RequestPreview = ({ req, outgoing, incoming }) => {
   const [profile, setProfile] = useState({});
   const [canceled, setCanceled] = useState(false);
 
+  // Pulls profile info to display on request preview
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_SERVER_URL}/users/id/${req.to}`)
+    outgoing ?
+      (axios.get(`${process.env.REACT_APP_SERVER_URL}/users/id/${req.to}`)
+        .then((response) => {
+          setProfile(response.data);
+        }))
+    : 
+      (axios.get(`${process.env.REACT_APP_SERVER_URL}/users/id/${req.from}`)
       .then((response) => {
         setProfile(response.data);
-      });
-  }, [req.to])
+      }));
+  }, [outgoing, req.from, req.to])
 
+  // Handles canceling outgoing requests
   const handleCancel = (e) => {
     e.preventDefault();
     axios.delete(`${process.env.REACT_APP_SERVER_URL}/requests/${req.id}`)
@@ -43,7 +51,7 @@ const RequestPreview = ({ req, outgoing }) => {
       </Link>
       {
         outgoing ?
-        <button className='response-btn' 
+        <button className='response-btn cancel-btn' 
           onClick={ !canceled ? (e) => handleCancel(e) : null }>
           { !canceled ? 'Cancel Request' : 'Canceled' }
         </button>

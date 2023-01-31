@@ -18,6 +18,12 @@
   color: inherit;
 }
 
+.response {
+  display: flex;
+  gap: 10px;
+  align-self: center;
+}
+
 .response-btn {
   height: 40px;
   border-radius: 10px;
@@ -27,6 +33,7 @@
   cursor: pointer;
   background-color: #9ec5f7;
   font-weight: bold;
+  width: 100px;
 }
 
 .response-btn:hover {
@@ -35,4 +42,8 @@
 
 .response-btn:active {
   filter: brightness(1.2);
+}
+
+.response-btn.cancel-btn {
+  width: 125px;
 }
