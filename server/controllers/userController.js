@@ -195,6 +195,12 @@ exports.update_friends = (req, res, next) => {
     .exec((err, user) => {
       if(err) { return next(err) }
 
+      if (user.friends.includes(req.body.friend)) {
+        return res.json({
+          message: 'Users are already friends.'
+        });
+      };
+
       const old = user.friends;
       const updated = [...old, req.body.friend];
       
