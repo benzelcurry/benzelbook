@@ -167,23 +167,25 @@ const User = () => {
           <img src={DefaultAvatar} alt="User avatar" className='profile-pic' />
           <div className="user-basics">
             <h1 className="user-fullname">{page.first_name} {page.family_name}</h1>
-            {
-              (user.id !== page._id && !friends) ?
-              <button className='friend-btn' onClick={(e) => handleRequest(e)}>
-                { pending ? 'Cancel Request' : 'Add Friend' }
+            <div className="friend-buttons">
+              {
+                (user.id !== page._id && !friends) ?
+                <button className='friend-btn' onClick={(e) => handleRequest(e)}>
+                  { pending ? 'Cancel Request' : 'Add Friend' }
+                </button>
+                : null
+              }
+              {
+                friends ?
+                <button className='friend-btn' onClick={(e) => handleDelete(e)}>
+                  Remove Friend
+                </button>
+                : null
+              }
+              <button className='friend-btn' onClick={(e) => navigate(`/user/${page.username}/friends`)}>
+                Friends List
               </button>
-              : null
-            }
-            {
-              friends ? 
-              <button className='friend-btn' onClick={(e) => handleDelete(e)}>
-                Remove Friend
-              </button>
-              : null
-            }
-            <button className='friend-btn' onClick={(e) => navigate(`/user/${page.username}/friends`)}>
-              Friends List 
-            </button>
+            </div>
           </div>
         </div>
         <div className="user-contents">
