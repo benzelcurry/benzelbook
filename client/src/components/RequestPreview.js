@@ -10,6 +10,7 @@ import '../stylesheets/RequestPreview.css';
 const RequestPreview = ({ req, outgoing, incoming }) => {
   const [profile, setProfile] = useState({});
   const [canceled, setCanceled] = useState(false);
+  const [accepted, setAccepted] = useState(false);
 
   // Pulls profile info to display on request preview
   useEffect(() => {
@@ -42,16 +43,15 @@ const RequestPreview = ({ req, outgoing, incoming }) => {
     // WILL NEED TO DELETE THE FRIEND REQUEST OBJECT IN DB UPON ACCEPTANCE
     const body = { friend: req.to };
     axios.put(`${process.env.REACT_APP_SERVER_URL}/users/${req.from}/friends`, body)
-      .then((response) => {
-        console.log(response);
-      });
-
     const body2 = { friend: req.from };
-    axios.put(`${process.env.REACT_APP_SERVER_URL}/users/${req.to}/friends`, body2)
+    axios.put(`${process.env.REACT_APP_SERVER_URL}/users/${req.to}/friends`, body2);
+    axios.delete(`${process.env.REACT_APP_SERVER_URL}/requests/${req.id}`)
       .then((response) => {
-        console.log(response);
+        if (response.data.message === 'Success') {
+          setAccepted(true);
+        };
       });
-  }
+  };
 
   return (
     <div className="request-preview">
@@ -75,17 +75,19 @@ const RequestPreview = ({ req, outgoing, incoming }) => {
         : 
         <div className='response'>
           { !canceled ?
-            // MAKE THIS BUTTON DISAPPEAR/CHANGE UPON ACCEPTANCE
             <button className='response-btn'
-              onClick={(e) => handleAccept(e)}>
-              Accept
+              onClick={ !accepted ? (e) => handleAccept(e) : null }>
+              { !accepted ? 'Accept' : 'Accepted!' }
             </button>
             : null
           }
-          <button className='response-btn'
-            onClick={(e) => handleCancel(e)}>
-            { !canceled ? 'Reject' : 'Rejected!' }
-          </button>
+          { !accepted ?
+            <button className='response-btn'
+              onClick={ !canceled ? (e) => handleCancel(e) : null }>
+              { !canceled ? 'Reject' : 'Rejected!' }
+            </button>
+            : null
+          }
         </div>
       }
     </div>
