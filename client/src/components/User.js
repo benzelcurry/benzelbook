@@ -15,6 +15,7 @@ const User = () => {
   const [current, setCurrent] = useState(username);
   const [user, setUser] = useState({});
   const [page, setPage] = useState({});
+  const [friends, setFriends] = useState(false);
   const [posts, setPosts] = useState([]);
   const [pending, setPending] = useState(false);
   const [existing, setExisting] = useState();
@@ -81,6 +82,19 @@ const User = () => {
         };
       })
   }, [page._id, user.id, pending]);
+
+  // Checks to see if active user and page owner are friends
+  useEffect(() => {
+    if (user.id) {
+      axios.get(`${process.env.REACT_APP_SERVER_URL}/users/id/${user.id}`)
+        .then((response) => {
+          const friends = response.data.friends;
+          if (friends.includes(page._id)) {
+            return setFriends(true);
+          };
+        });
+    }
+  }, [user.id, page._id]);
 
   // Updates message content in state upon change
   const handleInput = (e) => {
