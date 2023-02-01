@@ -181,6 +181,9 @@ const User = () => {
               </button>
               : null
             }
+            <button className='friend-btn' onClick={(e) => navigate(`/user/${page.username}/friends`)}>
+              Friends List 
+            </button>
           </div>
         </div>
         <div className="user-contents">
