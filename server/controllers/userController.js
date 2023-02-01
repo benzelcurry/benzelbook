@@ -50,6 +50,7 @@ exports.userID_detail = (req, res, next) => {
         first_name: user.first_name,
         family_name: user.family_name,
         account_created: user.account_created,
+        friends: user.friends,
         id: user._id,
       });
     });
@@ -190,7 +191,7 @@ exports.login_user = (req, res, next) => {
 
 
 // Add friend to User on PUT
-exports.update_friends = (req, res, next) => {
+exports.add_friends = (req, res, next) => {
   User.findById(req.params.id)
     .exec((err, user) => {
       if(err) { return next(err) }
@@ -208,5 +209,25 @@ exports.update_friends = (req, res, next) => {
         if (err) return next(err);
         return res.json({ message: 'Success' });
       });
+    });
+};
+
+
+// Delete friend from User on PUT
+exports.delete_friends = (req, res, next) => {
+  User.findById(req.params.id)
+    .exec((err, user) => {
+      if (err) { return next(err) }
+
+      const friendArr = user.friends;
+      const index = friendArr.indexOf(req.body.friend);
+      
+      if (index > -1) {
+        friendArr.splice(index, 1);
+        User.findByIdAndUpdate(req.params.id, { friends: friendArr }, (err) => {
+          if (err) return next(err);
+          return res.json({ message: 'Success' });
+        });
+      };
     });
 };

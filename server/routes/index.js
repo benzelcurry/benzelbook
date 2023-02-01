@@ -41,8 +41,11 @@ router.get('/users', user_controller.user_list);
 // POST create new user
 router.post('/users', user_controller.create_user);
 
-// Updates User friend list on PUT
-router.put('/users/:id/friends', user_controller.update_friends);
+// Adds to User friend list on PUT
+router.put('/users/:id/friends', user_controller.add_friends);
+
+// Deletes from User friend list and updates on PUT
+router.put('/users/:id/friends/delete', user_controller.delete_friends);
 
 // GET details for a single user by ID
 router.get('/users/id/:id', user_controller.userID_detail);

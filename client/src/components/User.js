@@ -151,8 +151,12 @@ const User = () => {
   // Deletes a friend upon pressing 'Remove Friend' button
   const handleDelete = (e) => {
     e.preventDefault();
-    // ADD FRIEND DELETION STUFF IN HERE AFTER SERVER IS UPDATED
-  }
+    const body = { friend: page._id };
+    axios.put(`${process.env.REACT_APP_SERVER_URL}/users/${user.id}/friends/delete`, body);
+    const body2 = { friend: user.id };
+    axios.put(`${process.env.REACT_APP_SERVER_URL}/users/${page._id}/friends/delete`, body2);
+    setFriends(false);
+  };
 
   return (
     <div>
@@ -172,7 +176,7 @@ const User = () => {
             }
             {
               friends ? 
-              <button className='friend-btn'>
+              <button className='friend-btn' onClick={(e) => handleDelete(e)}>
                 Remove Friend
               </button>
               : null

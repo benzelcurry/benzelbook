@@ -40,7 +40,6 @@ const RequestPreview = ({ req, outgoing, incoming }) => {
   // Handles accepting friend requests
   const handleAccept = (e) => {
     e.preventDefault();
-    // WILL NEED TO DELETE THE FRIEND REQUEST OBJECT IN DB UPON ACCEPTANCE
     const body = { friend: req.to };
     axios.put(`${process.env.REACT_APP_SERVER_URL}/users/${req.from}/friends`, body)
     const body2 = { friend: req.from };
