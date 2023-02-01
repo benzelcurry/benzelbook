@@ -148,6 +148,12 @@ const User = () => {
     };
   };
 
+  // Deletes a friend upon pressing 'Remove Friend' button
+  const handleDelete = (e) => {
+    e.preventDefault();
+    // ADD FRIEND DELETION STUFF IN HERE AFTER SERVER IS UPDATED
+  }
+
   return (
     <div>
       <Nav />
@@ -158,10 +164,16 @@ const User = () => {
           <div className="user-basics">
             <h1 className="user-fullname">{page.first_name} {page.family_name}</h1>
             {
-              // GET THIS TO HIDE IF USERS ARE ALREADY FRIENDS
-              (user.id !== page._id) ?
-              <button className='add-friend' onClick={(e) => handleRequest(e)}>
+              (user.id !== page._id && !friends) ?
+              <button className='friend-btn' onClick={(e) => handleRequest(e)}>
                 { pending ? 'Cancel Request' : 'Add Friend' }
+              </button>
+              : null
+            }
+            {
+              friends ? 
+              <button className='friend-btn'>
+                Remove Friend
               </button>
               : null
             }

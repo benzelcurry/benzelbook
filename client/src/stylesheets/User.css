@@ -31,7 +31,7 @@
   font-weight: bold;
 }
 
-.add-friend {
+.friend-btn {
   height: 40px;
   width: 150px;
   border: none;
@@ -43,11 +43,11 @@
   cursor: pointer;
 }
 
-.add-friend:hover {
+.friend-btn:hover {
   filter: brightness(1.1);
 }
 
-.add-friend:active {
+.friend-btn:active {
   filter: brightness(1.2);
 }
 
