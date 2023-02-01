@@ -11,6 +11,7 @@ import Search from './Search';
 import User from './User';
 import Error from './Error';
 import FriendRequests from './FriendRequests';
+import FriendList from './FriendList';
 
 const RouteSwitch = () => {
   return (
@@ -22,6 +23,7 @@ const RouteSwitch = () => {
         <Route path='search' element={ <Search /> } />
         <Route path='friend-requests' element={ <FriendRequests /> } />
         <Route path='user/:username' element={ <User /> } />
+        <Route path='user/:username/friends' element={ <FriendList /> } />
         <Route path='*' element={ <Error /> } />
       </Routes>
     </HashRouter>
