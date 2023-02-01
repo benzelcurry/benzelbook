@@ -22,7 +22,7 @@ const ProfilePreview = ({ user, friend }) => {
   return (
     <div className="preview-container">
       { user ? 
-        <div className="preview-container">
+        <div>
           <img src={ user.picture ? user.picture : DefaultAvatar }
           alt="User avatar" className='preview-pic' />
           <div className="preview-info">
@@ -33,7 +33,7 @@ const ProfilePreview = ({ user, friend }) => {
           </div>
         </div>
         :
-        <div className="preview-container">
+        <div>
           <img src={ account.picture ? account.picture : DefaultAvatar }
           alt="User avatar" className='preview-pic' />
           <div className="preview-info">
