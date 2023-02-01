@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import Nav from './Nav';
 import Footer from './Footer';
+import ProfilePreview from './ProfilePreview';
 import '../stylesheets/FriendList.css';
 
 const FriendList = () => {
@@ -24,7 +25,7 @@ const FriendList = () => {
     if (user.id) {
       axios.get(`${process.env.REACT_APP_SERVER_URL}/users/id/${user.id}`)
         .then((response) => {
-          console.log(response.data.friends);
+          setFriends(response.data.friends);
         })
     }
   }, [user.id]);
@@ -33,7 +34,11 @@ const FriendList = () => {
     <div>
       <Nav />
       <div className="fl-container">
-        Friend list stuff will go here.
+        {  
+          friends.map((friend) => 
+            <ProfilePreview key={friend._id} friend={friend} />
+          )
+        }
       </div>
       <Footer />
     </div>
