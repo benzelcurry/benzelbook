@@ -8,6 +8,7 @@ import { DateTime } from 'luxon';
 import Like from '../images/like.svg';
 import Comment from '../images/comment.svg';
 import DefaultAvatar from '../images/default-avatar.svg';
+import Delete from '../images/delete.svg';
 import '../stylesheets/Post.css';
 
 const Post = ({ post, author }) => {
@@ -60,15 +61,22 @@ const Post = ({ post, author }) => {
         DISPLAY USER PROFILE PICS; WILL LIKELY NEED TO INSTALL A DEPENDENCY
         OR SOMETHING LIKE THAT TO HANDLE IMAGE HOSTING? */}
       <div className="post-header">
-        <img src={
-          postAuthor.pfp ? postAuthor.pfp : DefaultAvatar
-        } alt="User avatar" className='mini-avatar' />
-        <Link to={`/user/${postAuthor.username}`} className='post-link'>
-          <div className="post-info">
-            <p className='post-author'>{postAuthor.first_name} {postAuthor.family_name}</p>
-            <p className='post-date'>{DateTime.fromISO(post.date).toLocaleString(DateTime.DATE_MED)}</p>
-          </div>
-        </Link>
+        <div>
+          <img src={
+            postAuthor.pfp ? postAuthor.pfp : DefaultAvatar
+          } alt="User avatar" className='mini-avatar' />
+          <Link to={`/user/${postAuthor.username}`} className='post-link'>
+            <div className="post-info">
+              <p className='post-author'>{postAuthor.first_name} {postAuthor.family_name}</p>
+              <p className='post-date'>{DateTime.fromISO(post.date).toLocaleString(DateTime.DATE_MED)}</p>
+            </div>
+          </Link>
+        </div>
+        {
+          user.id === post.author ?
+          <i><img src={Delete} alt='Delete post' className='post-action delete-post' /></i>
+          : null
+        }
       </div>
       <p className="post-body">{post.content}</p>
       <div className='post-actions'>
