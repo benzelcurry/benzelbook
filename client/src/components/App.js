@@ -52,7 +52,9 @@ const App = () => {
     <div>
       <Nav />
       <div className="app">
-        <NewPost userID={user.id} />
+        <div className="new-post-container">
+          <NewPost userID={user.id} />
+        </div>
         <div className="feed-posts">
           {posts.map((post) =>
             <Post key={post._id} post={post} author={post.author} />

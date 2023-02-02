@@ -5,7 +5,8 @@
   align-items: center;
 }
 
-.feed-posts {
+.feed-posts,
+.new-post-container {
   display: flex;
   flex-direction: column;
   gap: 20px;
