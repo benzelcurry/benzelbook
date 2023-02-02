@@ -48,7 +48,7 @@ const LogIn = () => {
 
   return (
     <div>
-      <Nav />
+      <Nav newUser={true} />
       <div className="login-container">
         <form action="" method="POST" className="login-form">
           <div className="form-inputs">

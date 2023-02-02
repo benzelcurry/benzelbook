@@ -10,7 +10,7 @@ import '../stylesheets/App.css';
 
 const App = () => {
   const [posts, setPosts] = useState([]);
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState({});
   const [page, setPage] = useState('');
   const token = localStorage.getItem('token');
 

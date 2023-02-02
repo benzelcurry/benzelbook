@@ -86,7 +86,7 @@ const SignUp = () => {
 
   return (
     <div>
-      <Nav />
+      <Nav newUser={true} />
       <div className="signup-container">
         <form action="" method="POST" className='signup-form'>
           <div className="signup-inputs">

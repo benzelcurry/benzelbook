@@ -1,15 +1,14 @@
 // Nav/Header component
 
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, Navigate } from 'react-router-dom';
 import axios from 'axios';
 
 import FriendRequest from '../images/friend-request.svg';
 import '../stylesheets/Nav.css';
 
-const Nav = () => {
-  const [name, setName] = useState();
-  const [username, setUsername] = useState();
+const Nav = ({ newUser }) => {
+  const [user, setUser] = useState({});
   const [query, setQuery] = useState();
   const token = localStorage.getItem('token');
 
@@ -20,8 +19,7 @@ const Nav = () => {
     const body = { token: localStorage.getItem('token') }
     axios.post(`${process.env.REACT_APP_SERVER_URL}/`, body)
       .then((response) => {
-        setName(response.data.name);
-        setUsername(response.data.username);
+        setUser(response.data);
       })
   }, [token])
 
@@ -42,6 +40,10 @@ const Nav = () => {
     navigate(0);
   }
 
+  if (user === 'No current user.' && !newUser) {
+    return <Navigate to='/login' />
+  };
+
   return (
     <div className='header'>
       <div className="nav-left">
@@ -55,13 +57,13 @@ const Nav = () => {
         </form>
       </div>
       <div className="nav-right">
-        { name ?
+        { user.name ?
           <div>
             <Link to={'/friend-requests'} className='nav-link'>
               <img src={FriendRequest} alt="Friend requests icon" className='fr-nav' />
             </Link>
-            <Link to={`/user/${username}`} className='nav-link'>
-              <button className='nav-btn'>{name}</button>
+            <Link to={`/user/${user.username}`} className='nav-link'>
+              <button className='nav-btn'>{user.name}</button>
             </Link>
             <button className='nav-btn' onClick={() => handleClick()}>Log Out</button>
           </div>
