@@ -1,6 +1,7 @@
 // Component for profile previews that are displayed in search results
 
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { DateTime } from 'luxon';
 
@@ -33,18 +34,19 @@ const ProfilePreview = ({ user, friend }) => {
           </div>
         </div>
         :
-        <div>
-          <img src={ account.picture ? account.picture : DefaultAvatar }
-          alt="User avatar" className='preview-pic' />
-          <div className="preview-info">
-          <h6 className="preview-name">{account.first_name} {account.family_name}</h6>
-          <h6 className="preview-act-created">
-            Account created: {DateTime.fromISO(account.account_created).toLocaleString(DateTime.DATE_MED)}
-          </h6>
-        </div>
-      </div>
+        <Link to={`/user/${account.username}`} className='friends-link'>
+          <div className='friends-preview'>
+            <img src={ account.picture ? account.picture : DefaultAvatar }
+            alt="User avatar" className='preview-pic' />
+            <div className="preview-info">
+              <h6 className="preview-name">{account.first_name} {account.family_name}</h6>
+              <h6 className="preview-act-created">
+                Account created: {DateTime.fromISO(account.account_created).toLocaleString(DateTime.DATE_MED)}
+              </h6>
+            </div>
+          </div>
+        </Link>
       }
-
     </div>
   );
 };

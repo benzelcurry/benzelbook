@@ -1,4 +1,5 @@
-.preview-container > div {
+.preview-container > div,
+.friends-preview {
   display: flex;
   align-items: center;
   gap: 30px;
@@ -36,4 +37,9 @@
   font-size: 1em;
   margin: 0;
   font-weight: normal;
+}
+
+.friends-link {
+  text-decoration: none;
+  color: inherit;
 }

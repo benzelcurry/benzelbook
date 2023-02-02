@@ -36,7 +36,7 @@ const FriendList = () => {
       <div className="fl-container">
         {  
           friends.map((friend) => 
-            <ProfilePreview key={friend._id} friend={friend} />
+            <ProfilePreview key={friend} friend={friend} />
           )
         }
       </div>
