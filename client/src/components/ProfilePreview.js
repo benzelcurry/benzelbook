@@ -9,8 +9,21 @@ import DefaultAvatar from '../images/default-avatar.svg';
 import '../stylesheets/ProfilePreview.css';
 
 const ProfilePreview = ({ user, friend, admin }) => {
+  const [active, setActive] = useState({});
   const [account, setAccount] = useState({});
+  const [friends, setFriends] = useState(true);
+  const token = localStorage.getItem('token');
 
+  // Pulls active user on client end
+  useEffect(() => {
+    const body = { token: localStorage.getItem('token') }
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/`, body)
+      .then((response) => {
+        setActive(response.data);
+      })
+  }, [token]);
+
+  // Sets account data using ID pulled from friends list
   useEffect(() => {
     if (friend) {
       axios.get(`${process.env.REACT_APP_SERVER_URL}/users/id/${friend}`)
@@ -18,7 +31,17 @@ const ProfilePreview = ({ user, friend, admin }) => {
           setAccount(response.data);
         })
     }
-  }, [friend])
+  }, [friend]);
+
+  // Deletes a friend upon pressing 'Remove Friend' button
+  const handleDelete = (e) => {
+    e.preventDefault();
+    const body = { friend: friend };
+    axios.put(`${process.env.REACT_APP_SERVER_URL}/users/${active.id}/friends/delete`, body);
+    const body2 = { friend: active.id };
+    axios.put(`${process.env.REACT_APP_SERVER_URL}/users/${friend}/friends/delete`, body2);
+    setFriends(false);
+  };
 
   return (
     <div>
@@ -47,7 +70,9 @@ const ProfilePreview = ({ user, friend, admin }) => {
           </Link>
             {
               admin ? 
-              <button className='remove-friend'>Remove Friend</button>
+              <button className='remove-friend' onClick={(e) => handleDelete(e)}>
+                { friends ? 'Remove Friend' : 'Removed!' }
+              </button>
               : null
             }
         </div>
