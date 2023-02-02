@@ -106,7 +106,7 @@ const User = () => {
   // Also handles accepting/deleting incoming requests
   const handleRequest = (e) => {
     e.preventDefault();
-    if (!pending) {
+    if (!pending && !incoming) {
       const body = { userID: user.id, pageID: page._id };
       axios.post(`${process.env.REACT_APP_SERVER_URL}/requests`, body)
         .then((response) => {
