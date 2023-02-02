@@ -1,4 +1,7 @@
+// Displays the friends list for any given User
+
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 import Nav from './Nav';
@@ -7,8 +10,10 @@ import ProfilePreview from './ProfilePreview';
 import '../stylesheets/FriendList.css';
 
 const FriendList = () => {
+  const { username } = useParams();
   const [user, setUser] = useState({});
   const [friends, setFriends] = useState([]);
+  const [admin, setAdmin] = useState(false);
   const token = localStorage.getItem('token');
 
   // Pulls active user on client end
@@ -30,13 +35,21 @@ const FriendList = () => {
     }
   }, [user.id]);
 
+  // Determines if user is viewing their own friends list, and
+  // displays 'Delete' buttons if so
+  useEffect(() => {
+    if (user.username === username) {
+      setAdmin(true);
+    };
+  }, [user.username, username])
+
   return (
     <div>
       <Nav />
       <div className="fl-container">
         {  
           friends.map((friend) => 
-            <ProfilePreview key={friend} friend={friend} />
+            <ProfilePreview key={friend} friend={friend} admin={admin} />
           )
         }
       </div>

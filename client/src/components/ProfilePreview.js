@@ -8,7 +8,7 @@ import { DateTime } from 'luxon';
 import DefaultAvatar from '../images/default-avatar.svg';
 import '../stylesheets/ProfilePreview.css';
 
-const ProfilePreview = ({ user, friend }) => {
+const ProfilePreview = ({ user, friend, admin }) => {
   const [account, setAccount] = useState({});
 
   useEffect(() => {
@@ -21,9 +21,9 @@ const ProfilePreview = ({ user, friend }) => {
   }, [friend])
 
   return (
-    <div className="preview-container">
+    <div>
       { user ? 
-        <div>
+        <div className="preview-container">
           <img src={ user.picture ? user.picture : DefaultAvatar }
           alt="User avatar" className='preview-pic' />
           <div className="preview-info">
@@ -34,8 +34,8 @@ const ProfilePreview = ({ user, friend }) => {
           </div>
         </div>
         :
-        <Link to={`/user/${account.username}`} className='friends-link'>
-          <div className='friends-preview'>
+        <div className='friends-preview'>
+          <Link to={`/user/${account.username}`} className='friends-link'>
             <img src={ account.picture ? account.picture : DefaultAvatar }
             alt="User avatar" className='preview-pic' />
             <div className="preview-info">
@@ -44,8 +44,13 @@ const ProfilePreview = ({ user, friend }) => {
                 Account created: {DateTime.fromISO(account.account_created).toLocaleString(DateTime.DATE_MED)}
               </h6>
             </div>
-          </div>
-        </Link>
+          </Link>
+            {
+              admin ? 
+              <button className='remove-friend'>Remove Friend</button>
+              : null
+            }
+        </div>
       }
     </div>
   );

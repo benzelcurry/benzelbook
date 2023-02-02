@@ -1,4 +1,4 @@
-.preview-container > div,
+.preview-container,
 .friends-preview {
   display: flex;
   align-items: center;
@@ -7,10 +7,20 @@
   padding: 20px;
   border-radius: 10px;
   background-color: #fff;
+}
+
+.preview-container {
   cursor: pointer;
 }
 
-.preview-container:hover {
+.friends-link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.preview-container:hover,
+.friends-link:hover {
   filter: brightness(0.9);
 }
 
@@ -42,4 +52,21 @@
 .friends-link {
   text-decoration: none;
   color: inherit;
+}
+
+.remove-friend {
+  border: none;
+  background-color: #9ec5f7;
+  padding: 5px;
+  width: 100px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.remove-friend:hover {
+  filter: brightness(1.1);
+}
+
+.remove-friend:active {
+  filter: brightness(1.2);
 }
