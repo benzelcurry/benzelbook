@@ -19,7 +19,9 @@ const User = () => {
   const [friends, setFriends] = useState(false);
   const [posts, setPosts] = useState([]);
   const [pending, setPending] = useState(false);
+  const [incoming, setIncoming] = useState(false);
   const [existing, setExisting] = useState();
+  const [accepted, setAccepted] = useState(false);
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
 
@@ -75,12 +77,17 @@ const User = () => {
       .then((response) => {
         const requests = response.data.request_list;
         const existingRequest = requests.find(req => (req.from === user.id) && req.to === page._id);
+        const incomingRequest = requests.find(req => (req.to === user.id) && req.from === page._id);
         if (existingRequest) {
           setPending(true);
           setExisting(existingRequest.id); 
         };
+        if (incomingRequest) {
+          setIncoming(true);
+          setExisting(incomingRequest.id);
+        };
       })
-  }, [page._id, user.id, pending]);
+  }, [page._id, user.id, pending, incoming]);
 
   // Checks to see if active user and page owner are friends
   useEffect(() => {
@@ -96,6 +103,7 @@ const User = () => {
   }, [user.id, page._id]);
 
   // Sends/cancels a friend request from active user to profile page's account
+  // Also handles accepting/deleting incoming requests
   const handleRequest = (e) => {
     e.preventDefault();
     if (!pending) {
@@ -109,7 +117,7 @@ const User = () => {
         .catch((err) => {
           throw new Error(err);
         });
-    } else {
+    } else if (pending && !incoming) {
       axios.delete(`${process.env.REACT_APP_SERVER_URL}/requests/${existing}`)
         .then((response) => {
           if (response.data.message === 'Success') {
@@ -119,7 +127,18 @@ const User = () => {
         .catch((err) => {
           throw new Error(err);
         });
-    };
+    } else if (incoming) {
+      const body1 = { friend: user.id };
+      axios.put(`${process.env.REACT_APP_SERVER_URL}/users/${page._id}/friends`, body1)
+      const body2 = { friend: page._id };
+      axios.put(`${process.env.REACT_APP_SERVER_URL}/users/${user.id}/friends`, body2);
+      axios.delete(`${process.env.REACT_APP_SERVER_URL}/requests/${existing}`)
+        .then((response) => {
+          if (response.data.message === 'Success') {
+            setAccepted(true);
+          };
+        });
+    }
   };
 
   // Deletes a friend upon pressing 'Remove Friend' button
@@ -143,9 +162,16 @@ const User = () => {
             <h1 className="user-fullname">{page.first_name} {page.family_name}</h1>
             <div className="friend-buttons">
               {
-                (user.id !== page._id && !friends) ?
+                (user.id !== page._id && !friends && !incoming) ?
                 <button className='friend-btn' onClick={(e) => handleRequest(e)}>
                   { pending ? 'Cancel Request' : 'Add Friend' }
+                </button>
+                : null
+              }
+              {
+                incoming ?
+                <button className='friend-btn' onClick={(e) => handleRequest(e)}>
+                  { accepted ? 'Accepted!' : 'Accept Request' }
                 </button>
                 : null
               }
