@@ -16,10 +16,11 @@ const Post = ({ post, author }) => {
   const [likes, setLikes] = useState(0);
   const token = localStorage.getItem('token');
 
+  // Sets the amount of likes on a post
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/${post._id}/likes`)
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/${post._id}`)
       .then((response) => {
-        setLikes(response.data.total_likes);
+        setLikes(response.data.post[0].likes);
       });
   }, [post._id]);
 
@@ -39,7 +40,7 @@ const Post = ({ post, author }) => {
   }, [author]);
 
   const handleLike = () => {
-    const body = { userID: user.id };
+    const body = { userID: user.id, postID: post._id };
     axios.post(`${process.env.REACT_APP_SERVER_URL}/posts/${post._id}`, body)
       .then((response) => {
         if (response.data.message === 'Successful') {

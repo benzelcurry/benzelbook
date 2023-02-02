@@ -15,6 +15,15 @@ exports.post_list = function (req, res, next) {
     });
 };
 
+// GET details for a post
+exports.get_details = (req, res, next) => {
+  Post.find({ _id: req.params.id })
+    .exec((err, post) => {
+      if (err) { return next(err) };
+      res.json({ post });
+    });
+};
+
 // Create a post on POST
 exports.create_post = [
   body('content')
@@ -33,7 +42,7 @@ exports.create_post = [
       date: new Date(),
       author: req.body.userID,
       target: req.body.targetID,
-      likes: [],
+      likes: 0,
     });
 
     if (!errors.isEmpty()) {

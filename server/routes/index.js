@@ -62,8 +62,8 @@ router.get('/posts', post_controller.post_list);
 // Create new post on POST
 router.post('/posts', post_controller.create_post);
 
-// Return amount of likes on a post on GET
-router.get('/posts/:id/likes', like_controller.get_likes);
+// Return post details on GET
+router.get('/posts/:id', post_controller.get_details);
 
 // Create new like or removes an old one on a post on POST
 router.post('/posts/:id', like_controller.add_like);

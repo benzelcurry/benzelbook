@@ -20,8 +20,6 @@ const User = () => {
   const [posts, setPosts] = useState([]);
   const [pending, setPending] = useState(false);
   const [existing, setExisting] = useState();
-  const [content, setContent] = useState('');
-  const [error, setError] = useState('');
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
 
@@ -97,31 +95,6 @@ const User = () => {
     }
   }, [user.id, page._id]);
 
-  // // Updates message content in state upon change
-  // const handleInput = (e) => {
-  //   setContent(e.target.value);
-  // };
-
-  // // Sends post info to server
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (content.length === 0) {
-  //     return setError('Please enter a post before hitting submit.');
-  //   };
-  //   const body = { content: content, userID: user.id, targetID: page._id };
-  //   axios.post(`${process.env.REACT_APP_SERVER_URL}/posts`, body)
-  //     .then((response) => {
-  //       if (response.data.message === 'Successful') {
-  //         navigate(0);
-  //       } else {
-  //         setError(response.data.errors[0].msg);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       throw new Error(err);
-  //     })
-  // };
-
   // Sends/cancels a friend request from active user to profile page's account
   const handleRequest = (e) => {
     e.preventDefault();
@@ -195,21 +168,6 @@ const User = () => {
           </div>
           <div className="user-posts">
             <NewPost userID={user.id} targetID={page._id} />
-            {/* <div className="user-new-post">
-              <img src={DefaultAvatar} alt="User avatar" className='mini-avatar' />
-              <form action="">
-                <textarea name="new-status" id="new-status" className='user-new-status'
-                  placeholder="What's on your mind?" onChange={(e) => handleInput(e)}
-                  maxLength={1000}>
-                </textarea>
-                <p className='remaining'>{1000 - content.length} chars remaining</p>
-                <button className='user-post-btn' onClick={(e) => handleSubmit(e)}>Submit Post</button>
-                { error ?
-                  <p className='error-msg'>{error}</p>
-                  : null
-                }
-              </form>
-            </div> */}
             <div className="user-wall">
               {posts.map((post) =>
                 <Post key={post._id} post={post} author={post.author} />
