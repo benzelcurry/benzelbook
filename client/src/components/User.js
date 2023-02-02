@@ -7,6 +7,7 @@ import axios from 'axios';
 import Nav from './Nav';
 import Footer from './Footer';
 import Post from './Post';
+import NewPost from './NewPost';
 import DefaultAvatar from '../images/default-avatar.svg';
 import '../stylesheets/User.css';
 
@@ -96,30 +97,30 @@ const User = () => {
     }
   }, [user.id, page._id]);
 
-  // Updates message content in state upon change
-  const handleInput = (e) => {
-    setContent(e.target.value);
-  };
+  // // Updates message content in state upon change
+  // const handleInput = (e) => {
+  //   setContent(e.target.value);
+  // };
 
-  // Sends post info to server
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (content.length === 0) {
-      return setError('Please enter a post before hitting submit.');
-    };
-    const body = { content: content, userID: user.id, targetID: page._id };
-    axios.post(`${process.env.REACT_APP_SERVER_URL}/posts`, body)
-      .then((response) => {
-        if (response.data.message === 'Successful') {
-          navigate(0);
-        } else {
-          setError(response.data.errors[0].msg);
-        }
-      })
-      .catch((err) => {
-        throw new Error(err);
-      })
-  };
+  // // Sends post info to server
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (content.length === 0) {
+  //     return setError('Please enter a post before hitting submit.');
+  //   };
+  //   const body = { content: content, userID: user.id, targetID: page._id };
+  //   axios.post(`${process.env.REACT_APP_SERVER_URL}/posts`, body)
+  //     .then((response) => {
+  //       if (response.data.message === 'Successful') {
+  //         navigate(0);
+  //       } else {
+  //         setError(response.data.errors[0].msg);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       throw new Error(err);
+  //     })
+  // };
 
   // Sends/cancels a friend request from active user to profile page's account
   const handleRequest = (e) => {
@@ -193,7 +194,8 @@ const User = () => {
             User intro content will go in here.
           </div>
           <div className="user-posts">
-            <div className="user-new-post">
+            <NewPost userID={user.id} targetID={page._id} />
+            {/* <div className="user-new-post">
               <img src={DefaultAvatar} alt="User avatar" className='mini-avatar' />
               <form action="">
                 <textarea name="new-status" id="new-status" className='user-new-status'
@@ -207,7 +209,7 @@ const User = () => {
                   : null
                 }
               </form>
-            </div>
+            </div> */}
             <div className="user-wall">
               {posts.map((post) =>
                 <Post key={post._id} post={post} author={post.author} />

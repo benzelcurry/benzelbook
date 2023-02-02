@@ -33,7 +33,7 @@ exports.create_post = [
       date: new Date(),
       author: req.body.userID,
       target: req.body.targetID,
-      likes: 0,
+      likes: [],
     });
 
     if (!errors.isEmpty()) {
