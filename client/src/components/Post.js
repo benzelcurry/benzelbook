@@ -17,14 +17,16 @@ const Post = ({ post, author }) => {
   const [postAuthor, setPostAuthor] = useState({});
   const [user, setUser] = useState({});
   const [likes, setLikes] = useState(0);
+  const [comments, setComments] = useState([]);
   const [displayComments, setDisplayComments] = useState(false);
   const token = localStorage.getItem('token');
 
-  // Sets the amount of likes on a post
+  // Sets the amount of likes and pulls comments on a post
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/${post._id}`)
       .then((response) => {
         setLikes(response.data.post[0].likes);
+        setComments(response.data.post[0].comments);
       });
   }, [post._id]);
 
@@ -102,7 +104,10 @@ const Post = ({ post, author }) => {
         displayComments ? 
         <div className="comment-container">
           <NewComment />
-          <Comment />
+          { comments.map((comment) => 
+              <Comment key={comment} postID={post._id} commentID={comment} />
+            )
+          }
         </div>
         : null
       }
