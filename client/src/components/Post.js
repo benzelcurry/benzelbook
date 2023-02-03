@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { DateTime } from 'luxon';
 
+import NewComment from './NewComment';
 import Like from '../images/like.svg';
 import Comment from '../images/comment.svg';
 import DefaultAvatar from '../images/default-avatar.svg';
