@@ -9,6 +9,7 @@ const user_controller = require('../controllers/userController');
 const post_controller = require('../controllers/postController');
 const like_controller = require('../controllers/likeController');
 const request_controller = require('../controllers/requestController');
+const comment_controller = require('../controllers/commentController');
 
 
 ///// NON-SPECIFIC ROUTES ///// 
@@ -64,6 +65,9 @@ router.post('/posts', post_controller.create_post);
 
 // Return post details on GET
 router.get('/posts/:id', post_controller.get_details);
+
+// Create new Post Comment on POST
+router.post('/posts/:id/comments', comment_controller.create_comment);
 
 // Create new like or removes an old one on a post on POST
 router.post('/posts/:id', like_controller.add_like);
