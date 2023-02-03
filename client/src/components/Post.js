@@ -16,6 +16,7 @@ const Post = ({ post, author }) => {
   const [postAuthor, setPostAuthor] = useState({});
   const [user, setUser] = useState({});
   const [likes, setLikes] = useState(0);
+  const [displayComments, setDisplayComments] = useState(false);
   const token = localStorage.getItem('token');
 
   // Sets the amount of likes on a post
@@ -26,6 +27,7 @@ const Post = ({ post, author }) => {
       });
   }, [post._id]);
 
+  // Pulls active user info
   useEffect(() => {
     const body = { token: localStorage.getItem('token') }
     axios.post(`${process.env.REACT_APP_SERVER_URL}/`, body)
@@ -34,6 +36,7 @@ const Post = ({ post, author }) => {
       });
   }, [token])
 
+  // Pulls post author info
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_SERVER_URL}/users/id/${author}`)
       .then((response) => {
@@ -41,6 +44,12 @@ const Post = ({ post, author }) => {
       })
   }, [author]);
 
+  // Handles displaying the new comment form and comments on click
+  const handleDisplay = () => {
+    displayComments ? setDisplayComments(false) : setDisplayComments(true);
+  };
+
+  // Handles adding/removing likes from posts
   const handleLike = () => {
     const body = { userID: user.id, postID: post._id };
     axios.post(`${process.env.REACT_APP_SERVER_URL}/posts/${post._id}`, body)
@@ -81,13 +90,18 @@ const Post = ({ post, author }) => {
       </div>
       <p className="post-body">{post.content}</p>
       <div className='post-actions'>
-        <i><img src={Comment} alt="Comment" className='post-action' /></i>
+        <i onClick={() => handleDisplay()}><img src={Comment} alt="Comment" className='post-action' /></i>
         {/* MAKE SO ICON HIGHLIGHTS BLUE WHEN LIKED BY USER? */}
         <i className='likes-container'>
           { likes ? likes : null }
           <img src={Like} alt="Like" className='post-action' onClick={() => handleLike()}/>
         </i>
       </div>
+      {
+        displayComments ? 
+        <NewComment />
+        : null
+      }
     </div>
   );
 };
