@@ -55,7 +55,7 @@ router.get('/users/id/:id', user_controller.userID_detail);
 router.get('/users/:username', user_controller.user_detail);
 
 
-///// (USER-MADE) POST ROUTES /////
+///// (USER-MADE) POST & COMMENT ROUTES /////
 
 // GET list of posts
 router.get('/posts', post_controller.post_list);
@@ -68,6 +68,9 @@ router.get('/posts/:id', post_controller.get_details);
 
 // Create new Post Comment on POST
 router.post('/posts/:id/comments', comment_controller.create_comment);
+
+// GET Comment details
+router.get('/posts/:id/comments/:comment', comment_controller.comment_detail);
 
 // Create new like or removes an old one on a post on POST
 router.post('/posts/:id', like_controller.add_like);

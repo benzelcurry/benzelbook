@@ -7,6 +7,15 @@ const async = require('async');
 const { body, validationResult } = require('express-validator');
 
 
+// GET Comment details by ID
+exports.comment_detail = (req, res, next) => {
+  Comment.findOne({ _id: req.params.comment })
+    .exec((err, comment) => {
+      if (err) { return next(err) };
+      res.json({ comment })
+    });
+};
+
 // Creates a new Comment on POST
 exports.create_comment = [
   body('content')
