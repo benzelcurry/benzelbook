@@ -6,8 +6,9 @@ import axios from 'axios';
 import { DateTime } from 'luxon';
 
 import NewComment from './NewComment';
+import Comment from './Comment';
 import Like from '../images/like.svg';
-import Comment from '../images/comment.svg';
+import CommentIcon from '../images/comment.svg';
 import DefaultAvatar from '../images/default-avatar.svg';
 import Delete from '../images/delete.svg';
 import '../stylesheets/Post.css';
@@ -90,7 +91,7 @@ const Post = ({ post, author }) => {
       </div>
       <p className="post-body">{post.content}</p>
       <div className='post-actions'>
-        <i onClick={() => handleDisplay()}><img src={Comment} alt="Comment" className='post-action' /></i>
+        <i onClick={() => handleDisplay()}><img src={CommentIcon} alt="Comment" className='post-action' /></i>
         {/* MAKE SO ICON HIGHLIGHTS BLUE WHEN LIKED BY USER? */}
         <i className='likes-container'>
           { likes ? likes : null }
@@ -99,7 +100,10 @@ const Post = ({ post, author }) => {
       </div>
       {
         displayComments ? 
-        <NewComment />
+        <div className="comment-container">
+          <NewComment />
+          <Comment />
+        </div>
         : null
       }
     </div>
