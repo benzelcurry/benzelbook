@@ -13,6 +13,7 @@ const Comment = ({ post, commentID, userID }) => {
   const [comment, setComment] = useState({});
   const [author, setAuthor] = useState('');
   const [likes, setLikes] = useState();
+  const [certainty, setCertainty] = useState(false);
 
   // Pulls the comment details using ID
   useEffect(() => {
@@ -62,6 +63,11 @@ const Comment = ({ post, commentID, userID }) => {
       });
   };
 
+  // Asks user if they're sure before deleting a post
+  const promptUser = () => {
+    certainty ? setCertainty(false) : setCertainty(true);
+  }
+
   return (
     <div className='comment-cards'>
       <div>
@@ -79,9 +85,20 @@ const Comment = ({ post, commentID, userID }) => {
           userID === author.id ?
           <i>
             <img src={Delete} alt="Delete comment icon" className='post-action' 
-              onClick={(e) => handleDelete(e)}
+              onClick={() => promptUser()}
             />
           </i>
+          : null
+        }
+        {
+          certainty ?
+          <div className='delete-prompt'>
+            <p>Are you sure you want to delete this comment?</p>
+            <div className="prompt-buttons">
+              <button onClick={(e) => handleDelete(e)}>Yes</button>
+              <button onClick={() => promptUser()}>No</button>
+            </div>
+          </div>
           : null
         }
       </div>
