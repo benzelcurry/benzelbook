@@ -1,6 +1,7 @@
 // Component for displaying comments on posts
 
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { DateTime } from 'luxon';
 
@@ -14,6 +15,8 @@ const Comment = ({ post, commentID, userID }) => {
   const [author, setAuthor] = useState('');
   const [likes, setLikes] = useState();
   const [certainty, setCertainty] = useState(false);
+
+  const navigate = useNavigate();
 
   // Pulls the comment details using ID
   useEffect(() => {
@@ -59,7 +62,9 @@ const Comment = ({ post, commentID, userID }) => {
     e.preventDefault();
     axios.delete(`${process.env.REACT_APP_SERVER_URL}/posts/${post._id}/comments/${comment._id}`)
       .then((response) => {
-        console.log(response);
+        if (response.data.message === 'Deleted') {
+          navigate(0);
+        }
       });
   };
 
