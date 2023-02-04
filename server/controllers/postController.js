@@ -79,6 +79,7 @@ exports.delete_post = (req, res, next) => {
     const comment_list = results.comments.map(x => x._id);
     const comment_likes = [];
     
+    // Pulls comment like IDs for deletion
     for (const item of comment_list) {
       const like = likes.find(obj => String(obj.comment) === String(item));
       if (like) {
@@ -86,6 +87,17 @@ exports.delete_post = (req, res, next) => {
       }
     }
 
-    res.json({ comment_likes })
+    // Pulls comment IDs for deletion
+    // comment_list should be what I use
+
+    const post_likes = [];
+    // Pulls post like IDs for deletion
+    for (const like of likes) {
+      if (String(like.post) === String(req.params.id)) {
+        post_likes.push(like._id)
+      }
+    };
+
+    res.json({ comment_likes, comment_list, post_likes })
   } 
 )}
