@@ -87,17 +87,39 @@ exports.delete_post = (req, res, next) => {
       }
     }
 
-    // Pulls comment IDs for deletion
-    // comment_list should be what I use
-
-    const post_likes = [];
     // Pulls post like IDs for deletion
+    const post_likes = [];
     for (const like of likes) {
       if (String(like.post) === String(req.params.id)) {
         post_likes.push(like._id)
       }
     };
 
-    res.json({ comment_likes, comment_list, post_likes })
-  } 
-)}
+    // Deletes post's comments' likes
+    for (const like of comment_likes) {
+      Like.findByIdAndRemove(like, (err) => {
+        if (err) { return next(err) };
+      });
+    };
+
+    // Deletes post's comments
+    for (const comment of comment_list) {
+      Comment.findByIdAndRemove(comment, (err) => {
+        if (err) { return next(err) };
+      });
+    };
+
+    // Deletes post's likes
+    for (const like of post_likes) {
+      Like.findByIdAndRemove(like, (err) => {
+        if (err) { return next(err) };
+      });
+    };
+
+    // Deletes post
+    Post.findByIdAndRemove(req.params.id, (err) => {
+      if (err) { return next(err) };
+      return res.json({ message: 'Deleted' });
+    });
+  },
+)};

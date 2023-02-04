@@ -1,7 +1,7 @@
 // Component for displaying posts in news feed/profile pages
 
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { DateTime } from 'luxon';
 
@@ -20,6 +20,8 @@ const Post = ({ post, author }) => {
   const [comments, setComments] = useState([]);
   const [displayComments, setDisplayComments] = useState(false);
   const token = localStorage.getItem('token');
+
+  const navigate = useNavigate();
 
   // Sets the amount of likes and pulls comments on a post
   useEffect(() => {
@@ -72,9 +74,11 @@ const Post = ({ post, author }) => {
   const handleDelete = () => {
     axios.delete(`${process.env.REACT_APP_SERVER_URL}/posts/${post._id}`)
       .then((response) => {
-        console.log(response);
-      })
-  }
+        if (response.data.message === 'Deleted') {
+          navigate(0);
+        };
+      });
+  };
 
   return (
     <div className='post-container'>
