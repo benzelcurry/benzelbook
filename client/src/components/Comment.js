@@ -53,6 +53,15 @@ const Comment = ({ post, commentID, userID }) => {
     )
   }
 
+  // Handles deleting a comment
+  const handleDelete = (e) => {
+    e.preventDefault();
+    axios.delete(`${process.env.REACT_APP_SERVER_URL}/posts/${post._id}/comments/${comment._id}`)
+      .then((response) => {
+        console.log(response);
+      });
+  };
+
   return (
     <div className='comment-cards'>
       <div>
@@ -69,7 +78,9 @@ const Comment = ({ post, commentID, userID }) => {
         {
           userID === author.id ?
           <i>
-            <img src={Delete} alt="Delete comment icon" className='post-action' />
+            <img src={Delete} alt="Delete comment icon" className='post-action' 
+              onClick={(e) => handleDelete(e)}
+            />
           </i>
           : null
         }
