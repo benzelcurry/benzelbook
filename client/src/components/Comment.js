@@ -8,15 +8,17 @@ import DefaultAvatar from '../images/default-avatar.svg';
 import Like from '../images/like.svg';
 import '../stylesheets/Comment.css';
 
-const Comment = ({ post, commentID }) => {
+const Comment = ({ post, commentID, userID }) => {
   const [comment, setComment] = useState({});
   const [author, setAuthor] = useState('');
+  const [likes, setLikes] = useState();
 
   // Pulls the comment details using ID
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/${post._id}/comments/${commentID}`)
       .then((response) => {
         setComment(response.data.comment);
+        setLikes(response.data.comment.likes);
       }
     )
   }, [post._id, commentID])
@@ -32,6 +34,24 @@ const Comment = ({ post, commentID }) => {
     }
   }, [comment.author])
 
+  // Handles liking/unliking a comment
+  const handleLike = (e) => {
+    e.preventDefault();
+    const body = { userID: userID };
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/posts/${comment._id}`, body)
+      .then((response) => {
+        if (response.data.message === 'Successful') {
+          setLikes(likes + 1);
+        } else {
+          setLikes(likes - 1);
+        }
+      })
+      .catch((err) => {
+        throw new Error(err);
+      }
+    )
+  }
+
   return (
     <div className='comment-cards'>
       <div>
@@ -45,7 +65,12 @@ const Comment = ({ post, commentID }) => {
         </div>
       </div>
       <p className="comment-content">{comment.content}</p>
-      <i className='comment-action'><img src={Like} alt="Like icon" className='post-action' /></i>
+      <i className='comment-action'>
+        { likes ? likes : null }
+        <img src={Like} alt="Like icon" className='post-action' 
+          onClick={(e) => handleLike(e)}
+        />
+      </i>
     </div>
   );
 };

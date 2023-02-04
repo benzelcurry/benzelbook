@@ -108,7 +108,7 @@ const Post = ({ post, author }) => {
         <div className="comment-container">
           <NewComment postID={post._id} userID={user.id} />
           { comments.map((comment) => 
-              <Comment key={comment} post={post} commentID={comment} />
+              <Comment key={comment} post={post} commentID={comment} userID={user.id} />
             )
           }
         </div>

@@ -42,27 +42,37 @@ exports.add_like = (req, res, next) => {
           });
     };
 
+    // Saves like to post
     if (results.post) {
       const likes = results.post.likes;
       Post.findByIdAndUpdate(req.params.id, { likes: (likes + 1) }, (err) => {
         if (err) { return res.json({ message: 'Error' }) };
       });
+      const like = new Like({
+        user: req.body.userID,
+        post: req.params.id,
+      });
+  
+      like.save((err) => {
+        if (err) { return next(err) };
+        res.json({ message: 'Successful' });
+      });
+    // Saves like to comment
     } else if (results.comment) {
       const likes = results.comment.likes;
       Comment.findByIdAndUpdate(req.params.id, { likes: (likes + 1) }, (err) => {
         if (err) { return res.json({ message: 'Error' }) };
       });
+
+      const like = new Like({
+        user: req.body.userID,
+        comment: req.params.id,
+      });
+  
+      like.save((err) => {
+        if (err) { return next(err) };
+        res.json({ message: 'Successful' });
+      });
     };
-
-    const like = new Like({
-      user: req.body.userID,
-      post: req.params.id,
-      comment: req.body.commentID,
-    });
-
-    like.save((err) => {
-      if (err) { return next(err) };
-      res.json({ message: 'Successful' });
-    });
   });
 };
