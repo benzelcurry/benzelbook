@@ -69,13 +69,23 @@ exports.delete_post = (req, res, next) => {
       Comment.find({ parent_post: req.params.id }).exec(callback);
     },
     likes(callback) {
-      Like.find({ post: req.params.id }).exec(callback);
+      Like.find().exec(callback);
     },
   },
   (err, results) => {
     if (err) { return next(err) };
 
+    const likes = results.likes;
     const comment_list = results.comments.map(x => x._id);
-    res.json({ comment_list })
+    const comment_likes = [];
+    
+    for (const item of comment_list) {
+      const like = likes.find(obj => String(obj.comment) === String(item));
+      if (like) {
+        comment_likes.push(like._id) 
+      }
+    }
+
+    res.json({ comment_likes })
   } 
 )}
