@@ -106,7 +106,7 @@ const Post = ({ post, author }) => {
       {
         displayComments ? 
         <div className="comment-container">
-          <NewComment />
+          <NewComment postID={post._id} userID={user.id} />
           { comments.map((comment) => 
               <Comment key={comment} postID={post._id} commentID={comment} />
             )
