@@ -117,8 +117,8 @@ const Post = ({ post, author }) => {
           <div className='delete-prompt'>
             <p>Are you sure you want to delete this post?</p>
             <div className="prompt-buttons">
-              <button>Yes</button>
-              <button>No</button>
+              <button onClick={() => handleDelete}>Yes</button>
+              <button onClick={() => promptUser()}>No</button>
             </div>
           </div>
           : null
