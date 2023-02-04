@@ -5,6 +5,7 @@ import axios from 'axios';
 import { DateTime } from 'luxon';
 
 import DefaultAvatar from '../images/default-avatar.svg';
+import Like from '../images/like.svg';
 import '../stylesheets/Comment.css';
 
 const Comment = ({ post, commentID }) => {
@@ -44,6 +45,7 @@ const Comment = ({ post, commentID }) => {
         </div>
       </div>
       <p className="comment-content">{comment.content}</p>
+      <i className='comment-action'><img src={Like} alt="Like icon" className='post-action' /></i>
     </div>
   );
 };
