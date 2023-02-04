@@ -19,9 +19,9 @@ const NewComment = () => {
   }
 
   return (
-    <div>
+    <div className='comment-form'>
       <form action="">
-        <textarea name="new-status" id="new-status" className='user-new-status'
+        <textarea name="new-comment" id="new-comment" className='new-comment'
           placeholder="Respond to post..." onChange={(e) => handleInput(e)}
           maxLength={500}>
         </textarea>
