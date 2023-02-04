@@ -20,12 +20,14 @@ const Comment = ({ postID, commentID }) => {
 
   // Pulls comment author name by using the provided ID
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_SERVER_URL}/users/id/${comment.author}`)
-      .then((response) => {
-        setAuthor(response.data.username);
-      }
-    )
-  })
+    if (comment.author) {
+      axios.get(`${process.env.REACT_APP_SERVER_URL}/users/id/${comment.author}`)
+        .then((response) => {
+          setAuthor(response.data.username);
+        }
+      )
+    }
+  }, [comment.author])
 
   return (
     <div className='comment-container'>
