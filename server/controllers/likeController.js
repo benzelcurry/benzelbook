@@ -10,9 +10,14 @@ const async = require('async');
 // Creates a new like or removes an old one
 exports.add_like = (req, res, next) => {
   async.parallel({
-    like(callback) {
+    post_like(callback) {
       Like
-        .findOne({ post: req.params.id, comment: req.params.id, user: req.body.userID })
+        .findOne({ post: req.params.id, user: req.body.userID })
+        .exec(callback)
+    },
+    comment_like(callback) {
+      Like
+        .findOne({ comment: req.params.id, user: req.body.userID })
         .exec(callback)
     },
     post(callback) {
@@ -23,7 +28,7 @@ exports.add_like = (req, res, next) => {
     },
   },
   (err, results) => {
-    if (results.like) {
+    if (results.post_like || results.comment_like) {
       if (results.post) {
         const likes = results.post.likes;
         Post.findByIdAndUpdate(req.params.id, { likes: (likes - 1) }, (err) => {
@@ -36,10 +41,19 @@ exports.add_like = (req, res, next) => {
         });
       };
 
-      return Like.findByIdAndRemove(results.like._id, (err) => {
+      // Deletes like if it's for a post
+      if (results.post_like) {
+        return Like.findByIdAndRemove(results.post_like._id, (err) => {
+            if (err) { return res.json({ message: 'Error' }) };
+            res.json({ message: 'Removed' });
+            });
+      // Deletes like if it's for a comment
+      } else if (results.comment_like) {
+        return Like.findByIdAndRemove(results.comment_like._id, (err) => {
           if (err) { return res.json({ message: 'Error' }) };
           res.json({ message: 'Removed' });
           });
+      }
     };
 
     // Saves like to post
