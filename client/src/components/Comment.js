@@ -6,6 +6,7 @@ import { DateTime } from 'luxon';
 
 import DefaultAvatar from '../images/default-avatar.svg';
 import Like from '../images/like.svg';
+import Delete from '../images/delete.svg';
 import '../stylesheets/Comment.css';
 
 const Comment = ({ post, commentID, userID }) => {
@@ -55,14 +56,23 @@ const Comment = ({ post, commentID, userID }) => {
   return (
     <div className='comment-cards'>
       <div>
-        <img src={ author.pfp ? author.pfp : DefaultAvatar }
-          alt="User avatar" className='mini-avatar' />
-        <div className="comment-info">
-          <i className="comment-author">{author.username}</i>
-          <p className='comment-date'>
-            {DateTime.fromISO(comment.date).toLocaleString(DateTime.DATE_MED)}
-          </p>
+        <div className="comment-user">
+          <img src={ author.pfp ? author.pfp : DefaultAvatar }
+            alt="User avatar" className='mini-avatar' />
+          <div className="comment-info">
+            <i className="comment-author">{author.username}</i>
+            <p className='comment-date'>
+              {DateTime.fromISO(comment.date).toLocaleString(DateTime.DATE_MED)}
+            </p>
+          </div>
         </div>
+        {
+          userID === author.id ?
+          <i>
+            <img src={Delete} alt="Delete comment icon" className='post-action' />
+          </i>
+          : null
+        }
       </div>
       <p className="comment-content">{comment.content}</p>
       <i className='comment-action'>

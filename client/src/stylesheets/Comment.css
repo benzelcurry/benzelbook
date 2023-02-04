@@ -11,6 +11,12 @@
 .comment-cards > div {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+.comment-user {
+  display: flex;
+  align-items: center;
   gap: 10px;
 }
 
@@ -27,4 +33,8 @@
 
 .comment-action {
   margin-left: auto;
+  font-style: normal;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
