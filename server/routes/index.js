@@ -72,6 +72,9 @@ router.post('/posts/:id/comments', comment_controller.create_comment);
 // GET Comment details
 router.get('/posts/:id/comments/:comment', comment_controller.comment_detail);
 
+// DELETE Comment
+router.delete('/posts/:id/comments/:comment', comment_controller.delete_comment);
+
 // Create new like or removes an old one on a post on POST
 router.post('/posts/:id', like_controller.add_like);
 

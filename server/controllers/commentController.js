@@ -2,6 +2,7 @@
 
 const Comment = require('../models/comment');
 const Post = require('../models/post');
+const Like = require('../models/like');
 
 const async = require('async');
 const { body, validationResult } = require('express-validator');
@@ -64,3 +65,28 @@ exports.create_comment = [
     });
   },
 ];
+
+
+// DELETE a comment
+exports.delete_comment = (req, res, next) => {
+  async.parallel({
+    comment(callback) {
+      Comment.findOne({ _id: req.params.comment }).exec(callback);
+    },
+    likes(callback) {
+      Like.find({ comment: req.params.comment }).exec(callback);
+    },
+  },
+  (err, results) => {
+    if (err) { return next(err) };
+
+    const like_list = results.likes.map(x => x._id);
+    for (const like of like_list) {
+      Like.findByIdAndRemove(like, (err) => {
+        if (err) { return next(err) }
+      });
+    };
+
+    res.json({ message: 'Likes deleted' })
+  }
+)}
