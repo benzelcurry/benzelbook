@@ -7,6 +7,7 @@ import '../stylesheets/Comment.css';
 
 const Comment = ({ postID, commentID }) => {
   const [comment, setComment] = useState({});
+  const [author, setAuthor] = useState('');
 
   // Pulls the comment details using ID
   useEffect(() => {
@@ -17,9 +18,19 @@ const Comment = ({ postID, commentID }) => {
     )
   }, [postID, commentID])
 
+  // Pulls comment author name by using the provided ID
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/users/id/${comment.author}`)
+      .then((response) => {
+        setAuthor(response.data.username);
+      }
+    )
+  })
+
   return (
-    <div>
-      {comment.content}
+    <div className='comment-container'>
+      <div className="comment-author">{author}</div>
+      <div className="comment-content">{comment.content}</div>
     </div>
   );
 };
