@@ -70,12 +70,12 @@ exports.create_comment = [
 // DELETE a comment
 exports.delete_comment = (req, res, next) => {
   async.parallel({
-    comment(callback) {
-      Comment.findOne({ _id: req.params.comment }).exec(callback);
-    },
     likes(callback) {
       Like.find({ comment: req.params.comment }).exec(callback);
     },
+    posts(callback) {
+      Post.findOne({ _id: req.params.id }).exec(callback);
+    }
   },
   (err, results) => {
     if (err) { return next(err) };
@@ -87,6 +87,16 @@ exports.delete_comment = (req, res, next) => {
       });
     };
 
-    res.json({ message: 'Likes deleted' })
-  }
-)}
+    const postComments = results.posts.comments;
+    const index = postComments.indexOf(req.params.id);
+    postComments.splice(index, 1);
+    Post.findByIdAndUpdate(req.params.id, { comments: postComments }, (err) => {
+      if (err) { return next(err) };
+    });
+
+    Comment.findByIdAndRemove(req.params.comment, (err) => {
+      if (err) { return next(err) }
+      return res.json({ message: 'Deleted' });
+    });
+  },
+)};
