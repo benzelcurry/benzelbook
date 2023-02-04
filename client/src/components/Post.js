@@ -93,7 +93,10 @@ const Post = ({ post, author }) => {
       </div>
       <p className="post-body">{post.content}</p>
       <div className='post-actions'>
-        <i onClick={() => handleDisplay()}><img src={CommentIcon} alt="Comment" className='post-action' /></i>
+        <i onClick={() => handleDisplay()} className='comment-group'>
+          { comments.length > 0 ? comments.length : null }
+          <img src={CommentIcon} alt="Comment" className='post-action' />
+        </i>
         {/* MAKE SO ICON HIGHLIGHTS BLUE WHEN LIKED BY USER? */}
         <i className='likes-container'>
           { likes ? likes : null }
