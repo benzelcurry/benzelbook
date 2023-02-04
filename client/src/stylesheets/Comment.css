@@ -1,0 +1,26 @@
+.comment-cards {
+  background-color: #fff;
+  margin: 20px 20px 20px 0px;
+  padding: 20px;
+  border: solid 2px black;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-cards > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.comment-author {
+  margin: 0;
+  font-weight: bold;
+  font-style: normal;
+}
+
+.comment-date {
+  margin: 0;
+  font-size: 0.9em;
+}
