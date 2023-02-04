@@ -15,6 +15,7 @@ import '../stylesheets/Post.css';
 
 const Post = ({ post, author }) => {
   const [postAuthor, setPostAuthor] = useState({});
+  const [certainty, setCertainty] = useState(false);
   const [user, setUser] = useState({});
   const [likes, setLikes] = useState(0);
   const [comments, setComments] = useState([]);
@@ -70,6 +71,11 @@ const Post = ({ post, author }) => {
       });
   };
 
+  // Asks user if they're sure before deleting a post
+  const promptUser = () => {
+    certainty ? setCertainty(false) : setCertainty(true);
+  }
+
   // Handles deleting a post
   const handleDelete = () => {
     axios.delete(`${process.env.REACT_APP_SERVER_URL}/posts/${post._id}`)
@@ -101,9 +107,20 @@ const Post = ({ post, author }) => {
           user.id === post.author ?
           <i>
             <img src={Delete} alt='Delete post' className='post-action delete-post' 
-              onClick={() => handleDelete()}
+              onClick={() => promptUser()}
             />
           </i>
+          : null
+        }
+        {
+          certainty ?
+          <div className='delete-prompt'>
+            <p>Are you sure you want to delete this post?</p>
+            <div className="prompt-buttons">
+              <button>Yes</button>
+              <button>No</button>
+            </div>
+          </div>
           : null
         }
       </div>
