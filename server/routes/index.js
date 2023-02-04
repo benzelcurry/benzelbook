@@ -66,6 +66,9 @@ router.post('/posts', post_controller.create_post);
 // Return post details on GET
 router.get('/posts/:id', post_controller.get_details);
 
+// DELETE Post
+router.delete('/posts/:id', post_controller.delete_post);
+
 // Create new Post Comment on POST
 router.post('/posts/:id/comments', comment_controller.create_comment);
 

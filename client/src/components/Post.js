@@ -68,6 +68,14 @@ const Post = ({ post, author }) => {
       });
   };
 
+  // Handles deleting a post
+  const handleDelete = () => {
+    axios.delete(`${process.env.REACT_APP_SERVER_URL}/posts/${post._id}`)
+      .then((response) => {
+        console.log(response);
+      })
+  }
+
   return (
     <div className='post-container'>
       {/* WILL PROBABLY NEED TO UPDATE IMAGE PULLING TO SUCCESSFULLY
@@ -87,7 +95,11 @@ const Post = ({ post, author }) => {
         </div>
         {
           user.id === post.author ?
-          <i><img src={Delete} alt='Delete post' className='post-action delete-post' /></i>
+          <i>
+            <img src={Delete} alt='Delete post' className='post-action delete-post' 
+              onClick={() => handleDelete()}
+            />
+          </i>
           : null
         }
       </div>

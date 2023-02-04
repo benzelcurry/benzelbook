@@ -1,6 +1,8 @@
 // Controller for (user-made) Post methods
 
 const Post = require('../models/post');
+const Comment = require('../models/comment');
+const Like = require('../models/like');
 
 const async = require('async');
 const { body, validationResult } = require('express-validator');
@@ -59,3 +61,21 @@ exports.create_post = [
     });
   },
 ];
+
+// DELETE a post
+exports.delete_post = (req, res, next) => {
+  async.parallel({
+    comments(callback) {
+      Comment.find({ parent_post: req.params.id }).exec(callback);
+    },
+    likes(callback) {
+      Like.find({ post: req.params.id }).exec(callback);
+    },
+  },
+  (err, results) => {
+    if (err) { return next(err) };
+
+    const comment_list = results.comments.map(x => x._id);
+    res.json({ comment_list })
+  } 
+)}
