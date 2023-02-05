@@ -36,7 +36,14 @@ const Comment = ({ post, commentID, userID }) => {
           setAuthor(response.data);
         }
       )
-    }
+    } else {
+      setAuthor({
+        username: 'guestuser',
+        first_name: 'Guest',
+        family_name: 'User',
+        id: 'guestuser123',
+      });
+    };
   }, [comment.author])
 
   // Handles liking/unliking a comment
