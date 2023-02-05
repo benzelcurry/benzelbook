@@ -162,7 +162,7 @@ const User = () => {
             <h1 className="user-fullname">{page.first_name} {page.family_name}</h1>
             <div className="friend-buttons">
               {
-                (user.id !== page._id && !friends && !incoming) ?
+                (user.id !== page._id && !friends && !incoming && user.id !== 'guestuser123') ?
                 <button className='friend-btn' onClick={(e) => handleRequest(e)}>
                   { pending ? 'Cancel Request' : 'Add Friend' }
                 </button>

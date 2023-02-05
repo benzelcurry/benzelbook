@@ -38,3 +38,8 @@
   align-items: center;
   gap: 5px;
 }
+
+.user-link {
+  text-decoration: none;
+  color: inherit;
+}

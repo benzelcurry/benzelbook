@@ -1,7 +1,7 @@
 // Component for displaying comments on posts
 
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { DateTime } from 'luxon';
 
@@ -87,7 +87,9 @@ const Comment = ({ post, commentID, userID }) => {
           <img src={ author.pfp ? author.pfp : DefaultAvatar }
             alt="User avatar" className='mini-avatar' />
           <div className="comment-info">
-            <i className="comment-author">{author.username}</i>
+            <Link to={'/user/author.username'} className='user-link'>
+              <i className="comment-author">{author.first_name} {author.family_name}</i>
+            </Link>
             <p className='comment-date'>
               {DateTime.fromISO(comment.date).toLocaleString(DateTime.DATE_MED)}
             </p>
