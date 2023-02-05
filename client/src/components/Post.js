@@ -58,18 +58,20 @@ const Post = ({ post, author }) => {
 
   // Handles adding/removing likes from posts
   const handleLike = () => {
-    const body = { userID: user.id, postID: post._id };
-    axios.post(`${process.env.REACT_APP_SERVER_URL}/posts/${post._id}`, body)
-      .then((response) => {
-        if (response.data.message === 'Successful') {
-          setLikes(likes + 1);
-        } else {
-          setLikes(likes - 1);
-        }
-      })
-      .catch((err) => {
-        throw new Error(err);
-      });
+    if (user.id !== 'guestuser123') {
+      const body = { userID: user.id, postID: post._id };
+      axios.post(`${process.env.REACT_APP_SERVER_URL}/posts/${post._id}`, body)
+        .then((response) => {
+          if (response.data.message === 'Successful') {
+            setLikes(likes + 1);
+          } else {
+            setLikes(likes - 1);
+          }
+        })
+        .catch((err) => {
+          throw new Error(err);
+        });
+    }
   };
 
   // Asks user if they're sure before deleting a post
