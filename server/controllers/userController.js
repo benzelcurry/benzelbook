@@ -31,29 +31,47 @@ exports.user_list = (req, res, next) => {
 
 // Return details of single User on GET
 exports.user_detail = (req, res, next) => {
-  User.findOne({ username: req.params.username })
-    .exec((err, user) => {
-      if (err) { return next(err) };
-      res.json({ user })
+  if (req.params.username === 'guestuser') {
+    return res.json({
+      username: 'guestuser',
+      first_name: 'Guest',
+      family_name: 'User',
+      id: 'guestuser123',
     });
+  } else {
+    User.findOne({ username: req.params.username })
+      .exec((err, user) => {
+        if (err) { return next(err) };
+        res.json({ user })
+      });
+  }
 };
 
 
 // Look up user by ID and return details on GET
 exports.userID_detail = (req, res, next) => {
-  User.findOne({ _id: req.params.id })
-    .exec((err, user) => {
-      if (err) { return next(err) };
-      // WILL NEED TO UPDATE TO RETURN PROFILE PIC INFO
-      res.json({
-        username: user.username,
-        first_name: user.first_name,
-        family_name: user.family_name,
-        account_created: user.account_created,
-        friends: user.friends,
-        id: user._id,
-      });
+  if (req.params.id === 'guestuser123') {
+    return res.json({
+      username: 'guestuser',
+      first_name: 'Guest',
+      family_name: 'User',
+      id: 'guestuser123',
     });
+  } else {
+    User.findOne({ _id: req.params.id })
+      .exec((err, user) => {
+        if (err) { return next(err) };
+        // WILL NEED TO UPDATE TO RETURN PROFILE PIC INFO
+        res.json({
+          username: user.username,
+          first_name: user.first_name,
+          family_name: user.family_name,
+          account_created: user.account_created,
+          friends: user.friends,
+          id: user._id,
+        });
+      });
+  }
 };
 
 

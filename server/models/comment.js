@@ -7,7 +7,8 @@ const { DateTime } = require('luxon');
 const CommentSchema = new Schema({
   content: { type: String, required: true, minLength: 1, maxLength: 500 },
   date: { type: Date, required: true },
-  author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  author: { type: Schema.Types.ObjectId, ref: 'User'},
+  by_guest: { type: Boolean },
   parent_post: { type: Schema.Types.ObjectId, ref: 'Post', required: true },
   likes: { type: Number, required: true },
 });

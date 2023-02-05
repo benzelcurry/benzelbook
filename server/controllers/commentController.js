@@ -40,6 +40,7 @@ exports.create_comment = [
         content: req.body.content,
         date: new Date(),
         author: req.body.userID,
+        by_guest: req.body.byGuest,
         parent_post: req.params.id,
         likes: 0,
       });

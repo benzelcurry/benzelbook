@@ -38,6 +38,7 @@ const Post = ({ post, author }) => {
     const body = { token: localStorage.getItem('token') }
     axios.post(`${process.env.REACT_APP_SERVER_URL}/`, body)
       .then((response) => {
+        console.log(response.data);
         setUser(response.data);
       });
   }, [token])

@@ -18,7 +18,10 @@ const NewComment = ({ postID, userID }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const body = { content: content, userID: userID };
+    let body = { content: content, userID: userID };
+    if (userID === 'guestuser123') {
+      body = { content: content, byGuest: true };
+    };
     axios.post(`${process.env.REACT_APP_SERVER_URL}/posts/${postID}/comments`, body)
       .then((response) => {
         if (response.data.errors) {
