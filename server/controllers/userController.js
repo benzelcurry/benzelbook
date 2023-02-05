@@ -80,7 +80,7 @@ exports.create_user = [
     .withMessage('Username must be 16 characters or less')
     .isAlphanumeric()
     .withMessage('Usernames may only contain alphanumeric characters')
-    .custom((value) => value !== '404')
+    .custom((value) => value !== '404' && value !== 'guestuser')
     .withMessage('Please choose a different username'),
   body('password')
     .trim()
@@ -208,7 +208,6 @@ exports.guest_login = (req, res, next) => {
 
   return res.status(200).json({
     message: 'Successful',
-    admin: results.user.admin,
     token,
   });
 };
