@@ -15,14 +15,17 @@ const LogIn = () => {
 
   const navigate = useNavigate();
 
+  // Handles username field input
   const handleUser = (e) => {
     setUsername(e.target.value);
   };
 
+  // Handles password field input
   const handlePassword = (e) => {
     setPassword(e.target.value);
   };
 
+  // Handles submitting the login form
   const handleSubmit = (e) => {
     e.preventDefault();
     if (username.length === 0) {
@@ -45,6 +48,20 @@ const LogIn = () => {
         throw new Error(err);
       });
   };
+
+  // Handles logging guests in
+  const handleGuest = () => {
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/login/guest`)
+      .then((response) => {
+        if (response.data.message === 'Successful') {
+          window.localStorage.setItem('token', response.data.token);
+          navigate('/');
+        }
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+  }
 
   return (
     <div>
@@ -71,7 +88,9 @@ const LogIn = () => {
         <Link to={'/signup'} className='no-account-msg'>
           <p>Don't have an account? Sign up now!</p>
         </Link>
-        <button className='guest-login-btn'>Proceed As Guest</button>
+        <button className='guest-login-btn' onClick={() => handleGuest()}>
+          Proceed As Guest
+        </button>
       </div>
       <Footer />
     </div>
