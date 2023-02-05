@@ -14,10 +14,7 @@ const comment_controller = require('../controllers/commentController');
 
 ///// NON-SPECIFIC ROUTES ///// 
 
-router.get('/', (req, res) => {
-  res.json('Welcome to Odinbook!');
-});
-
+// Maintains persistent user verification across site
 router.post('/', (req, res) => {
   if (req.body.token) {
     const decrypt = jwt.verify(req.body.token, process.env.SECRET_KEY);
@@ -31,7 +28,11 @@ router.post('/', (req, res) => {
   };
 });
 
+// Logs user in on POST
 router.post('/login', user_controller.login_user);
+
+// Logs guest in on POST
+router.post('/login/guest', user_controller.guest_login);
 
 
 ///// USER ROUTES /////

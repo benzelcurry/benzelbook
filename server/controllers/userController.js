@@ -190,6 +190,30 @@ exports.login_user = (req, res, next) => {
 };
 
 
+// Logs guest in on POST
+exports.guest_login = (req, res, next) => {
+  const secret = process.env.SECRET_KEY;
+  const token = jwt.sign(
+    {
+      username: 'guestuser',
+      first_name: 'Guest',
+      family_name: 'User',
+      id: 'guestuser123',
+    },
+    secret,
+    { expiresIn: '30d' },
+  );
+
+  res.cookie('token', token, { secure: false, httpOnly: true });
+
+  return res.status(200).json({
+    message: 'Successful',
+    admin: results.user.admin,
+    token,
+  });
+};
+
+
 // Add friend to User on PUT
 exports.add_friends = (req, res, next) => {
   User.findById(req.params.id)
