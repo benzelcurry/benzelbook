@@ -89,8 +89,11 @@ const LogIn = () => {
           <p>Don't have an account? Sign up now!</p>
         </Link>
         <button className='guest-login-btn' onClick={() => handleGuest()}>
-          Proceed As Guest
+          Proceed As Guest*
         </button>
+        <p className='guest-notice'>* Guests don't have their own profile pages,
+        can't add other uses as friends, and can't like posts. To gain access to 
+        these features, please create an account.</p>
       </div>
       <Footer />
     </div>

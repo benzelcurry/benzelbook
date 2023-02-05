@@ -63,6 +63,12 @@
   font-style: italic;
 }
 
+.guest-notice {
+  font-size: 0.9em;
+  font-style: italic;
+  width: 500px;
+}
+
 .guest-login-btn {
   margin-top: 40px;
   width: 150px;
