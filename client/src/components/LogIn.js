@@ -62,15 +62,16 @@ const LogIn = () => {
               onChange={(e) => handlePassword(e)}
             />
           </div>
+          { error ? 
+          <div className="error-msg">{error}</div> 
+          : null 
+          }
           <button className='login-form-btn' onClick={(e) => handleSubmit(e)}>Log In</button>
         </form>
         <Link to={'/signup'} className='no-account-msg'>
           <p>Don't have an account? Sign up now!</p>
         </Link>
-        { error ? 
-          <div className="error-msg">{error}</div> 
-          : null 
-        }
+        <button className='guest-login-btn'>Proceed As Guest</button>
       </div>
       <Footer />
     </div>

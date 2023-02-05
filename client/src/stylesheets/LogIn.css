@@ -62,3 +62,22 @@
   font-size: 0.9em;
   font-style: italic;
 }
+
+.guest-login-btn {
+  margin-top: 40px;
+  width: 150px;
+  border: solid 2px black;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px;
+  background-color: #9cacc0;;
+  font-size: 18px;
+}
+
+.guest-login-btn:hover {
+  filter: brightness(1.1);
+}
+
+.guest-login-btn:active {
+  filter: brightness(0.9);
+}
