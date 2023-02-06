@@ -16,6 +16,7 @@ const User = () => {
   const [current, setCurrent] = useState(username);
   const [user, setUser] = useState({});
   const [page, setPage] = useState({});
+  const [image, setImage] = useState();
   const [friends, setFriends] = useState(false);
   const [posts, setPosts] = useState([]);
   const [pending, setPending] = useState(false);
@@ -101,6 +102,20 @@ const User = () => {
         });
     }
   }, [user.id, page._id]);
+
+  // Gets page owner's profile picture
+  useEffect(() => {
+    if (page._id) {
+      axios.get(`${process.env.REACT_APP_SERVER_URL}/images/${page.pfp}`, {responseType: 'blob'} )
+        .then((response) => {
+          // const imgBlob = response.blob();
+          // const imgURL = URL.createObjectURL(imgBlob);
+          // setImage(imgURL);
+          console.log(URL.createObjectURL(response.data));
+          setImage(URL.createObjectURL(response.data));
+        })
+    }
+  }, [page])
 
   // Sends/cancels a friend request from active user to profile page's account
   // Also handles accepting/deleting incoming requests
@@ -202,6 +217,7 @@ const User = () => {
           </div>
         </div>
       </div>
+      <img src={image} alt="Profile avatar" />
       <Footer />
     </div>
   );

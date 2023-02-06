@@ -60,14 +60,6 @@ const SignUp = () => {
     if (confPass.length === 0) {
       return setError('Confirm password field must not be blank');
     };
-    // const body = {
-    //   first_name: firstName,
-    //   family_name: familyName,
-    //   pfp: photo,
-    //   username: username,
-    //   password: password,
-    //   confirm_password: confPass,
-    // };
     const body = new FormData();
     body.append('first_name', firstName);
     body.append('family_name', familyName);

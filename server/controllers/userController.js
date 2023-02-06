@@ -66,6 +66,7 @@ exports.userID_detail = (req, res, next) => {
           username: user.username,
           first_name: user.first_name,
           family_name: user.family_name,
+          pfp: user.pfp,
           account_created: user.account_created,
           friends: user.friends,
           id: user._id,

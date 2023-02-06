@@ -41,6 +41,7 @@ router.post('/', (req, res) => {
   if (req.body.token) {
     const decrypt = jwt.verify(req.body.token, process.env.SECRET_KEY);
     res.json({
+      // MIGHT NEED TO UPDATE TO SEND PFP DATA
       username: decrypt.username,
       name: `${decrypt.first_name} ${decrypt.family_name}`,
       id: decrypt.id,
@@ -55,6 +56,13 @@ router.post('/login', user_controller.login_user);
 
 // Logs guest in on POST
 router.post('/login/guest', user_controller.guest_login);
+
+// Return profile picture on GET
+router.get('/images/:id', (req, res) => {
+  const filePath = `../server/images/${req.params.id}`;
+  const resolvedPath = path.resolve(filePath);
+  res.sendFile(resolvedPath);
+});
 
 
 ///// USER ROUTES /////
