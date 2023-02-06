@@ -3,6 +3,9 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
+const multer = require('multer');
+const { v4: uuidv4 } = require('uuid');
+const path = require('path');
 
 // Require controller modules
 const user_controller = require('../controllers/userController');
@@ -11,6 +14,25 @@ const like_controller = require('../controllers/likeController');
 const request_controller = require('../controllers/requestController');
 const comment_controller = require('../controllers/commentController');
 
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, 'images');
+  },
+  filename: function(req, file, cb) {
+    cb(null, uuidv4() + '-' + Date.now() + path.extname(file.originalname));
+  }
+});
+
+const fileFilter = (req, file, cb) => {
+  const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+  if (allowedFileTypes.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  };
+};
+
+let upload = multer({ storage, fileFilter});
 
 ///// NON-SPECIFIC ROUTES ///// 
 
@@ -41,7 +63,7 @@ router.post('/login/guest', user_controller.guest_login);
 router.get('/users', user_controller.user_list);
 
 // POST create new user
-router.post('/users', user_controller.create_user);
+router.post('/users', upload.single('pfp'), user_controller.create_user);
 
 // Adds to User friend list on PUT
 router.put('/users/:id/friends', user_controller.add_friends);

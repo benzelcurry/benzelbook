@@ -137,6 +137,7 @@ exports.create_user = [
           family_name: req.body.family_name,
           username: req.body.username,
           password: hashedPassword,
+          pfp: req.file.filename,
           account_created: new Date(),
         });
 

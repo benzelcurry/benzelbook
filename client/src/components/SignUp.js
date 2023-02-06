@@ -60,13 +60,21 @@ const SignUp = () => {
     if (confPass.length === 0) {
       return setError('Confirm password field must not be blank');
     };
-    const body = {
-      first_name: firstName,
-      family_name: familyName,
-      username: username,
-      password: password,
-      confirm_password: confPass,
-    };
+    // const body = {
+    //   first_name: firstName,
+    //   family_name: familyName,
+    //   pfp: photo,
+    //   username: username,
+    //   password: password,
+    //   confirm_password: confPass,
+    // };
+    const body = new FormData();
+    body.append('first_name', firstName);
+    body.append('family_name', familyName);
+    body.append('pfp', photo);
+    body.append('username', username);
+    body.append('password', password);
+    body.append('confirm_password', confPass);
     axios.post(`${process.env.REACT_APP_SERVER_URL}/users`, body)
       .then((response) => {
         if (response.data.errors) {
