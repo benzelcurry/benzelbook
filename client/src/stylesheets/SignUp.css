@@ -61,3 +61,8 @@
 .signup-form-btn:active {
   filter: brightness(0.9);
 }
+
+.required-message {
+  justify-self: center;
+  grid-column: span 2;
+}

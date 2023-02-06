@@ -39,8 +39,8 @@ const SignUp = () => {
     setConfPass(e.target.value);
   };
 
-  const handlePhoto = () => {
-
+  const handlePhoto = (e) => {
+    setPhoto(e.target.files[0]);
   }
 
   const handleSubmit = (e) => {
@@ -93,36 +93,38 @@ const SignUp = () => {
     <div>
       <Nav newUser={true} />
       <div className="signup-container">
-        <form action="" method="POST" className='signup-form'>
+        <form action="" method="POST" className='signup-form' encType='multipart/form-data' >
           <div className="signup-inputs">
             <label htmlFor="photo">Profile Picture: </label>
             <input type="file" accept='.png, .jpg, .jpeg' name='photo' id='photo'
-              onChange={() => handlePhoto()} className='pfp-input' />
+              onChange={(e) => handlePhoto(e)} className='pfp-input' />
 
-            <label htmlFor="first_name">First Name: </label>
+            <label htmlFor="first_name">First Name*: </label>
             <input type="text" name='first_name' id='first_name' placeholder='First Name' 
               onChange={(e) => handleFirst(e)}
             />
             
-            <label htmlFor="family_name">Family Name: </label>
+            <label htmlFor="family_name">Family Name*: </label>
             <input type="text" name='family_name' id='family_name' placeholder='Family Name' 
               onChange={(e) => handleFamily(e)}
             />
 
-            <label htmlFor="username">Username: </label>
+            <label htmlFor="username">Username*: </label>
             <input type="text" name='username' id='username' maxLength={16}
               placeholder='Username (16 char max)' onChange={(e) => handleUser(e)}
             />
 
-            <label htmlFor="password">Password: </label>
+            <label htmlFor="password">Password*: </label>
             <input type="password" name='password' id='password' placeholder='Password' 
               onChange={(e) => handlePass(e)}
             />
 
-            <label htmlFor="confirm_password">Confirm Password: </label>
+            <label htmlFor="confirm_password">Confirm Password*: </label>
             <input type="password" name='confirm_password' id='confirm_password' placeholder='Confirm Password' 
               onChange={(e) => handleConf(e)}
             />
+
+            <p className='required-message'>* required</p>
           </div>
 
           <button className='signup-form-btn' onClick={(e) => handleSubmit(e)}>Sign Up</button>
