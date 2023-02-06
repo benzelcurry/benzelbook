@@ -36,6 +36,12 @@
   border: solid 3px black;
 }
 
+.signup-inputs > input.pfp-input {
+  display: flex;
+  align-items: center;
+  width: 250px;
+}
+
 .signup-form-btn {
   margin-top: 40px;
   width: 150px;

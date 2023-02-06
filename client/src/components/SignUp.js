@@ -9,6 +9,7 @@ import Footer from './Footer';
 import '../stylesheets/SignUp.css';
 
 const SignUp = () => {
+  const [photo, setPhoto] = useState('');
   const [firstName, setFirstName] = useState('');
   const [familyName, setFamilyName] = useState('');
   const [username, setUsername] = useState('');
@@ -37,6 +38,10 @@ const SignUp = () => {
   const handleConf = (e) => {
     setConfPass(e.target.value);
   };
+
+  const handlePhoto = () => {
+
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -90,6 +95,10 @@ const SignUp = () => {
       <div className="signup-container">
         <form action="" method="POST" className='signup-form'>
           <div className="signup-inputs">
+            <label htmlFor="photo">Profile Picture: </label>
+            <input type="file" accept='.png, .jpg, .jpeg' name='photo' id='photo'
+              onChange={() => handlePhoto()} className='pfp-input' />
+
             <label htmlFor="first_name">First Name: </label>
             <input type="text" name='first_name' id='first_name' placeholder='First Name' 
               onChange={(e) => handleFirst(e)}

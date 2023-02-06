@@ -9,6 +9,7 @@ const UserSchema = new Schema({
   family_name: { type: String, required: true, minLength: 1, maxLength: 20 },
   username: { type: String, required: true, minLength: 3, maxLength: 16 },
   password: { type: String, minLength: 6, maxLength: 100 },
+  pfp: { type: String },
   account_created: { type: Date, required: true },
   friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 });
