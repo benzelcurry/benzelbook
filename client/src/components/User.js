@@ -9,6 +9,7 @@ import Footer from './Footer';
 import Post from './Post';
 import NewPost from './NewPost';
 import DefaultAvatar from '../images/default-avatar.svg';
+import Camera from '../images/camera.svg';
 import '../stylesheets/User.css';
 
 const User = () => {
@@ -162,18 +163,28 @@ const User = () => {
     setFriends(false);
   };
 
+  // Navigates user to avatar update page upon clicking button
+  const handlePhoto = () => {
+    navigate(`/user/${user.username}/update-photo`);
+  }
+
   return (
     <div>
       <Nav />
       <div className="user-container">
         <div className="cover-photo"></div>
         <div className="user-header">
-          {
-            image ? 
-            <img src={image} alt='User avatar' className='profile-pic' />
-            :
-            <img src={DefaultAvatar} alt="User avatar" className='profile-pic' />
-          }
+          <div className="user-photo">
+            <img src={image ? image : DefaultAvatar} alt='User avatar' className='profile-pic' />
+            {
+              user.id === page._id ?
+              <button className='update-photo-btn' onClick={() => handlePhoto()}>
+                <i><img src={Camera} alt='Camera icon' className='camera-icon' /></i>
+                Update Photo
+              </button>
+              : null
+            }
+          </div>
           <div className="user-basics">
             <h1 className="user-fullname">{page.first_name} {page.family_name}</h1>
             <div className="friend-buttons">

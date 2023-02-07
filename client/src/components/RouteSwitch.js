@@ -12,6 +12,7 @@ import User from './User';
 import Error from './Error';
 import FriendRequests from './FriendRequests';
 import FriendList from './FriendList';
+import UpdatePhoto from './UpdatePhoto';
 
 const RouteSwitch = () => {
   return (
@@ -23,6 +24,7 @@ const RouteSwitch = () => {
         <Route path='search' element={ <Search /> } />
         <Route path='friend-requests' element={ <FriendRequests /> } />
         <Route path='user/:username' element={ <User /> } />
+        <Route path='user/:username/update-photo' element={ <UpdatePhoto /> } />
         <Route path='user/:username/friends' element={ <FriendList /> } />
         <Route path='*' element={ <Error /> } />
       </Routes>

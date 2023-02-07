@@ -97,6 +97,37 @@
   border-radius: 50%;
 }
 
+.user-photo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.update-photo-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 5px;
+  border-radius: 10px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+.update-photo-btn:hover {
+  filter: brightness(0.95);
+}
+
+.update-photo-btn:active {
+  filter: brightness(0.9);
+}
+
+.camera-icon {
+  height: 20px;
+  width: 20px;
+}
+
 .user-new-post {
   display: flex;
   gap: 20px;
