@@ -15,6 +15,7 @@ import '../stylesheets/Post.css';
 
 const Post = ({ post, author }) => {
   const [postAuthor, setPostAuthor] = useState({});
+  const [avatar, setAvatar] = useState();
   const [certainty, setCertainty] = useState(false);
   const [user, setUser] = useState({});
   const [likes, setLikes] = useState(0);
@@ -49,6 +50,16 @@ const Post = ({ post, author }) => {
         setPostAuthor(response.data);
       })
   }, [author]);
+
+  // Gets user's profile picture
+  useEffect(() => {
+    if (postAuthor.pfp) {
+      axios.get(`${process.env.REACT_APP_SERVER_URL}/images/${postAuthor.pfp}`, {responseType: 'blob'} )
+        .then((response) => {
+          setAvatar(URL.createObjectURL(response.data));
+        })
+    }
+  }, [postAuthor])
 
   // Handles displaying the new comment form and comments on click
   const handleDisplay = () => {
@@ -90,14 +101,10 @@ const Post = ({ post, author }) => {
 
   return (
     <div className='post-container'>
-      {/* WILL PROBABLY NEED TO UPDATE IMAGE PULLING TO SUCCESSFULLY
-        DISPLAY USER PROFILE PICS; WILL LIKELY NEED TO INSTALL A DEPENDENCY
-        OR SOMETHING LIKE THAT TO HANDLE IMAGE HOSTING? */}
       <div className="post-header">
         <div>
-          <img src={
-            postAuthor.pfp ? postAuthor.pfp : DefaultAvatar
-          } alt="User avatar" className='mini-avatar' />
+          <img src={avatar ? avatar : DefaultAvatar} 
+            alt="User avatar" className='mini-avatar' />
           <Link to={`/user/${postAuthor.username}`} className='post-link'>
             <div className="post-info">
               <p className='post-author'>{postAuthor.first_name} {postAuthor.family_name}</p>
