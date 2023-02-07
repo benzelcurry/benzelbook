@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -8,6 +8,8 @@ import '../stylesheets/NewPost.css';
 const NewPost = ({ userID, targetID }) => {
   const [content, setContent] = useState('');
   const [error, setError] = useState('');
+  const [user, setUser] = useState({});
+  const [avatar, setAvatar] = useState();
 
   const navigate = useNavigate();
 
@@ -36,9 +38,34 @@ const NewPost = ({ userID, targetID }) => {
       })
   };
 
+  // Gets user's data
+  useEffect(() => {
+    if (userID) {
+      axios.get(`${process.env.REACT_APP_SERVER_URL}/users/id/${userID}`)
+        .then((response) => {
+          setUser(response.data);
+        })
+    }
+  }, [userID])
+
+  // Gets user's profile picture
+  useEffect(() => {
+    if (userID) {
+      axios.get(`${process.env.REACT_APP_SERVER_URL}/images/${user.pfp}`, {responseType: 'blob'} )
+        .then((response) => {
+          setAvatar(URL.createObjectURL(response.data));
+        })
+    }
+  }, [userID, user])
+
   return (
     <div className="user-new-post">
-      <img src={DefaultAvatar} alt="User avatar" className='mini-avatar' />
+      {
+        avatar ?
+        <img src={avatar} alt='User avatar' className='mini-avatar' />
+        :
+        <img src={DefaultAvatar} alt="User avatar" className='mini-avatar' />
+      }
       <form action="">
         <textarea name="new-status" id="new-status" className='user-new-status'
           placeholder="What's on your mind?" onChange={(e) => handleInput(e)}
