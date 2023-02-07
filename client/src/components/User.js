@@ -168,7 +168,12 @@ const User = () => {
       <div className="user-container">
         <div className="cover-photo"></div>
         <div className="user-header">
-          <img src={DefaultAvatar} alt="User avatar" className='profile-pic' />
+          {
+            image ? 
+            <img src={image} alt='User avatar' className='profile-pic' />
+            :
+            <img src={DefaultAvatar} alt="User avatar" className='profile-pic' />
+          }
           <div className="user-basics">
             <h1 className="user-fullname">{page.first_name} {page.family_name}</h1>
             <div className="friend-buttons">
@@ -213,7 +218,6 @@ const User = () => {
           </div>
         </div>
       </div>
-      <img src={image} alt="Profile avatar" />
       <Footer />
     </div>
   );
