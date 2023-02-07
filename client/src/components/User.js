@@ -108,10 +108,6 @@ const User = () => {
     if (page._id) {
       axios.get(`${process.env.REACT_APP_SERVER_URL}/images/${page.pfp}`, {responseType: 'blob'} )
         .then((response) => {
-          // const imgBlob = response.blob();
-          // const imgURL = URL.createObjectURL(imgBlob);
-          // setImage(imgURL);
-          console.log(URL.createObjectURL(response.data));
           setImage(URL.createObjectURL(response.data));
         })
     }
