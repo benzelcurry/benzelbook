@@ -12,7 +12,8 @@ import '../stylesheets/Comment.css';
 
 const Comment = ({ post, commentID, userID }) => {
   const [comment, setComment] = useState({});
-  const [author, setAuthor] = useState('');
+  const [author, setAuthor] = useState({});
+  const [avatar, setAvatar] = useState();
   const [likes, setLikes] = useState();
   const [certainty, setCertainty] = useState(false);
 
@@ -45,6 +46,16 @@ const Comment = ({ post, commentID, userID }) => {
       });
     };
   }, [comment.author])
+
+  // Gets user's profile picture
+  useEffect(() => {
+    if (author.pfp) {
+      axios.get(`${process.env.REACT_APP_SERVER_URL}/images/${author.pfp}`, {responseType: 'blob'} )
+        .then((response) => {
+          setAvatar(URL.createObjectURL(response.data));
+        })
+    }
+  }, [author])
 
   // Handles liking/unliking a comment
   const handleLike = (e) => {
@@ -84,7 +95,7 @@ const Comment = ({ post, commentID, userID }) => {
     <div className='comment-cards'>
       <div>
         <div className="comment-user">
-          <img src={ author.pfp ? author.pfp : DefaultAvatar }
+          <img src={ avatar ? avatar : DefaultAvatar }
             alt="User avatar" className='mini-avatar' />
           <div className="comment-info">
             <Link to={'/user/author.username'} className='user-link'>
