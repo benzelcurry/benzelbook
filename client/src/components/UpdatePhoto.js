@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import Nav from './Nav';
@@ -15,6 +15,8 @@ const UpdatePhoto = () => {
   const [error, setError] = useState('');
   const token = localStorage.getItem('token');
 
+  const navigate = useNavigate();
+
   // Pulls active user on client end
   useEffect(() => {
     const body = { token: localStorage.getItem('token') }
@@ -24,15 +26,17 @@ const UpdatePhoto = () => {
       })
   }, [token])
 
+  // Sets the target photo that user is trying to update
   const handlePhoto = (e) => {
     setPhoto(e.target.files[0]);
   }
 
+  // Handles submitting and updating the user's new profile picture
   const handleSubmit = (e) => {
     e.preventDefault();
     const body = new FormData();
     body.append('pfp', photo);
-    axios.put(`${process.env.REACT_APP_SERVER_URL}/users`, body)
+    axios.put(`${process.env.REACT_APP_SERVER_URL}/users/${user.id}/avatar`, body)
       .then((response) => {
         if (response.data.errors) {
           if (typeof(response.data.errors[0]) === 'object') {
@@ -40,6 +44,8 @@ const UpdatePhoto = () => {
           } else {
             return setError(response.data.errors[0]);
           }
+        } else if (response.data.message === 'Success') {
+          navigate(0);
         }
       })
       .catch((err) => {
