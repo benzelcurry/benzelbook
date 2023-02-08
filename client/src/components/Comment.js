@@ -1,7 +1,7 @@
 // Component for displaying comments on posts
 
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { DateTime } from 'luxon';
 
@@ -86,6 +86,10 @@ const Comment = ({ post, commentID, userID }) => {
       });
   };
 
+  const handleLink = (e) => {
+    navigate(`/user/${author.username}`)
+  }
+
   // Asks user if they're sure before deleting a post
   const promptUser = () => {
     certainty ? setCertainty(false) : setCertainty(true);
@@ -94,13 +98,11 @@ const Comment = ({ post, commentID, userID }) => {
   return (
     <div className='comment-cards'>
       <div>
-        <div className="comment-user">
+        <div className="comment-user" onClick={(e) => handleLink(e)}>
           <img src={ avatar ? avatar : DefaultAvatar }
             alt="User avatar" className='mini-avatar' />
           <div className="comment-info">
-            <Link to={'/user/author.username'} className='user-link'>
-              <i className="comment-author">{author.first_name} {author.family_name}</i>
-            </Link>
+            <i className="comment-author">{author.first_name} {author.family_name}</i>
             <p className='comment-date'>
               {DateTime.fromISO(comment.date).toLocaleString(DateTime.DATE_MED)}
             </p>

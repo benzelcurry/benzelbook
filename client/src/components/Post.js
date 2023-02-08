@@ -1,7 +1,7 @@
 // Component for displaying posts in news feed/profile pages
 
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { DateTime } from 'luxon';
 
@@ -99,18 +99,21 @@ const Post = ({ post, author }) => {
       });
   };
 
+  // Links to user's profile upon click
+  const handleLink = () => {
+    navigate(`/user/${postAuthor.username}`)
+  }
+
   return (
     <div className='post-container'>
       <div className="post-header">
-        <div>
+        <div onClick={() => handleLink()}>
           <img src={avatar ? avatar : DefaultAvatar} 
             alt="User avatar" className='mini-avatar' />
-          <Link to={`/user/${postAuthor.username}`} className='post-link'>
-            <div className="post-info">
-              <p className='post-author'>{postAuthor.first_name} {postAuthor.family_name}</p>
-              <p className='post-date'>{DateTime.fromISO(post.date).toLocaleString(DateTime.DATE_MED)}</p>
-            </div>
-          </Link>
+          <div className="post-info">
+            <p className='post-author'>{postAuthor.first_name} {postAuthor.family_name}</p>
+            <p className='post-date'>{DateTime.fromISO(post.date).toLocaleString(DateTime.DATE_MED)}</p>
+          </div>
         </div>
         {
           user.id === post.author ?
