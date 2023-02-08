@@ -57,8 +57,8 @@ const About = ({ user, page }) => {
         :
         <p className='about-text'>
           {
-            user.about ?
-            user.about 
+            page.about ?
+            page.about 
             : "This user hasn't written their about section yet."
           }
         </p>
