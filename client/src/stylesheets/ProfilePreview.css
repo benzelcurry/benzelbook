@@ -27,6 +27,7 @@
 
 .preview-pic {
   height: 70px;
+  border-radius: 50%;
 }
 
 .preview-info {
@@ -62,6 +63,7 @@
   width: 100px;
   border-radius: 10px;
   cursor: pointer;
+  font-weight: bold;
 }
 
 .remove-friend:hover {

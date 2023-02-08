@@ -27,12 +27,6 @@ const FriendList = () => {
 
   // Pulls list of active User's friends
   useEffect(() => {
-    // if (user.id) {
-    //   axios.get(`${process.env.REACT_APP_SERVER_URL}/users/id/${user.id}`)
-    //     .then((response) => {
-    //       setFriends(response.data.friends);
-    //     })
-    // }
     axios.get(`${process.env.REACT_APP_SERVER_URL}/users/${username}`)
       .then((response) => {
         setFriends(response.data.user.friends);

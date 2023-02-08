@@ -12,6 +12,7 @@ const ProfilePreview = ({ user, friend, admin }) => {
   const [active, setActive] = useState({});
   const [account, setAccount] = useState({});
   const [friends, setFriends] = useState(true);
+  const [avatar, setAvatar] = useState();
   const token = localStorage.getItem('token');
 
   // Pulls active user on client end
@@ -33,6 +34,16 @@ const ProfilePreview = ({ user, friend, admin }) => {
     }
   }, [friend]);
 
+  // Gets user's profile picture
+  useEffect(() => {
+    if (account.pfp) {
+      axios.get(`${process.env.REACT_APP_SERVER_URL}/images/${account.pfp}`, {responseType: 'blob'} )
+        .then((response) => {
+          setAvatar(URL.createObjectURL(response.data));
+        })
+    }
+  }, [account])
+
   // Deletes a friend upon pressing 'Remove Friend' button
   const handleDelete = (e) => {
     e.preventDefault();
@@ -47,7 +58,7 @@ const ProfilePreview = ({ user, friend, admin }) => {
     <div>
       { user ? 
         <div className="preview-container">
-          <img src={ user.picture ? user.picture : DefaultAvatar }
+          <img src={ avatar ? avatar : DefaultAvatar }
           alt="User avatar" className='preview-pic' />
           <div className="preview-info">
             <h6 className="preview-name">{user.first_name} {user.family_name}</h6>
@@ -59,7 +70,7 @@ const ProfilePreview = ({ user, friend, admin }) => {
         :
         <div className='friends-preview'>
           <Link to={`/user/${account.username}`} className='friends-link'>
-            <img src={ account.picture ? account.picture : DefaultAvatar }
+            <img src={ avatar ? avatar : DefaultAvatar }
             alt="User avatar" className='preview-pic' />
             <div className="preview-info">
               <h6 className="preview-name">{account.first_name} {account.family_name}</h6>

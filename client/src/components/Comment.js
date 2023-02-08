@@ -86,6 +86,7 @@ const Comment = ({ post, commentID, userID }) => {
       });
   };
 
+  // Handles linking to a user's profile
   const handleLink = (e) => {
     navigate(`/user/${author.username}`)
   }

@@ -11,6 +11,7 @@ const RequestPreview = ({ req, outgoing, incoming }) => {
   const [profile, setProfile] = useState({});
   const [canceled, setCanceled] = useState(false);
   const [accepted, setAccepted] = useState(false);
+  const [avatar, setAvatar] = useState();
 
   // Pulls profile info to display on request preview
   useEffect(() => {
@@ -25,6 +26,17 @@ const RequestPreview = ({ req, outgoing, incoming }) => {
         setProfile(response.data);
       }));
   }, [outgoing, req.from, req.to])
+
+  // Gets user's profile picture
+  useEffect(() => {
+    if (profile.pfp) {
+      axios.get(`${process.env.REACT_APP_SERVER_URL}/images/${profile.pfp}`, {responseType: 'blob'} )
+        .then((response) => {
+          console.log(response);
+          setAvatar(URL.createObjectURL(response.data));
+        })
+    }
+  }, [profile])
 
   // Handles canceling outgoing requests
   const handleCancel = (e) => {
@@ -58,7 +70,7 @@ const RequestPreview = ({ req, outgoing, incoming }) => {
       className='request-link'>
         <div>
           <img src={
-            profile.picture ? profile.picture : DefaultAvatar
+            avatar ? avatar : DefaultAvatar
           } alt="User avatar" className='preview-pic' />
           <h6 className="preview-name">
             {profile.first_name} {profile.family_name}
