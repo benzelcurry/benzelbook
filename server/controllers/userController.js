@@ -157,6 +157,7 @@ exports.create_user = [
   },
 ];
 
+
 // Update profile picture on PUT
 exports.update_pfp = (req, res, next) => {
   User.findById(req.params.id)
@@ -164,6 +165,20 @@ exports.update_pfp = (req, res, next) => {
       if (err) { return next(err) };
 
       User.findByIdAndUpdate(req.params.id, { pfp: req.file.filename }, (err) => {
+        if (err) return next(err);
+        return res.json({ message: 'Success' });
+      });
+    });
+};
+
+
+// Update User about section on PUT
+exports.update_about = (req, res, next) => {
+  User.findById(req.params.id)
+    .exec((err, user) => {
+      if (err) { return next(err) };
+
+      User.findByIdAndUpdate(req.params.id, { about: req.body.about }, (err) => {
         if (err) return next(err);
         return res.json({ message: 'Success' });
       });

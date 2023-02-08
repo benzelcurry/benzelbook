@@ -77,6 +77,9 @@ router.post('/users', upload.single('pfp'), user_controller.create_user);
 // Update user avatar on PUT
 router.put('/users/:id/avatar', upload.single('pfp'), user_controller.update_pfp);
 
+// Update user about section on PUT
+router.put('/users/:id/about', user_controller.update_about);
+
 // Adds to User friend list on PUT
 router.put('/users/:id/friends', user_controller.add_friends);
 
