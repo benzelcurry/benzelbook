@@ -24,7 +24,6 @@ const About = ({ user, page }) => {
     const body = { about: about };
     axios.put(`${process.env.REACT_APP_SERVER_URL}/users/${user.id}/about`, body)
       .then((response) => {
-        console.log(response);
         if (response.data.message === 'Success') {
           navigate(0);
         };
