@@ -31,9 +31,13 @@
 
 .update-photo-form {
   margin: 50px 0px 50px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
 }
 
-.update-photo-form > label {
+.update-photo-form > .form-group > label {
   font-weight: bold;
   font-size: 1.1em;
 }
@@ -41,4 +45,23 @@
 .pfp-update {
   border-bottom: solid 2px black;
   padding: 5px;
+}
+
+.update-avatar-btn {
+  padding: 10px;
+  width: 150px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #a3c3eb;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.update-avatar-btn:hover {
+  filter: brightness(1.1);
+}
+
+.update-avatar-btn:active {
+  filter: brightness(0.9);
 }

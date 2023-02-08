@@ -38,9 +38,12 @@ const UpdatePhoto = () => {
               className='current-avatar'
             />
             <form action="" encType='multipart/form-data' className='update-photo-form'>
-              <label htmlFor="photo">New Avatar: </label>
-              <input type="file" accept='.png, .jpg, .jpeg' name='photo' id='photo'
-                onChange={(e) => handlePhoto(e)} className='pfp-update' />
+              <div className="form-group">
+                <label htmlFor="photo">New Avatar: </label>
+                <input type="file" accept='.png, .jpg, .jpeg' name='photo' id='photo'
+                  onChange={(e) => handlePhoto(e)} className='pfp-update' />
+              </div>
+              <button className='update-avatar-btn'>Update Photo</button>
             </form>
           </div>
           :
