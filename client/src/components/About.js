@@ -5,7 +5,11 @@ import '../stylesheets/About.css';
 
 const About = ({ user, page }) => {
   const [edit, setEdit] = useState(false);
-  const [about, handleAbout] = useState('');
+  const [about, setAbout] = useState('');
+
+  const handleAbout = (e) => {
+    setAbout(e.target.value);
+  };
 
   const handleEdit = () => {
     edit ? setEdit(false) : setEdit(true);
@@ -25,13 +29,15 @@ const About = ({ user, page }) => {
         edit ?
         <form action="">
           <textarea name="user-about" id="user-about" className='user-about-text'
-            placeholder='Write something about yourself...'>
+            placeholder='Write something about yourself...' maxLength={250}
+            onChange={(e) => handleAbout(e)}>
             { user.about ? user.about : '' }
           </textarea>
+          <i>{250 - about.length} chars remaining</i>
           <button>Submit Changes</button>
         </form>
         :
-        <p>
+        <p className='about-text'>
           {
             user.about ?
             user.about 
