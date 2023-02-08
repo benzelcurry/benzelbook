@@ -5,8 +5,11 @@ import '../stylesheets/About.css';
 
 const About = ({ user, page }) => {
   return (
-    <div>
-      About content goes here.
+    <div className='user-intro'>
+      { user.id === page._id ?
+        <i><img src={Edit} alt='Edit about section' className='edit-about' /></i>
+        : null
+      }
     </div>
   );
 };

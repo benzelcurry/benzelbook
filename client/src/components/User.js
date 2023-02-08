@@ -8,6 +8,7 @@ import Nav from './Nav';
 import Footer from './Footer';
 import Post from './Post';
 import NewPost from './NewPost';
+import About from './About';
 import DefaultAvatar from '../images/default-avatar.svg';
 import Camera from '../images/camera.svg';
 import '../stylesheets/User.css';
@@ -216,9 +217,7 @@ const User = () => {
           </div>
         </div>
         <div className="user-contents">
-          <div className="user-intro">
-            User intro content will go in here.
-          </div>
+          <About user={user} page={page} />
           <div className="user-posts">
             <NewPost userID={user.id} targetID={page._id} />
             <div className="user-wall">

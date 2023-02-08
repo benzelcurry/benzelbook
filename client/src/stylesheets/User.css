@@ -68,16 +68,6 @@
   grid-template-columns: 1fr 1.5fr;
 }
 
-.user-intro {
-  display: flex;
-  border-radius: 20px;
-  padding: 20px;
-  flex-direction: column;
-  background-color: #fff;
-  height: 400px;
-  flex-grow: 1;
-}
-
 .user-posts {
   display: flex;
   flex-direction: column;
