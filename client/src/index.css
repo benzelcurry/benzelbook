@@ -24,3 +24,7 @@ code {
   color: red;
   margin-top: 20px;
 }
+
+textarea {
+  resize: none;
+}

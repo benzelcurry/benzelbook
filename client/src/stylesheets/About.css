@@ -6,6 +6,7 @@
   background-color: #fff;
   height: 400px;
   flex-grow: 1;
+  gap: 10px;
 }
 
 .user-intro > i {
@@ -20,4 +21,38 @@
 
 .edit-about:hover {
   filter: invert(53%) sepia(0%) saturate(0%) hue-rotate(170deg) brightness(94%) contrast(82%);
+}
+
+.user-intro > form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.user-about-text {
+  display: flex;
+  height: 280px;
+  border-radius: 10px;
+  padding: 10px;
+  font-family: inherit;
+}
+
+.user-intro > form > button {
+  width: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-weight: bold;
+  background-color: #b9d6fc;
+  cursor: pointer;
+}
+
+.user-intro > form > button:hover {
+  filter: brightness(1.1);
+}
+
+.user-intro > form > button:active {
+  filter: brightness(0.9);
 }
