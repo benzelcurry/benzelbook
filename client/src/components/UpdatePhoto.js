@@ -26,6 +26,16 @@ const UpdatePhoto = () => {
       })
   }, [token])
 
+  // GET user avatar
+  useEffect(() => {
+    if (user.id) {
+      axios.get(`${process.env.REACT_APP_SERVER_URL}/images/${user.pfp}`, {responseType: 'blob'} )
+        .then((response) => {
+          setAvatar(URL.createObjectURL(response.data));
+        })
+    }
+  }, [user])
+
   // Sets the target photo that user is trying to update
   const handlePhoto = (e) => {
     setPhoto(e.target.files[0]);

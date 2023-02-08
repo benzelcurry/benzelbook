@@ -198,6 +198,7 @@ exports.login_user = (req, res, next) => {
               username: req.body.username,
               first_name: results.user.first_name,
               family_name: results.user.family_name,
+              pfp: results.user.pfp,
               id: results.user._id,
             },
             secret,

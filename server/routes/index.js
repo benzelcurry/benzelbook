@@ -45,6 +45,7 @@ router.post('/', (req, res) => {
       username: decrypt.username,
       name: `${decrypt.first_name} ${decrypt.family_name}`,
       id: decrypt.id,
+      pfp: decrypt.pfp,
     });
   } else {
     res.json('No current user.');
