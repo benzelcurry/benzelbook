@@ -28,3 +28,17 @@
   width: 300px;
   border-radius: 50%;
 }
+
+.update-photo-form {
+  margin: 50px 0px 50px 0px;
+}
+
+.update-photo-form > label {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.pfp-update {
+  border-bottom: solid 2px black;
+  padding: 5px;
+}

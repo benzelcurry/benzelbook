@@ -22,6 +22,10 @@ const UpdatePhoto = () => {
       })
   }, [token])
 
+  const handlePhoto = (e) => {
+    
+  }
+
   return (
     <div>
       <Nav />
@@ -33,6 +37,11 @@ const UpdatePhoto = () => {
             <img src={ avatar ? avatar : DefaultAvatar } alt='Current avatar' 
               className='current-avatar'
             />
+            <form action="" encType='multipart/form-data' className='update-photo-form'>
+              <label htmlFor="photo">New Avatar: </label>
+              <input type="file" accept='.png, .jpg, .jpeg' name='photo' id='photo'
+                onChange={(e) => handlePhoto(e)} className='pfp-update' />
+            </form>
           </div>
           :
           <div className="wrong-user">403 Forbidden: Access Denied</div>
