@@ -11,6 +11,8 @@ const UpdatePhoto = () => {
   const { username } = useParams();
   const [user, setUser] = useState({});
   const [avatar, setAvatar] = useState();
+  const [photo, setPhoto] = useState();
+  const [error, setError] = useState('');
   const token = localStorage.getItem('token');
 
   // Pulls active user on client end
@@ -23,8 +25,27 @@ const UpdatePhoto = () => {
   }, [token])
 
   const handlePhoto = (e) => {
-    
+    setPhoto(e.target.files[0]);
   }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const body = new FormData();
+    body.append('pfp', photo);
+    axios.put(`${process.env.REACT_APP_SERVER_URL}/users`, body)
+      .then((response) => {
+        if (response.data.errors) {
+          if (typeof(response.data.errors[0]) === 'object') {
+            return setError(response.data.errors[0].msg);
+          } else {
+            return setError(response.data.errors[0]);
+          }
+        }
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+  };
 
   return (
     <div>
@@ -37,7 +58,8 @@ const UpdatePhoto = () => {
             <img src={ avatar ? avatar : DefaultAvatar } alt='Current avatar' 
               className='current-avatar'
             />
-            <form action="" encType='multipart/form-data' className='update-photo-form'>
+            <form action="" encType='multipart/form-data' className='update-photo-form'
+              onSubmit={(e) => handleSubmit(e)}>
               <div className="form-group">
                 <label htmlFor="photo">New Avatar: </label>
                 <input type="file" accept='.png, .jpg, .jpeg' name='photo' id='photo'
@@ -45,6 +67,7 @@ const UpdatePhoto = () => {
               </div>
               <button className='update-avatar-btn'>Update Photo</button>
             </form>
+            <p className='error-msg'>{ error ? error : null }</p>
           </div>
           :
           <div className="wrong-user">403 Forbidden: Access Denied</div>
