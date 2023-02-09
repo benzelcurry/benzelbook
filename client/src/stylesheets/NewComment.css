@@ -18,3 +18,26 @@
   background-color: #f0f2f5;
   font-family: inherit;
 }
+
+@media (max-width: 500px) {
+  .comment-form {
+    border: none;
+    background-color: inherit;
+  }
+
+  .new-comment {
+    width: 240px;
+    background-color: #fff;
+  }
+
+  .comment-form > form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .user-post-btn {
+    align-self: center;
+    width: 200px;
+    height: 50px;
+  }
+}
