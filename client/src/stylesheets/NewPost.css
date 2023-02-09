@@ -29,12 +29,37 @@
   width: 500px;
 }
 
+.user-new-post {
+  display: flex;
+  gap: 20px;
+}
+
+.user-new-status {
+  width: 350px;
+  height: 150px;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #f0f2f5;
+  font-family: inherit;
+}
+
+.user-new-post > form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 @media (max-width: 500px) {
   .feed-posts,
   .new-post-container {
     width: 280px;
     padding: 20px 0px 20px 0px;
     margin-top: 20px;
+  }
+
+  .feed-posts {
+    padding: 20px 20px 20px 20px;
   }
 
   .user-new-post {
