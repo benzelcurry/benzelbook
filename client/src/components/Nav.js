@@ -11,6 +11,7 @@ import '../stylesheets/Nav.css';
 const Nav = ({ newUser }) => {
   const [user, setUser] = useState({});
   const [query, setQuery] = useState();
+  const [expanded, setExpanded] = useState(false);
   const token = localStorage.getItem('token');
 
   const navigate = useNavigate();
@@ -23,6 +24,12 @@ const Nav = ({ newUser }) => {
         setUser(response.data);
       })
   }, [token])
+
+  // Expands user options on mobile
+  const handleExpand = (e) => {
+    e.preventDefault();
+    expanded ? setExpanded(false) : setExpanded(true);
+  } ;
 
   // Handles the search query
   const handleQuery = (e) => {
@@ -50,12 +57,24 @@ const Nav = ({ newUser }) => {
       <div className="nav-left">
         <Link to={'/'} className='nav-link'>
           <button className='site-title'>Benzelbook</button>
-          <button className='site-title2'>
+        </Link>
+        <div className="nav-link">
+          <button className='site-title2' onClick={(e) => handleExpand(e)}>
             <i><img src={Logo} alt="Home page" className='nav-logo' /></i>
           </button>
-        </Link>
+          {
+            expanded ?
+            <div className="expanded-options">
+              <button onClick={() => navigate('/')}>Home</button>
+              <button onClick={() => navigate(`/user/${user.username}`)}>Profile</button>
+              <button onClick={() => handleClick()}>Log Out</button>
+            </div>
+            : null
+          }
+        </div>
         <form action="" onSubmit={(e) => handleSearch(e)}>
-            <input type="text" placeholder='Search Benzelbook' className='nav-search' 
+            <input type="text" placeholder='Search Benzelbook' 
+              className={user.id ? 'nav-search logged' : 'nav-search'} 
               onChange={(e) => handleQuery(e)}
             />
         </form>

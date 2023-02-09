@@ -100,12 +100,38 @@ a.nav-link {
     width: 180px;
   }
 
+  .nav-right {
+    display: none;
+  }
+
   .fr-nav {
     display: none;
+  }
+
+  .nav-left {
+    margin-left: -15px;
   }
 
   .signup-btn,
   .login-btn {
     display: none;
+  }
+
+  .expanded-options {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    position: absolute;
+    margin-top: 5px;;
+    margin-left: -10px;
+    display: flex;
+    gap: 10px;
+  }
+
+  .expanded-options > button {
+    border: none;
+    background-color: #b5d4fd;
+    padding: 10px;
+    border-radius: 10px;
   }
 }
