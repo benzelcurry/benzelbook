@@ -87,3 +87,27 @@
 .guest-login-btn:active {
   filter: brightness(0.9);
 }
+
+@media (max-width: 500px) {
+  .form-inputs {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-inputs > label {
+    display: none;
+  }
+
+  .form-inputs > input {
+    width: 240px;
+  }
+
+  .no-account-msg > p {
+    width: 240px;
+  }
+
+  .guest-notice {
+    width: 240px;
+  }
+}

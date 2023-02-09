@@ -68,25 +68,17 @@
 }
 
 @media (max-width: 500px) {
-  .form-inputs {
-    width: 300px;
+  .signup-inputs {
     display: flex;
     flex-direction: column;
   }
 
-  .form-inputs > label {
+  .signup-inputs > label {
     display: none;
   }
 
-  .form-inputs > input {
+  .signup-form-btn {
     width: 240px;
-  }
-
-  .no-account-msg > p {
-    width: 240px;
-  }
-
-  .guest-notice {
-    width: 240px;
+    height: 50px;
   }
 }
