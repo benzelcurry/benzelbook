@@ -97,10 +97,15 @@ a.nav-link {
   }
 
   .nav-search {
-    width: 130px;
+    width: 180px;
   }
 
   .fr-nav {
+    display: none;
+  }
+
+  .signup-btn,
+  .login-btn {
     display: none;
   }
 }
