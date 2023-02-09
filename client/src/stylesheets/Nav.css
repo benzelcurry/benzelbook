@@ -43,6 +43,7 @@
 }
 
 .site-title,
+.site-title2,
 .nav-btn {
   border: none;
   background-color: inherit;
@@ -53,6 +54,10 @@
   align-items: center;
   cursor: pointer;
   height: 100%;
+}
+
+.site-title2 {
+  display: none;
 }
 
 .nav-btn {
@@ -72,4 +77,30 @@ a.nav-link {
 
 .fr-nav:hover {
   filter: invert(19%) sepia(2%) saturate(1793%) hue-rotate(314deg) brightness(93%) contrast(77%);
+}
+
+@media (max-width: 500px) {
+  .site-title {
+    display: none;
+  }
+
+  .site-title2 {
+    display: flex;
+  }
+
+  .site-title2 > i {
+    display: flex;
+  }
+
+  .nav-logo {
+    height: 35px;
+  }
+
+  .nav-search {
+    width: 130px;
+  }
+
+  .fr-nav {
+    display: none;
+  }
 }

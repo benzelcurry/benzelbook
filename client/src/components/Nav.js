@@ -5,6 +5,7 @@ import { Link, useNavigate, Navigate } from 'react-router-dom';
 import axios from 'axios';
 
 import FriendRequest from '../images/friend-request.svg';
+import Logo from '../images/site-logo.svg';
 import '../stylesheets/Nav.css';
 
 const Nav = ({ newUser }) => {
@@ -49,6 +50,9 @@ const Nav = ({ newUser }) => {
       <div className="nav-left">
         <Link to={'/'} className='nav-link'>
           <button className='site-title'>Benzelbook</button>
+          <button className='site-title2'>
+            <i><img src={Logo} alt="Home page" className='nav-logo' /></i>
+          </button>
         </Link>
         <form action="" onSubmit={(e) => handleSearch(e)}>
             <input type="text" placeholder='Search Benzelbook' className='nav-search' 
