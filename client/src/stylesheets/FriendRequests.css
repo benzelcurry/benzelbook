@@ -10,3 +10,14 @@
 .outgoing-requests {
   width: 540px;
 }
+
+@media (max-width: 500px) {
+  .fr-container {
+    padding: 10px;
+  }
+
+  .incoming-requests,
+  .outgoing-requests {
+    width: 300px;
+  }
+}
