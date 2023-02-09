@@ -21,6 +21,7 @@ exports.user_list = (req, res, next) => {
         first_name: user.first_name,
         family_name: user.family_name,
         account_created: user.account_created,
+        pfp: user.pfp,
         id: user._id,
       }));
 
