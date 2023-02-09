@@ -37,7 +37,7 @@ const Search = ({ query }) => {
       <div className="search-container">
         { users.map((user) => 
           <Link to={`/user/${user.username}`} className='preview-link'>
-            <ProfilePreview key={user._id} user={user} />
+            <ProfilePreview key={user.id} user={user} pfp={user.pfp} />
           </Link>
         )}
       </div>

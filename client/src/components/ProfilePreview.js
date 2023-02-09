@@ -8,7 +8,7 @@ import { DateTime } from 'luxon';
 import DefaultAvatar from '../images/default-avatar.svg';
 import '../stylesheets/ProfilePreview.css';
 
-const ProfilePreview = ({ user, friend, admin }) => {
+const ProfilePreview = ({ user, friend, pfp, admin }) => {
   const [active, setActive] = useState({});
   const [account, setAccount] = useState({});
   const [friends, setFriends] = useState(true);
@@ -34,15 +34,26 @@ const ProfilePreview = ({ user, friend, admin }) => {
     }
   }, [friend]);
 
-  // Gets user's profile picture
+  // Gets user's profile picture for friend preview
   useEffect(() => {
     if (account.pfp) {
       axios.get(`${process.env.REACT_APP_SERVER_URL}/images/${account.pfp}`, {responseType: 'blob'} )
         .then((response) => {
+          console.log(response);
           setAvatar(URL.createObjectURL(response.data));
         })
     }
   }, [account])
+
+  // Gets user's profile picture for search preview
+  useEffect(() => {
+    if (pfp) {
+      axios.get(`${process.env.REACT_APP_SERVER_URL}/images/${pfp}`, {responseType: 'blob'} )
+        .then((response) => {
+          setAvatar(URL.createObjectURL(response.data));
+        })
+    }
+  }, [pfp])
 
   // Deletes a friend upon pressing 'Remove Friend' button
   const handleDelete = (e) => {
