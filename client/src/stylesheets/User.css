@@ -149,4 +149,18 @@
     width: 90px;
     font-size: 0.9em;
   }
+
+  .user-contents {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .user-intro {
+    height: 100%;
+  }
+
+  .about-text {
+    width: 100%;
+  }
 }
