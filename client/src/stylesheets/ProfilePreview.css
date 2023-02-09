@@ -73,3 +73,16 @@
 .remove-friend:active {
   filter: brightness(1.2);
 }
+
+@media (max-width: 500px) {
+  .preview-container,
+  .friends-preview {
+    width: 280px;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .remove-friend {
+    height: 100px;
+  }
+}
