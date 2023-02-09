@@ -128,3 +128,25 @@
   flex-direction: column;
   gap: 20px;
 }
+
+@media (max-width: 500px) {
+  .cover-photo {
+    height: 100px;
+  }
+
+  .user-header {
+    padding: 10px;
+    width: 320px;
+    gap: 10px;
+  }
+
+  .profile-pic {
+    height: 100px;
+    width: 100px;
+  }
+
+  .friend-btn {
+    width: 90px;
+    font-size: 0.9em;
+  }
+}
