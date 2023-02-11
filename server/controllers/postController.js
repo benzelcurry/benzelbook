@@ -42,6 +42,7 @@ exports.create_post = [
     const post = new Post({
       content: req.body.content,
       date: new Date(),
+      by_guest: req.body.byGuest,
       author: req.body.userID,
       target: req.body.targetID,
       likes: 0,
