@@ -21,7 +21,7 @@ db.on('error', console.error.bind(console, 'mongo connection error'));
 
 const app = express();
 
-app.use(cors({ credentials: true }));
+app.use(cors());
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
