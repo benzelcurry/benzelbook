@@ -107,7 +107,7 @@ const Comment = ({ post, commentID, userID }) => {
           </div>
         </div>
         {
-          userID === author.id ?
+          (userID === author.id && userID !== 'guestuser123') ?
           <i>
             <img src={Delete} alt="Delete comment icon" className='post-action' 
               onClick={() => promptUser()}
