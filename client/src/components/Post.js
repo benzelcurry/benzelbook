@@ -45,11 +45,19 @@ const Post = ({ post, author }) => {
 
   // Pulls post author info
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_SERVER_URL}/users/id/${author}`)
+    if (post.by_guest === true) {
+      setPostAuthor({
+        first_name: 'Guest',
+        family_name: 'User',
+        username: 'guestuser'
+      });
+    } else {
+      axios.get(`${process.env.REACT_APP_SERVER_URL}/users/id/${author}`)
       .then((response) => {
         setPostAuthor(response.data);
-      })
-  }, [author]);
+      });
+    };
+  }, [post, author]);
 
   // Gets user's profile picture
   useEffect(() => {

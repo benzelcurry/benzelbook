@@ -24,7 +24,10 @@ const NewPost = ({ userID, targetID }) => {
     if (content.length === 0) {
       return setError('Please enter a post before hitting submit.');
     };
-    const body = { content: content, userID, targetID };
+    let body = { content: content, userID, targetID };
+    if (userID === 'guestuser123') {
+      body = { content, byGuest: true, targetID }
+    };
     axios.post(`${process.env.REACT_APP_SERVER_URL}/posts`, body)
       .then((response) => {
         if (response.data.message === 'Successful') {
