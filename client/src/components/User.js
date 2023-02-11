@@ -109,8 +109,6 @@ const User = () => {
   useEffect(() => {
     if (page._id) {
       setImage(`${process.env.REACT_APP_IMAGES}/${page.pfp}`)
-      console.log(process.env.REACT_APP_IMAGES + '/' + page.pfp)
-      console.log(page.pfp);
     }
   }, [page])
 
