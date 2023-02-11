@@ -7,6 +7,7 @@ Live preview at https://benzel-book.web.app/
 * Express/Node.js
 * React
 * MongoDB/Mongoose
+* Multer
 * Cloudinary
 * Vanilla CSS
 * JWT auth
