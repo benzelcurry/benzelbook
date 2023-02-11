@@ -8,6 +8,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
+const cloudinary = require('cloudinary').v2;
 
 require('dotenv').config();
 

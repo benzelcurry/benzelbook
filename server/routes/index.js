@@ -6,6 +6,8 @@ const jwt = require('jsonwebtoken');
 const multer = require('multer');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
 // Require controller modules
 const user_controller = require('../controllers/userController');
@@ -14,15 +16,32 @@ const like_controller = require('../controllers/likeController');
 const request_controller = require('../controllers/requestController');
 const comment_controller = require('../controllers/commentController');
 
-const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, 'images');
-  },
-  filename: function(req, file, cb) {
-    cb(null, uuidv4() + '-' + Date.now() + path.extname(file.originalname));
-  }
+// Image storage
+// const storage = multer.diskStorage({
+//   destination: function(req, file, cb) {
+//     cb(null, 'images');
+//   },
+//   filename: function(req, file, cb) {
+//     cb(null, uuidv4() + '-' + Date.now() + path.extname(file.originalname));
+//   }
+// });
+
+// Cloudinary config
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_API_SECRET,
 });
 
+// Cloudinary image storage
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "IMAGES",
+  },
+});
+
+// Filters images by file type
 const fileFilter = (req, file, cb) => {
   const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
   if (allowedFileTypes.includes(file.mimetype)) {
@@ -32,7 +51,8 @@ const fileFilter = (req, file, cb) => {
   };
 };
 
-let upload = multer({ storage, fileFilter});
+// Uploads images based on storage location and filter params
+const upload = multer({ storage, fileFilter});
 
 ///// NON-SPECIFIC ROUTES ///// 
 
