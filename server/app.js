@@ -21,6 +21,13 @@ db.on('error', console.error.bind(console, 'mongo connection error'));
 
 const app = express();
 
+app.use(helmet({}));
+app.use(compression());
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static('images'));
+app.use(bodyParser.json());
 // app.use(cors());
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -31,13 +38,6 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
   next();
 });
-app.use(helmet({}));
-app.use(compression());
-app.use(cookieParser());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(express.static('images'));
-app.use(bodyParser.json());
 
 app.use('/', indexRouter);
 
