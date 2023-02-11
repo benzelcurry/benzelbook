@@ -37,21 +37,14 @@ const ProfilePreview = ({ user, friend, pfp, admin }) => {
   // Gets user's profile picture for friend preview
   useEffect(() => {
     if (account.pfp) {
-      axios.get(`${process.env.REACT_APP_SERVER_URL}/images/${account.pfp}`, {responseType: 'blob'} )
-        .then((response) => {
-          console.log(response);
-          setAvatar(URL.createObjectURL(response.data));
-        })
+      setAvatar(`${process.env.REACT_APP_IMAGES}/${account.pfp}`)
     }
   }, [account])
 
   // Gets user's profile picture for search preview
   useEffect(() => {
     if (pfp) {
-      axios.get(`${process.env.REACT_APP_SERVER_URL}/images/${pfp}`, {responseType: 'blob'} )
-        .then((response) => {
-          setAvatar(URL.createObjectURL(response.data));
-        })
+      setAvatar(`${process.env.REACT_APP_IMAGES}/${pfp}`)
     }
   }, [pfp])
 

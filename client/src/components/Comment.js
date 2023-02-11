@@ -50,10 +50,7 @@ const Comment = ({ post, commentID, userID }) => {
   // Gets user's profile picture
   useEffect(() => {
     if (author.pfp) {
-      axios.get(`${process.env.REACT_APP_SERVER_URL}/images/${author.pfp}`, {responseType: 'blob'} )
-        .then((response) => {
-          setAvatar(URL.createObjectURL(response.data));
-        })
+      setAvatar(`${process.env.REACT_APP_IMAGES}/${author.pfp}`)
     }
   }, [author])
 

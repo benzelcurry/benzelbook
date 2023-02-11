@@ -108,10 +108,9 @@ const User = () => {
   // Gets page owner's profile picture
   useEffect(() => {
     if (page._id) {
-      axios.get(`${process.env.REACT_APP_SERVER_URL}/images/${page.pfp}`, {responseType: 'blob'} )
-        .then((response) => {
-          setImage(URL.createObjectURL(response.data));
-        })
+      setImage(`${process.env.REACT_APP_IMAGES}/${page.pfp}`)
+      console.log(process.env.REACT_APP_IMAGES + '/' + page.pfp)
+      console.log(page.pfp);
     }
   }, [page])
 

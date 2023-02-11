@@ -51,10 +51,7 @@ const NewPost = ({ userID, targetID }) => {
   // Gets user's profile picture
   useEffect(() => {
     if (user.pfp) {
-      axios.get(`${process.env.REACT_APP_SERVER_URL}/images/${user.pfp}`, {responseType: 'blob'} )
-        .then((response) => {
-          setAvatar(URL.createObjectURL(response.data));
-        })
+      setAvatar(`${process.env.REACT_APP_IMAGES}/${user.pfp}`)
     }
   }, [user])
 

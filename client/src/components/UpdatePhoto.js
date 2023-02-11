@@ -29,10 +29,7 @@ const UpdatePhoto = () => {
   // GET user avatar
   useEffect(() => {
     if (user.id) {
-      axios.get(`${process.env.REACT_APP_SERVER_URL}/images/${user.pfp}`, {responseType: 'blob'} )
-        .then((response) => {
-          setAvatar(URL.createObjectURL(response.data));
-        })
+      setAvatar(`${process.env.REACT_APP_IMAGES}/${user.pfp}`);
     }
   }, [user])
 
