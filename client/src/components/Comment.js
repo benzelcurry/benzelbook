@@ -57,19 +57,21 @@ const Comment = ({ post, commentID, userID }) => {
   // Handles liking/unliking a comment
   const handleLike = (e) => {
     e.preventDefault();
-    const body = { userID: userID };
-    axios.post(`${process.env.REACT_APP_SERVER_URL}/posts/${comment._id}`, body)
-      .then((response) => {
-        if (response.data.message === 'Successful') {
-          setLikes(likes + 1);
-        } else {
-          setLikes(likes - 1);
+    if (userID !== 'guestuser123') {
+      const body = { userID: userID };
+      axios.post(`${process.env.REACT_APP_SERVER_URL}/posts/${comment._id}`, body)
+        .then((response) => {
+          if (response.data.message === 'Successful') {
+            setLikes(likes + 1);
+          } else {
+            setLikes(likes - 1);
+          }
+        })
+        .catch((err) => {
+          throw new Error(err);
         }
-      })
-      .catch((err) => {
-        throw new Error(err);
-      }
-    )
+      )
+    }
   }
 
   // Handles deleting a comment
