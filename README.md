@@ -1,5 +1,5 @@
 # benzelbook
-Benzelbook is a Facebook-inspired app, built using the MERN stack.
+benzelbook is a Facebook-inspired app, built using the MERN stack.
 
 Live preview at https://benzel-book.web.app/
 
