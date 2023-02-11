@@ -10,6 +10,8 @@ Live preview at https://benzel-book.web.app/
 * Cloudinary
 * Vanilla CSS
 * JWT auth
+* Railway server hosting
+* Firebase client hosting
 
 ## Features
 * Create unique accounts
