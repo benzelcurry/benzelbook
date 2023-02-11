@@ -30,11 +30,7 @@ const RequestPreview = ({ req, outgoing, incoming }) => {
   // Gets user's profile picture
   useEffect(() => {
     if (profile.pfp) {
-      axios.get(`${process.env.REACT_APP_SERVER_URL}/images/${profile.pfp}`, {responseType: 'blob'} )
-        .then((response) => {
-          console.log(response);
-          setAvatar(URL.createObjectURL(response.data));
-        })
+      setAvatar(`${process.env.REACT_APP_IMAGES}/${profile.pfp}`)
     }
   }, [profile])
 
