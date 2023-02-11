@@ -21,16 +21,16 @@ db.on('error', console.error.bind(console, 'mongo connection error'));
 
 const app = express();
 
-app.use(cors());
-// app.use(function(req, res, next) {
-//   res.setHeader("Access-Control-Allow-Origin", "https://benzel-book.web.app");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-//   next();
-// });
+// app.use(cors());
+app.use(function(req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "https://benzel-book.web.app");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  next();
+});
 app.use(helmet({}));
 app.use(compression());
 app.use(cookieParser());
