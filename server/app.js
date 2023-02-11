@@ -34,7 +34,7 @@ app.use(function(req, res, next) {
 app.use(helmet({}));
 app.use(compression());
 app.use(cookieParser());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('images'));
 app.use(bodyParser.json());
