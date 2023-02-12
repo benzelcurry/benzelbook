@@ -134,25 +134,46 @@ exports.create_user = [
 
         const errors = validationResult(req);
 
-        const user = new User({
-          first_name: req.body.first_name,
-          family_name: req.body.family_name,
-          username: req.body.username,
-          password: hashedPassword,
-          pfp: req.file.filename,
-          account_created: new Date(),
-        });
+        if (!req.file) {
+          const user = new User({
+            first_name: req.body.first_name,
+            family_name: req.body.family_name,
+            username: req.body.username,
+            password: hashedPassword,
+            account_created: new Date(),
+          });
+  
+          if (!errors.isEmpty()) {
+            return res.json({
+              errors: errors.array(),
+            });
+          };
+  
+          user.save((err) => {
+            if (err) { return next(err) };
+            res.json('Account successfully created.');
+          });
+        } else {
+          const user = new User({
+            first_name: req.body.first_name,
+            family_name: req.body.family_name,
+            username: req.body.username,
+            password: hashedPassword,
+            pfp: req.file.filename,
+            account_created: new Date(),
+          });
 
-        if (!errors.isEmpty()) {
-          return res.json({
-            errors: errors.array(),
+          if (!errors.isEmpty()) {
+            return res.json({
+              errors: errors.array(),
+            });
+          };
+
+          user.save((err) => {
+            if (err) { return next(err) };
+            res.json('Account successfully created.');
           });
         };
-
-        user.save((err) => {
-          if (err) { return next(err) };
-          res.json('Account successfully created.');
-        });
       });
     });
   },
