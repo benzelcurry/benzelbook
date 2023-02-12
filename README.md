@@ -15,6 +15,7 @@ Live preview at https://benzel-book.web.app/
 * Firebase client hosting
 
 ## Features
+* Responsive design on both mobile and desktop devices
 * Create unique accounts
 * Guest log-in
   - Guests *can* write posts and comments
