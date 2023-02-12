@@ -16,16 +16,6 @@ const like_controller = require('../controllers/likeController');
 const request_controller = require('../controllers/requestController');
 const comment_controller = require('../controllers/commentController');
 
-// Image storage
-// const storage = multer.diskStorage({
-//   destination: function(req, file, cb) {
-//     cb(null, 'images');
-//   },
-//   filename: function(req, file, cb) {
-//     cb(null, uuidv4() + '-' + Date.now() + path.extname(file.originalname));
-//   }
-// });
-
 // Cloudinary config
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,

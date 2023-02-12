@@ -107,7 +107,7 @@ const User = () => {
 
   // Gets page owner's profile picture
   useEffect(() => {
-    if (page._id) {
+    if (page.pfp) {
       setImage(`${process.env.REACT_APP_IMAGES}/${page.pfp}`)
     }
   }, [page])
